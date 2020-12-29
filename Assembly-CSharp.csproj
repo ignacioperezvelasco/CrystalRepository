@@ -109,6 +109,7 @@
     <Compile Include="Assets\Scripts\Enemies\Agent.cs" />
     <Compile Include="Assets\Scripts\Enemies\Enemy.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemyBullet.cs" />
+    <Compile Include="Assets\Scripts\Enemies\TurretEnemy.cs" />
     <Compile Include="Assets\Scripts\HUD\HUD.cs" />
     <Compile Include="Assets\Scripts\HUD\MainMenu.cs" />
     <Compile Include="Assets\Scripts\HUD\PauseMenu.cs" />
