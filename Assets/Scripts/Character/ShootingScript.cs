@@ -68,14 +68,16 @@ public class ShootingScript : MonoBehaviour
     {
         Rigidbody bulletClone = (Rigidbody)Instantiate(bullet, rightPistol.transform.position, rightPistol.transform.rotation);
         bulletClone.gameObject.GetComponent<BulletScript>().SetPole(iman.NEGATIVE);
+        Debug.Log("Negative");
         bulletClone.gameObject.GetComponent<BulletScript>().SetCharge((int)negativeCharge);
         bulletClone.velocity = transform.forward * bulletSpeed;
     }
 
     void ShootPositive()
     {
-        Rigidbody bulletClone = (Rigidbody)Instantiate(bullet, leftPistol.transform.position, leftPistol.transform.rotation);
+        Rigidbody bulletClone = (Rigidbody)Instantiate(crystal, leftPistol.transform.position, leftPistol.transform.rotation);
         bulletClone.gameObject.GetComponent<BulletScript>().SetPole(iman.POSITIVE);
+        Debug.Log("Positive");
         bulletClone.gameObject.GetComponent<BulletScript>().SetCharge((int)positiveCharge);
         bulletClone.velocity = transform.forward * bulletSpeed;
     }
