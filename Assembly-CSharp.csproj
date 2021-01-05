@@ -96,6 +96,7 @@
     <Compile Include="Assets\LeanTween\Framework\LeanTest.cs" />
     <Compile Include="Assets\LeanTween\Framework\LeanTween.cs" />
     <Compile Include="Assets\LeanTween\Framework\LeanTweenExt.cs" />
+    <Compile Include="Assets\QuickOutline\Scripts\Outline.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraTransition.cs" />
     <Compile Include="Assets\Scripts\Camera\FollowCharacter.cs" />
     <Compile Include="Assets\Scripts\Camera\cameraScript.cs" />
@@ -130,7 +131,10 @@
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <None Include="Assets\LeanTween\ReadMe.txt" />
     <None Include="Assets\LeanTween\License.txt" />
+    <None Include="Assets\QuickOutline\Resources\Shaders\OutlineMask.shader" />
+    <None Include="Assets\QuickOutline\Readme.txt" />
     <None Include="Assets\LeanTween\Examples\Archived\2dUnlitWithFade.shader" />
+    <None Include="Assets\QuickOutline\Resources\Shaders\OutlineFill.shader" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.10f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 609703410532210516}
   - component: {fileID: 609703410532210519}
   - component: {fileID: 609703410532210512}
+  - component: {fileID: 1752815033930837699}
   m_Layer: 0
   m_Name: ImantableObject
   m_TagString: CanBeHitted
@@ -136,6 +137,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1752815033930837699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 609703410532210518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 1
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 8
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &609703410572927239
 GameObject:
   m_ObjectHideFlags: 0

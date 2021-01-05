@@ -31,6 +31,10 @@ public class ImanBehavior : MonoBehaviour
     forceType myForceType = forceType.NONE;
     int numChargesAdded = 0;
     // Start is called before the first frame update
+
+    //OUTLINE
+    private Outline outline;
+
     void Start()
     {
         myRB = this.GetComponent<Rigidbody>();
@@ -39,6 +43,12 @@ public class ImanBehavior : MonoBehaviour
         nearImantableObjects = new List<GameObject>();
         timerActive = timeActive;
         timerImanted = timeImanted;
+
+        //OUTLINE SET
+        outline = this.GetComponent<Outline>();
+        outline.enabled = false;
+
+        //outline.OutlineColor = new Color32(0, 0, 0, 0);
     }
 
     private void Update()
@@ -161,9 +171,18 @@ public class ImanBehavior : MonoBehaviour
         //this.gameObject.tag = "Untagged";
         //Primero asignamos polo para que no haya problemas en otra parte del codigo
         if (typeIman == iman.POSITIVE)
+        {
             myPole = iman.POSITIVE;
+            outline.OutlineColor = new Color32(255, 0, 0, 255);
+        }
         else
+        {
             myPole = iman.NEGATIVE;
+            outline.OutlineColor = new Color32(0, 0, 255, 255);
+        }
+
+        //ACTIVAMOS SCRIPT OUTLINE
+        outline.enabled = true;
 
         numChargesAdded = numCharge;
 
@@ -200,6 +219,10 @@ public class ImanBehavior : MonoBehaviour
         timerImanted = timeImanted;
         mysphereCollider.radius = 0.5f;
         mysphereCollider.enabled = false;
+
+        //OUTLINE
+        outline.OutlineColor = new Color32(0, 0, 0, 0);
+        outline.enabled = false;
     }
 
 }
