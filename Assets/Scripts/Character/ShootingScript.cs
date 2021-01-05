@@ -17,10 +17,11 @@ public class ShootingScript : MonoBehaviour
     float positiveCharge = 1;
     float negativeCharge = 1;
     bool isChargingNegative, isChargingPositive = false;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -82,13 +83,23 @@ public class ShootingScript : MonoBehaviour
         bulletClone.velocity = transform.forward * bulletSpeed;
     }
 
-    float GetShootCharge1()
+    public float GetShootPositive()
     {
         return positiveCharge;
     }
 
-    float GetShootCharge2()
+    public float GetShootNegative()
     {
         return negativeCharge;
+    }
+
+    public bool GetIsChargingPositive()
+    {
+        return isChargingPositive;
+    }
+
+    public bool GetIsChargingNegative()
+    {
+        return isChargingNegative;
     }
 }
