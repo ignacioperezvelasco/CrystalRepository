@@ -23,6 +23,7 @@ public class Enemy : Agent
     [Header("ENEMY")]
     public int startingLife = 100;
     public int lifeThershold = 30;
+
     [Header("PATROL")]
     public List<Transform> patrolPoints;
     public float distanceToPoint = 1;
@@ -30,16 +31,28 @@ public class Enemy : Agent
     public float distanceAlert = 20;
     int currentPatrolPoint = -1;
     bool onPoint = false;
+
     [Header("SPEEDS")]
     public float patrolSpeed;
     public float seekSpeed;
     public float agressiveSpeed;
+
     [Header("ATTACK")]
     public float timeBetweenAttacks = 3;
     public float distanceToDoAreaAtttack = 3;
     public GameObject attackArea;
     float timer;
 
+    [Header("TELEGRAPHING")]
+    public LineRenderer line;
+    public Transform baseTelegraph;
+    public Transform targetTelegraph;
+    public float chargeDistance = 7;
+    public float speedTelegraph = 1.5f;
+    bool isAttacking = false;
+    float timerAttack = 0;
+    [Header("CHARGE")]
+    public float speedCharging = 0.7f;
     #endregion
 
     #region START
@@ -56,6 +69,11 @@ public class Enemy : Agent
 
         //Añadimos el primer destino
         SetNewDestination();
+
+        //Ponemos los puntos del telegraph en su sitio
+        line.SetPosition(0, baseTelegraph.position);
+        line.SetPosition(1, baseTelegraph.position);
+        line.enabled = false;
     }
     #endregion
 
@@ -224,11 +242,12 @@ public class Enemy : Agent
 
     #endregion
 
-
     #region ATTACK METHODS
 
-        #region ATTACK BEHAVIOUR
-        void AttackBehaviour()
+    #region ATTACK BEHAVIOUR
+    void AttackBehaviour()
+    {
+        if (!isAttacking)
         {
             if (Vector3.Distance(player.position, this.transform.position) > 3)
             {
@@ -242,14 +261,22 @@ public class Enemy : Agent
 
                 float distanceToplayer = Vector3.Distance(this.transform.position, player.position);
 
+                //SI ESTA CERCA DEL ENEMIGO,ATAQUE EN AREA
                 if (distanceToplayer <= distanceToDoAreaAtttack)
                 {
+                    //Paramos al enemigo
+                    agentNavMesh.isStopped = true;
                     //Hacemos el Ataque en area
                     attackArea.SetActive(true);
                     Invoke("DeactivateAreaAttack", 0.5f);
                 }
+                //SI ESTA LEJOS HACEMOS ATAQUE CARGA
                 else
                 {
+                    line.enabled = true;
+                    isAttacking = true;
+                    //Paramos al enemigo
+                    agentNavMesh.isStopped = true;
                     //Hacemos el ataque embestida
                     ChargeAttack();
                     Debug.Log("ATAQUE CARGADO");
@@ -258,26 +285,69 @@ public class Enemy : Agent
 
             }
         }
-        #endregion
-
-        #region DEACTIVATE AREA ATTACK
-        void DeactivateAreaAttack()
+        else
         {
-            attackArea.SetActive(false);
+            line.SetPosition(0, baseTelegraph.position);
+            line.SetPosition(1, targetTelegraph.position);
+
+            timerAttack += Time.deltaTime;
+            if (timerAttack >= speedTelegraph)
+            {
+                timerAttack = 0;
+
+                JumpToTarget();
+            }
         }
+        
+    }
     #endregion
 
-        //TO DO
-        #region CHARGE ATTACK
-        void ChargeAttack()
-        {
+    #region DEACTIVATE AREA ATTACK
+    void DeactivateAreaAttack()
+    {
+        attackArea.SetActive(false);
+        agentNavMesh.isStopped = false;
+    }
+    #endregion
 
-        }
-        #endregion
+    #region CHARGE ATTACK
+    void ChargeAttack()
+    {
+        line.SetPosition(0, baseTelegraph.position);
+        line.SetPosition(1, baseTelegraph.position);
 
-        //TO DO
-        #region ATTACK AGRESSIVE BEHAVIOUR
-        void AttackAgressiveBehaviour()
+
+        Vector3 targetPosition = baseTelegraph.position + (this.transform.forward * chargeDistance);
+
+        targetTelegraph.DOMove(targetPosition, speedTelegraph);        
+    }
+    #endregion
+
+    #region JUMP TO TARGET
+    void JumpToTarget()
+    {
+        //Desactivamos el lineRenderer
+        line.enabled = false;
+
+        //Hacemos el movimiento
+        this.transform.DOMove(targetTelegraph.position, speedCharging);
+
+        Invoke("StopAttacking", speedCharging);
+    }
+    #endregion
+
+    #region STOP ATTACKING
+    void StopAttacking()
+    {
+        isAttacking = false;
+
+        agentNavMesh.isStopped = false;
+    }
+    #endregion
+
+    //TO DO
+    #region ATTACK AGRESSIVE BEHAVIOUR
+    void AttackAgressiveBehaviour()
         {
 
         }
