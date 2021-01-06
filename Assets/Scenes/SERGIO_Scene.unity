@@ -975,27 +975,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   life: 100
   speed: 5
-  lifeThreshold: 30
-  distanceToRun: 5
-  chargeForce: 10
-  chargeSpeed: 1
-  attackDamage: 10
-  chargeDamage: 20
+  startingLife: 100
+  lifeThershold: 30
   patrolPoints:
   - {fileID: 432552718}
   - {fileID: 2074586144}
   - {fileID: 1462765328}
   - {fileID: 1129971306}
-  minDistanceToPoint: 3
-  maxDistanceToPlayer: 15.1
-  minDistanceToPlayer: 1.5
-  bullet: {fileID: 725535111294921866, guid: 8a5644bcbac8f8448a599aa79d832b8b, type: 3}
-  areaAttack: {fileID: 1926804175}
-  areaAtkLife: 0.3
-  timeToAttack: 5
-  knockbackForce: 5
-  knockbackDirection: {x: 0, y: 0, z: 0}
-  applyKnockBack: 0
+  distanceAlert: 20
+  patrolSpeed: 5
+  seekSpeed: 7.5
+  agressiveSpeed: 11
 --- !u!195 &348345096
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -4398,7 +4388,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1655820485}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.6, y: 1.2, z: 2.62}
+  m_LocalPosition: {x: 37.5, y: 1.2, z: 6.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 352067609}
