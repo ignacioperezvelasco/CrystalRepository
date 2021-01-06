@@ -25,7 +25,6 @@ public class EnemyBullet : MonoBehaviour
     #region TRIGGER ENTER
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("CHOCA CON ALGO");
         if (other.CompareTag("Finish"))
         {
             Destroy(this.gameObject);
@@ -33,7 +32,6 @@ public class EnemyBullet : MonoBehaviour
 
         if (other.CompareTag("Player"))
         {
-            Debug.Log("CHOCA CON PLAYER");
             Destroy(this.gameObject);
         }
     }
