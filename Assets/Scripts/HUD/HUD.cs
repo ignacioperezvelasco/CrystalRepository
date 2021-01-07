@@ -85,8 +85,7 @@ public class HUD : MonoBehaviour
             {
                 if ((positiveBullets - 1) >= 1 && (positiveBullets - 1) <= 1.9)
                 {
-                    bulletImagesPositive[currentBulletPositive].color = new Color32(0, 255, 0, 255);
-                    LeanTween.rotate(revolverPositiveGameobject, new Vector3(0, 0, 120.0f), 0.3f);
+                    bulletImagesPositive[currentBulletPositive].color = new Color32(255, 0, 0, 255);
                     revolverSlider.fillAmount = 0;
                     first_charge = true;
 
@@ -98,8 +97,7 @@ public class HUD : MonoBehaviour
             {
                 if ((positiveBullets - 1) >= 2 && (positiveBullets - 1) <= 2.9)
                 {
-                    bulletImagesPositive[currentBulletPositive].color = new Color32(0, 255, 0, 255);
-                    LeanTween.rotate(revolverPositiveGameobject, new Vector3(0, 0, 240), 0.3f);
+                    bulletImagesPositive[currentBulletPositive].color = new Color32(255, 0, 0, 255);
                     revolverSlider.fillAmount = 0;
                     second_charge = true;
 
@@ -111,8 +109,7 @@ public class HUD : MonoBehaviour
             {
                 if(revolverSlider.fillAmount == 1)
                 {
-                    bulletImagesPositive[currentBulletPositive].color = new Color32(0, 255, 0, 255);
-                    LeanTween.rotate(revolverPositiveGameobject, new Vector3(0, 0, 360), 0.3f);
+                    bulletImagesPositive[currentBulletPositive].color = new Color32(255, 0, 0, 255);
 
                     IncrementBulletPositive(1);
                 }
@@ -141,7 +138,11 @@ public class HUD : MonoBehaviour
                 second_charge = false;
             }
 
+            //RESTART VARIABLES
             restartFillSlider();
+            restartColorImages();
+
+            currentBulletPositive = 0;
             isChargingPositive = false;
         }
         else if(positiveBullets != 0)
@@ -184,4 +185,12 @@ public class HUD : MonoBehaviour
     }
     #endregion
 
+    #region RestartColorImages
+    void restartColorImages()
+    {
+        bulletImagesPositive[0].color = new Color32(255, 255, 255, 255);
+        bulletImagesPositive[1].color = new Color32(255, 255, 255, 255);
+        bulletImagesPositive[2].color = new Color32(255, 255, 255, 255);
+    }
+    #endregion
 }
