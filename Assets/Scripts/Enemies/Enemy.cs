@@ -12,455 +12,349 @@ public class Enemy : Agent
         NONE,
         PATROL,
         SEEK,
-        FLEE
-    };
-    public enum AttackType
-    {
-        NONE,
-        MELEE_LIGHT,
-        MELEE_HEAVY,
-        CHARGE,
-        AREA
+        AGRESSIVE
     };
 
-    /////////ENEMY
+    StateEnemy currentState = StateEnemy.PATROL;
+    Transform player;
+    NavMeshAgent agentNavMesh;
+
+
     [Header("ENEMY")]
-    [SerializeField] float lifeThreshold = 30f;
-    [SerializeField] float distanceToRun;
-    [SerializeField] float chargeForce = 10f;
-    [SerializeField] float chargeSpeed =1f;
-    [Header("ENEMY DAMAGE")]
-    [SerializeField] int attackDamage= 10;
-    [SerializeField] int chargeDamage = 20;
+    public int startingLife = 100;
+    public int lifeThershold = 30;
 
-    NavMeshAgent agent;
-    StateEnemy currentState;
-    float maxLife;
-    float currentPercentLife;
+    [Header("PATROL")]
+    public List<Transform> patrolPoints;
+    public float distanceToPoint = 1;
+    public float timeToNextPoint = 1f;
+    public float distanceAlert = 20;
+    int currentPatrolPoint = -1;
+    bool onPoint = false;
 
-    /////////PATROL ELEMENTS
-    [Header("PATROL ELEMENTS")]
-    public Transform[] patrolPoints;
-    public float minDistanceToPoint = 1.5f;
-    int currentPoint;
+    [Header("SPEEDS")]
+    public float patrolSpeed;
+    public float seekSpeed;
+    public float agressiveSpeed;
 
-    /////////PLAYER
-    [Header("PLAYER")]
-    public float maxDistanceToPlayer = 20f;
-    public float minDistanceToPlayer = 1.5f;
-    Rigidbody playerRB;
-    Transform playerTransform;
-
-    /////////ATTACK
     [Header("ATTACK")]
-    public GameObject bullet;
-    public GameObject areaAttack;
-    public float areaAtkLife = 0.3f;
-    public float timeToAttack = 5f;
-    float countDownToAttack = 5f;
-    AttackType currentAttack;
+    public float timeBetweenAttacks = 3;
+    public float distanceToDoAreaAtttack = 3;
+    public GameObject attackArea;
+    float timer;
 
-    bool isCharging = false;
-
-    /////////KNOCBACK   
-    private NavMeshAgent nma = null;
-    private Rigidbody rb;
-    [Header("KNOCBACK")]
-    public float knockbackForce = 5.0f;
-    public Vector3 knockbackDirection;
-    public bool applyKnockBack;
+    [Header("TELEGRAPHING")]
+    public LineRenderer line;
+    public Transform baseTelegraph;
+    public Transform targetTelegraph;
+    public float chargeDistance = 7;
+    public float speedTelegraph = 1.5f;
+    bool isAttacking = false;
+    float timerAttack = 0;
+    [Header("CHARGE")]
+    public float speedCharging = 0.7f;
     #endregion
 
     #region START
     void Start()
     {
-        ///Set Agent
-        agent = GetComponent<NavMeshAgent>();
-        agent.speed = speed;
-        maxLife = life;
+        //Buscamos al Player
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
 
-        ////Set Patrol
-        currentState = StateEnemy.PATROL;
-        UpdatePatrolPoint();
+        //Buscamos el agente Nev
+        agentNavMesh = GetComponent<NavMeshAgent>();
 
-        ////Set Player
-        GameObject auxPlayer = GameObject.FindGameObjectWithTag("Player");
-        if (auxPlayer != null)
-        {
-            playerTransform = auxPlayer.transform;
-            playerRB = auxPlayer.GetComponent<Rigidbody>();
-        }
+        //Asignamos la velocidad
+        agentNavMesh.speed = patrolSpeed;
 
-        ////NAVMESH AGENT KNOCKBACK
-        nma = GetComponentInParent<NavMeshAgent>();
-        rb = GetComponent<Rigidbody>();
+        //Añadimos el primer destino
+        SetNewDestination();
 
-        countDownToAttack = timeToAttack;
+        //Ponemos los puntos del telegraph en su sitio
+        line.SetPosition(0, baseTelegraph.position);
+        line.SetPosition(1, baseTelegraph.position);
+        line.enabled = false;
     }
     #endregion
 
     #region UPDATE
     void Update()
     {
-        distanceToRun = maxDistanceToPlayer * 0.5f;
-        CheckChangeState();
+        //Controlamos si debe haber cambio de estado
+        CheckState();
 
-        switch (currentState)
-        {
-            case StateEnemy.NONE:
-                {
-                    break;
-                }
-            case StateEnemy.PATROL:
-                {
-                    if (Vector3.Distance(this.transform.position, patrolPoints[currentPoint].position) <= minDistanceToPoint)
-                    {
-                        UpdatePatrolPoint();
-                    }
-                    break;
-                }
-            case StateEnemy.SEEK:
-                {
-                    //Controlamos el ataque
-                    HandleAttack();
-
-                    //Miramos si no acercamos demasiado
-                    if (Vector3.Distance(this.transform.position, playerTransform.position) >= minDistanceToPoint * 3f)
-                    {
-                        agent.SetDestination(playerTransform.position);
-                    }
-                    break;
-                }
-            case StateEnemy.FLEE:
-                {
-                    //Controlamos el ataque
-                    HandleAttack();
-
-                    //Miramos si no acercamos demasiado
-                    if (Vector3.Distance(this.transform.position, playerTransform.position) <= distanceToRun)
-                    {
-                        //Sacamos la dirección al player
-                        Vector3 dirToplayer = this.transform.position - playerTransform.position;
-                        Vector3 newPosFlee = this.transform.position + dirToplayer;
-
-                        agent.SetDestination(newPosFlee);
-                    }
-                    break;
-                }
-            default:
-                {
-                    break;
-                }
-        }
-
-        if (applyKnockBack)
-        {
-            StartCoroutine(KnockBackCo());
-            applyKnockBack = false;
-        }
+        //Controlamos el estado actual
+        StateBehaviour(); 
     }
     #endregion
 
-
-    #region PATROL METHODS
-        #region  CHECK CHANGE STATE
-    void CheckChangeState()
+    #region CHECK STATE
+    void CheckState()
     {
         switch (currentState)
         {
-            case StateEnemy.NONE:
-                {
-                    break;
-                }
             case StateEnemy.PATROL:
                 {
-                    if (Vector3.Distance(this.transform.position, playerTransform.position) <= maxDistanceToPlayer)
+                    if (Vector3.Distance(this.transform.position, player.position) < distanceAlert)
                     {
-
-                        //Current % of Life
-                        currentPercentLife = (life / maxLife) * 100;
-
-                        if (currentPercentLife >= lifeThreshold)
+                        if (life < lifeThershold)
                         {
-                            countDownToAttack = timeToAttack;
-                            //Debug.Log("EL ESTADO ACTUAL ES SEEK");
-                            currentState = StateEnemy.SEEK;
-                            agent.speed = speed * 2;
+                            currentState = StateEnemy.AGRESSIVE;
+
+                            //Asignamos la velocidad
+                            agentNavMesh.speed = agressiveSpeed;
                         }
                         else
                         {
-                            countDownToAttack = timeToAttack;
-                            //Debug.Log("EL ESTADO ACTUAL ES FLEE");
-                            currentState = StateEnemy.FLEE;
-                            agent.speed = speed * 2;
+                            currentState = StateEnemy.SEEK;
+
+                            //Asignamos la velocidad
+                            agentNavMesh.speed = seekSpeed;
                         }
-
-
                     }
                     break;
                 }
             case StateEnemy.SEEK:
                 {
-                    //Distance to Player
-                    if (Vector3.Distance(this.transform.position, playerTransform.position) >= maxDistanceToPlayer)
+                    if (Vector3.Distance(this.transform.position, player.position) > distanceAlert)
                     {
-                        countDownToAttack = timeToAttack;
-
-                        //Debug.Log("EL ESTADO ACTUAL ES PATROL");
                         currentState = StateEnemy.PATROL;
-                        agent.speed = speed;
-                        UpdatePatrolPoint();
+
+                        //Asignamos la velocidad
+                        agentNavMesh.speed = patrolSpeed;
                     }
 
-                    //Current % of Life
-                    currentPercentLife = (life / maxLife) * 100;
-
-                    if (currentPercentLife <= lifeThreshold)
+                    if (life < lifeThershold)
                     {
-                        countDownToAttack = timeToAttack;
+                        currentState = StateEnemy.AGRESSIVE;
 
-                        //Debug.Log("EL ESTADO ACTUAL ES FLEE");
-                        currentState = StateEnemy.FLEE;
+                        //Asignamos la velocidad
+                        agentNavMesh.speed = agressiveSpeed;
                     }
 
                     break;
                 }
-            case StateEnemy.FLEE:
+            case StateEnemy.AGRESSIVE:
                 {
-                    if (Vector3.Distance(this.transform.position, playerTransform.position) >= maxDistanceToPlayer)
+                    if (life > lifeThershold)
                     {
-                        countDownToAttack = timeToAttack;
-
-                        //Debug.Log("EL ESTADO ACTUAL ES PATROL");
-                        currentState = StateEnemy.PATROL;
-                        agent.speed = speed;
-                        UpdatePatrolPoint();
-                    }
-
-                    //Current % of Life
-                    currentPercentLife = (life / maxLife) * 100;
-
-                    if (currentPercentLife >= lifeThreshold)
-                    {
-                        countDownToAttack = timeToAttack;
-
-                        //Debug.Log("EL ESTADO ACTUAL ES SEEK");
                         currentState = StateEnemy.SEEK;
+
+                        //Asignamos la velocidad
+                        agentNavMesh.speed = seekSpeed;
+                    }
+                    if (Vector3.Distance(this.transform.position, player.position) > distanceAlert)
+                    {
+                        currentState = StateEnemy.PATROL;
+
+                        //Asignamos la velocidad
+                        agentNavMesh.speed = patrolSpeed;
                     }
                     break;
                 }
             default:
                 {
+                    Debug.Log("NO HAY NINGUN ESTADO");
                     break;
                 }
         }
     }
     #endregion
 
-        #region UPDATE PATROL POINT
-    void UpdatePatrolPoint()
+    #region STATE BEHAVIOUR
+    void StateBehaviour()
     {
-        //buscar un siguiente punto
-        currentPoint = Random.Range(0, patrolPoints.Length - 1);
-
-        agent.SetDestination(patrolPoints[currentPoint].position);
+        switch (currentState)
+        {
+            case StateEnemy.PATROL:
+                {
+                    FollowPatrol();
+                    break;
+                }
+            case StateEnemy.SEEK:
+                {
+                    AttackBehaviour();
+                    break;
+                }
+            case StateEnemy.AGRESSIVE:
+                {
+                    AttackBehaviour();
+                    break;
+                }
+            default:
+                {
+                    Debug.Log("NO HAY NINGUN ESTADO");
+                    break;
+                }
+        }
     }
     #endregion
+
+    #region PATROL METHODS
+
+        #region FOLLOW PATROL
+        void FollowPatrol()
+        {
+            if (Vector3.Distance(this.transform.position, patrolPoints[currentPatrolPoint].position) < distanceToPoint && !onPoint)
+            {
+                onPoint = true;
+                //Mirar al siguiente punto y dirigirnos
+
+                Invoke("LookAtNewDestination", timeToNextPoint / 2);
+                Invoke("SetNewDestination", timeToNextPoint);
+                //SetNewDestination();
+            }
+        }
+        #endregion
+
+        #region SET NEW DESTINATION
+        void SetNewDestination()
+        {
+            onPoint = false;
+            //Aumentamos la posicion del array
+            currentPatrolPoint++;
+            if (currentPatrolPoint == patrolPoints.Count)
+            {
+                currentPatrolPoint = 0;
+            }
+
+            //Seleccionamos el siguiente destino
+            agentNavMesh.SetDestination(patrolPoints[currentPatrolPoint].position);
+
+        }
+        #endregion
+
+        #region LOOK AT NEW DESTINATION
+        void LookAtNewDestination()
+        {
+            int aux = currentPatrolPoint;
+            aux++;
+
+            if (aux == patrolPoints.Count)
+            {
+                aux = 0;
+            }
+
+            //Mirar al siguiente punto
+            this.transform.DOLookAt(patrolPoints[aux].position, timeToNextPoint / 2);
+        }
+    #endregion
+
     #endregion
 
     #region ATTACK METHODS
 
-        #region HANDLE ATTACK
-        void HandleAttack()
-        {
-            countDownToAttack -= Time.deltaTime;
-            if (countDownToAttack <= 0f)
-            {
-                switch (currentState)
-                {
-                    case StateEnemy.SEEK:
-                        {
-                            //hacemos un random entre los dos tipos de ataque
-                            int rand = Random.Range(0, 100);
-                            if (rand > lifeThreshold)
-                            {
-                                Debug.Log("RANDOM: " + rand + "  LIGHT ATTACK");
-                                Attack();
-                                break;
-                            }
-                            else
-                            {
-                                Debug.Log("RANDOM: " + rand + " CHARGE ATTACK");
-                                AreaAttack();
-                                //ChargeAttack();
-                                break;
-                            }
+    #region ATTACK BEHAVIOUR
+    void AttackBehaviour()
+    {
+        line.SetPosition(0, baseTelegraph.position);
+        line.SetPosition(1, targetTelegraph.position);
 
-                        }
-                    case StateEnemy.FLEE:
-                        {
-                            int rand = Random.Range(0, 100);
-                            //hacemos un random entre los dos tipos de ataque
-                            if (rand < lifeThreshold)
-                            {
-                                Debug.Log("RANDOM: " + rand + "  LIGHT ATTACK");
-                                Attack();
-                                break;
-                            }
-                            else
-                            {
-                                Debug.Log("RANDOM: " + rand + " FRONT ATTACK");
-                                AreaAttack();
-                                //ChargeAttack();
-                            break;
-                            }
-                        }
-                    default:
-                        break;
+        if (!isAttacking)
+        {
+            if (Vector3.Distance(player.position, this.transform.position) > 3)
+            {
+                agentNavMesh.SetDestination(player.position);
+            }
+
+            timer += Time.deltaTime;
+            if (timer > timeBetweenAttacks)
+            {
+                timer = 0;
+
+                float distanceToplayer = Vector3.Distance(this.transform.position, player.position);
+
+                //SI ESTA CERCA DEL ENEMIGO,ATAQUE EN AREA
+                if (distanceToplayer <= distanceToDoAreaAtttack)
+                {
+                    //Paramos al enemigo
+                    agentNavMesh.isStopped = true;
+                    //Hacemos el Ataque en area
+                    attackArea.SetActive(true);
+                    Invoke("DeactivateAreaAttack", 0.5f);
+                }
+                //SI ESTA LEJOS HACEMOS ATAQUE CARGA
+                else
+                {
+                    line.enabled = true;
+                    isAttacking = true;
+                    //Paramos al enemigo
+                    agentNavMesh.isStopped = true;
+                    //Hacemos el ataque embestida
+                    ChargeAttack();
+                    Debug.Log("ATAQUE CARGADO");
                 }
 
-                countDownToAttack = timeToAttack;
+
             }
         }
-        #endregion
-
-        #region ATTACK
-        void Attack()
+        else
         {
-            Instantiate(bullet, this.transform.position, this.transform.rotation);
+            //line.SetPosition(0, baseTelegraph.position);
+            //line.SetPosition(1, targetTelegraph.position);
 
-        //Rigidbody bulletClone = (Rigidbody)Instantiate(bullet, rightPistol.transform.position, rightPistol.transform.rotation);
-        //bulletClone.velocity = transform.forward * bulletSpeed;
-
-
-        /*if (Vector3.Distance(this.transform.position, playerTransform.position) <= minDistanceToPoint * 3f)
-        {
-            Debug.Log("LIGHT ATTACK!!");
-
-            PushPlayer();
-            CauseDamage(attackDamage);
-        }*/
-        }
-    #endregion
-
-        #region AREA ATTACK
-        void AreaAttack()
-        {
-            areaAttack.SetActive(true);
-            Invoke("DeactivateAreaAttack", areaAtkLife);
-        }
-        #endregion
-
-        #region DEACTIVATE AREA ATTACK
-        void DeactivateAreaAttack()
-        {
-            areaAttack.SetActive(false);
-        }
-        #endregion
-
-        #region CHARGE ATTACK
-        void ChargeAttack()
-        {
-            if (Vector3.Distance(this.transform.position, playerTransform.position) <= minDistanceToPoint * 10f)
+            timerAttack += Time.deltaTime;
+            if (timerAttack >= speedTelegraph)
             {
-                Vector3 pushDirection = Vector3.Normalize(playerTransform.position - this.transform.position);
+                timerAttack = 0;
 
-                this.transform.DOMove(playerTransform.position + pushDirection * chargeForce, chargeSpeed);
-                isCharging = true;
-
-                Invoke("RestartChargeAttack", chargeSpeed);
+                JumpToTarget();
             }
         }
-        #endregion
-
-        #region RESTART CHARGE ATTACK
-        void RestartChargeAttack()
-        {
-            isCharging = false;
-        }
-        #endregion
-
-        #region PUSH PLAYER
-        void PushPlayer()
-        {
-            Vector3 pushDirection = playerTransform.position - this.transform.position;
-            pushDirection.y += 2f;
-            playerTransform.DOMove(playerTransform.position + pushDirection, 0.3f);
-        }
-        #endregion    
-
-        #region CAUSE DAMAGE
-        public void CauseDamage(int _damage)
-        {
-        }
-        #endregion
-
-        #region GET HURT
-        public void GetHurt(int _damage)
-        {
-            this.life -= _damage;
-        }
-        #endregion
-
-    #endregion
-
-
-
-    #region GET LIFE
-    public int GetLife()
-    {
-        return this.life;
+        
     }
     #endregion
 
-    #region TRIGGER ENTER
-    private void OnTriggerEnter(Collider other)
+    #region DEACTIVATE AREA ATTACK
+    void DeactivateAreaAttack()
     {
-        if (other.CompareTag("Player") && isCharging)
-        {
-            PushPlayer();
-
-            CauseDamage(chargeDamage);
-        }
+        attackArea.SetActive(false);
+        agentNavMesh.isStopped = false;
     }
+    #endregion
+
+    #region CHARGE ATTACK
+    void ChargeAttack()
+    {
+        //line.SetPosition(0, baseTelegraph.position);
+        //line.SetPosition(1, baseTelegraph.position);
+
+
+        //Vector3 targetPosition = baseTelegraph.position + (this.transform.forward * chargeDistance);
+
+        //targetTelegraph.DOMove(targetPosition, speedTelegraph);        
+    }
+    #endregion
+
+    #region JUMP TO TARGET
+    void JumpToTarget()
+    {
+        //Desactivamos el lineRenderer
+        line.enabled = false;
+
+        //Hacemos el movimiento
+        this.transform.DOMove(targetTelegraph.position, speedCharging);
+
+        Invoke("StopAttacking", speedCharging);
+    }
+    #endregion
+
+    #region STOP ATTACKING
+    void StopAttacking()
+    {
+        isAttacking = false;
+
+        agentNavMesh.isStopped = false;
+    }
+    #endregion
+
     #endregion
 
     #region ON DRAW GIZMOS
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(this.transform.position, maxDistanceToPlayer);
-        Gizmos.DrawWireSphere(this.transform.position, distanceToRun);
+        Gizmos.DrawWireSphere(this.transform.position, distanceToDoAreaAtttack);
+        Gizmos.DrawWireSphere(this.transform.position, distanceAlert);
     }
     #endregion
-
-    #region ONCOLLISIONENTER
-    void OnCollisionEnter(Collision col)
-    {
-        if (col.gameObject.tag == "Spikes")
-        {
-            GetHurt(10);
-            knockbackDirection = (agent.transform.position - col.transform.position).normalized;
-            StartCoroutine(KnockBackCo());
-        }
-    }
-    #endregion
-
-    #region COURUTINE KNOCBACK
-    IEnumerator KnockBackCo()
-    {
-        nma.enabled = false;
-        rb.isKinematic = false;
-
-        knockbackDirection.y = 0.5f;
-
-        //agent.velocity = knockbackDirection * knockbackForce;
-        rb.velocity = knockbackDirection * knockbackForce;
-
-        yield return new WaitForSeconds(0.5f);
-
-        nma.enabled = true;
-        rb.isKinematic = true;
-    }
-    #endregion
-
 }
