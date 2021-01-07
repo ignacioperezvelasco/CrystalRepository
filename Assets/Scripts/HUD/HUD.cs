@@ -32,6 +32,8 @@ public class HUD : MonoBehaviour
     private int currentBulletPositive;
     private bool first_charge;
     private bool second_charge;
+    private Color32 positiveColor;
+    private Color32 negativeColor;
 
     // Start is called before the first frame update
     void Start()
@@ -44,6 +46,8 @@ public class HUD : MonoBehaviour
         _shootscript = player.GetComponent<ShootingScript>();
 
         currentBulletPositive = 0;
+        positiveColor = new Color32(255, 0, 0, 255);
+        negativeColor = new Color32(0, 0, 255, 255);
     }
 
     // Update is called once per frame
@@ -85,9 +89,10 @@ public class HUD : MonoBehaviour
             {
                 if ((positiveBullets) >= 1 && (positiveBullets) <= 1.9)
                 {
-                    bulletImagesPositive[currentBulletPositive].color = new Color32(255, 0, 0, 255);
-                    revolverSlider.fillAmount = 0;
+                    ChangeColorBullet(currentBulletPositive, positiveColor);
+                    restartFillSlider();
                     first_charge = true;
+                    IncrementBulletPositive(1);
                 }
             }
             //SEGUNDA CARGA
@@ -95,9 +100,10 @@ public class HUD : MonoBehaviour
             {
                 if ((positiveBullets) >= 2 && (positiveBullets) <= 2.9)
                 {
-                    bulletImagesPositive[currentBulletPositive].color = new Color32(255, 0, 0, 255);
-                    revolverSlider.fillAmount = 0;
+                    ChangeColorBullet(currentBulletPositive, positiveColor);
+                    restartFillSlider();
                     second_charge = true;
+                    IncrementBulletPositive(1);
                 }
             }
             //TERCERA CARGA
@@ -105,7 +111,8 @@ public class HUD : MonoBehaviour
             {
                 if(revolverSlider.fillAmount == 1)
                 {
-                    bulletImagesPositive[currentBulletPositive].color = new Color32(255, 0, 0, 255);
+                    ChangeColorBullet(currentBulletPositive, positiveColor);
+                    IncrementBulletPositive(1);
                 }
             }
 
@@ -114,31 +121,13 @@ public class HUD : MonoBehaviour
         }
         else if (isChargingPositive == true)
         {
-            if (positiveBullets <= 1.9)
-            {
-                Debug.Log("Ha disparado una bala");
-                LeanTween.rotate(revolverPositiveGameobject.gameObject, new Vector3(0, 0, 120.0f * (currentBulletPositive + 1)), 0.3f);
-                first_charge = false;
-                IncrementBulletPositive(1);
-            }
-            else if(positiveBullets >= 2 && positiveBullets <= 2.9)
-            {
-                Debug.Log("Ha disparado dos balas");
-                first_charge = false;
-                second_charge = false;
-            }
-            else if(positiveBullets > 2.9)
-            {
-                Debug.Log("Ha disparado tres balas");
-                first_charge = false;
-                second_charge = false;
-            }
+            //RESTART CHARGES AND ROTATES
+            RestartRevolverCharges();
 
             //RESTART VARIABLES
             restartFillSlider();
             restartColorImages();
 
-            currentBulletPositive = 0;
             isChargingPositive = false;
         }
         else if(positiveBullets != 0)
@@ -167,9 +156,9 @@ public class HUD : MonoBehaviour
     void IncrementBulletPositive(int toInc)
     {
         currentBulletPositive += toInc;
-        if (currentBulletPositive >= 3)
+        if (currentBulletPositive == 3)
         {
-            currentBulletPositive = currentBulletPositive % 3;
+            currentBulletPositive = 0;
         }
     }
     #endregion
@@ -187,6 +176,43 @@ public class HUD : MonoBehaviour
         bulletImagesPositive[0].color = new Color32(255, 255, 255, 255);
         bulletImagesPositive[1].color = new Color32(255, 255, 255, 255);
         bulletImagesPositive[2].color = new Color32(255, 255, 255, 255);
+    }
+    #endregion
+
+    #region RotateRevolver
+    void RotateRevolver(float haveToRotate)
+    {
+        LeanTween.rotateAroundLocal(revolverPositiveGameobject.gameObject, Vector3.forward, haveToRotate, 0.3f);
+    }
+    #endregion
+
+    #region RestartRevolverCharges
+    void RestartRevolverCharges()
+    {
+        if (positiveBullets <= 1.9)
+        {
+            RotateRevolver(120.0f);
+            first_charge = false;
+        }
+        else if (positiveBullets >= 2 && positiveBullets <= 2.9)
+        {
+            RotateRevolver(240.0f);
+            first_charge = false;
+            second_charge = false;
+        }
+        else if (positiveBullets > 2.9)
+        {
+            RotateRevolver(360.0f);
+            first_charge = false;
+            second_charge = false;
+        }
+    }
+    #endregion
+
+    #region ChangeColorBullet
+    void ChangeColorBullet(int bullet, Color32 color)
+    {
+        bulletImagesPositive[bullet].color = color;
     }
     #endregion
 }
