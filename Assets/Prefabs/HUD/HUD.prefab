@@ -108,7 +108,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -0.00012207031, y: -0.000020345053}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2122794028260470800
@@ -173,16 +173,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2830698468326786848}
-  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
+  m_LocalRotation: {x: -0, y: -0, z: 1, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
-  m_Father: {fileID: 5546796627030773417}
-  m_RootOrder: 4
+  m_Father: {fileID: 7283109460651405438}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.00000095367, y: -0.00000095367}
+  m_AnchoredPosition: {x: -805.00006, y: -317.5341}
   m_SizeDelta: {x: 64.6694, y: 64.6694}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6764108015018138042
@@ -217,7 +217,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 1
+  m_FillAmount: 0
   m_FillClockwise: 0
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -327,13 +327,12 @@ RectTransform:
   - {fileID: 5033880131458595132}
   - {fileID: 9140513877360977354}
   - {fileID: 6427040040966569792}
-  - {fileID: 7892197040346520698}
   m_Father: {fileID: 7283109460651405438}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 149.09998, y: 196.5}
+  m_AnchoredPosition: {x: 155, y: 135}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &7283109460597838255
@@ -369,7 +368,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 449, y: 60}
+  m_AnchoredPosition: {x: 429, y: 1213}
   m_SizeDelta: {x: 763.4219, y: 74.6983}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &7283109460651405435
@@ -405,6 +404,7 @@ RectTransform:
   m_Children:
   - {fileID: 7283109460597838240}
   - {fileID: 5546796627030773417}
+  - {fileID: 7892197040346520698}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -488,9 +488,8 @@ MonoBehaviour:
   player: {fileID: 0}
   sliderLifePlayer: {fileID: 0}
   revolverPositiveGameobject: {fileID: 0}
+  revolverSlider: {fileID: 0}
   bulletImagesPositive: []
-  revolverNegativeImageGameobject: {fileID: 0}
-  bulletImagesNegative: []
   negativeBullets: 0
   positiveBullets: 0
 --- !u!1 &7283109460808397594
