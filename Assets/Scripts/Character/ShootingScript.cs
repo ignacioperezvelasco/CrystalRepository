@@ -14,8 +14,8 @@ public class ShootingScript : MonoBehaviour
     public Transform leftPistol;
     bool canShootPositive = true;
     bool canShootNegative = true;
-    float positiveCharge = 1;
-    float negativeCharge = 1;
+    float positiveCharge = 0;
+    float negativeCharge = 0;
     bool isChargingNegative, isChargingPositive = false;
 
     // Start is called before the first frame update
@@ -33,8 +33,9 @@ public class ShootingScript : MonoBehaviour
         }
         if (Input.GetButtonUp("Fire1"))
         {
-            ShootNegative();
-            negativeCharge = 1;
+            if (negativeCharge >= 1)
+                ShootNegative();
+            negativeCharge = 0;
             isChargingNegative = false;
         }
         if (Input.GetButtonDown("Fire2") && canShootPositive)
@@ -43,8 +44,9 @@ public class ShootingScript : MonoBehaviour
         }
         if (Input.GetButtonUp("Fire2"))
         {
-            ShootPositive();
-            positiveCharge = 1;
+            if(positiveCharge>=1)
+                ShootPositive();
+            positiveCharge = 0;
             isChargingPositive = false;
         }
     }
