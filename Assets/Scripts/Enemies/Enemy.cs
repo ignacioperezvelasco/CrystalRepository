@@ -178,7 +178,7 @@ public class Enemy : Agent
                 }
             case StateEnemy.AGRESSIVE:
                 {
-                    AttackAgressiveBehaviour();
+                    AttackBehaviour();
                     break;
                 }
             default:
@@ -247,6 +247,9 @@ public class Enemy : Agent
     #region ATTACK BEHAVIOUR
     void AttackBehaviour()
     {
+        line.SetPosition(0, baseTelegraph.position);
+        line.SetPosition(1, targetTelegraph.position);
+
         if (!isAttacking)
         {
             if (Vector3.Distance(player.position, this.transform.position) > 3)
@@ -287,8 +290,8 @@ public class Enemy : Agent
         }
         else
         {
-            line.SetPosition(0, baseTelegraph.position);
-            line.SetPosition(1, targetTelegraph.position);
+            //line.SetPosition(0, baseTelegraph.position);
+            //line.SetPosition(1, targetTelegraph.position);
 
             timerAttack += Time.deltaTime;
             if (timerAttack >= speedTelegraph)
@@ -313,13 +316,13 @@ public class Enemy : Agent
     #region CHARGE ATTACK
     void ChargeAttack()
     {
-        line.SetPosition(0, baseTelegraph.position);
-        line.SetPosition(1, baseTelegraph.position);
+        //line.SetPosition(0, baseTelegraph.position);
+        //line.SetPosition(1, baseTelegraph.position);
 
 
-        Vector3 targetPosition = baseTelegraph.position + (this.transform.forward * chargeDistance);
+        //Vector3 targetPosition = baseTelegraph.position + (this.transform.forward * chargeDistance);
 
-        targetTelegraph.DOMove(targetPosition, speedTelegraph);        
+        //targetTelegraph.DOMove(targetPosition, speedTelegraph);        
     }
     #endregion
 
@@ -344,14 +347,6 @@ public class Enemy : Agent
         agentNavMesh.isStopped = false;
     }
     #endregion
-
-    //TO DO
-    #region ATTACK AGRESSIVE BEHAVIOUR
-    void AttackAgressiveBehaviour()
-        {
-
-        }
-        #endregion
 
     #endregion
 
