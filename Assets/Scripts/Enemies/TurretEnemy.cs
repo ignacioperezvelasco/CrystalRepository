@@ -16,7 +16,7 @@ public class TurretEnemy : MonoBehaviour
     [Header("CROSSHAIR")]
     public Transform crosshair;
     public float followSpeed;
-    public bool isInside = false;
+    bool isInside = false;
 
     [Header("Shooting")]
     public float fireRate = 3;
@@ -25,6 +25,28 @@ public class TurretEnemy : MonoBehaviour
     [Header("Particles Efect")]
     public GameObject chargeParticles;
     public float restartParticles = 0.3f;
+
+    [Header("ANIMATION")]
+    public Transform downHead;
+    public Transform upHead;
+    public float speedAnimation;
+
+    [Header("FRONT STONE")]
+    public Transform frontStone;
+    public Transform frontNear;
+    public Transform frontFar;
+    [Header("BACK STONE")]
+    public Transform backStone;
+    public Transform backNear;
+    public Transform backFar;
+    [Header("LEFT STONE")]
+    public Transform leftStone;
+    public Transform leftNear;
+    public Transform leftFar;
+    [Header("RIGHT STONE")]
+    public Transform rightStone;
+    public Transform rightNear;
+    public Transform rightFar;
 
     LineRenderer line;
     float shootTimer;
@@ -95,6 +117,9 @@ public class TurretEnemy : MonoBehaviour
             chargeParticles.SetActive(true);
 
             isInside = true;
+
+            //Animamos la torreta para que se active
+            ActivateTurretAnimation();
         }
     }
     #endregion
@@ -110,7 +135,39 @@ public class TurretEnemy : MonoBehaviour
             //reiniciamos las cosas
             shootTimer = 0;
             isInside = false;
+
+            //Animamos la torreta para que se desactive
+            DeactivateTurretAnimation();
         }
+    }
+    #endregion
+
+    #region ACTIVATE TURRET ANIMATION
+    void ActivateTurretAnimation()
+    {
+        //Elevamos la cabeza
+        head.DOMove(upHead.position, speedAnimation);
+
+        //Separamos las piedras imantables
+        frontStone.DOMove(frontFar.position ,speedAnimation);
+        backStone.DOMove(backFar.position, speedAnimation);
+        leftStone.DOMove(leftFar.position, speedAnimation);
+        rightStone.DOMove(rightFar.position, speedAnimation);
+
+    }
+    #endregion
+
+    #region DEACTIVATE TURRET ANIMATION
+    void DeactivateTurretAnimation()
+    {
+        //Elevamos la cabeza
+        head.DOMove(downHead.position, speedAnimation);
+
+        //Separamos las piedras imantables
+        frontStone.DOMove(frontNear.position, speedAnimation);
+        backStone.DOMove(backNear.position, speedAnimation);
+        leftStone.DOMove(leftNear.position, speedAnimation);
+        rightStone.DOMove(rightNear.position, speedAnimation);
     }
     #endregion
 
