@@ -901,6 +901,11 @@ PrefabInstance:
       propertyPath: revolverPositiveGameobject
       value: 
       objectReference: {fileID: 1989761776}
+    - target: {fileID: 6642487290883377601, guid: 8b5548488aaed374dbf15b627b1f31fd,
+        type: 3}
+      propertyPath: revolverSlider
+      value: 
+      objectReference: {fileID: 1989761777}
     - target: {fileID: 7283109460651405435, guid: 8b5548488aaed374dbf15b627b1f31fd,
         type: 3}
       propertyPath: m_Name
@@ -1095,6 +1100,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1989761772}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1989761777 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4171159511969737139, guid: 8b5548488aaed374dbf15b627b1f31fd,
+    type: 3}
+  m_PrefabInstance: {fileID: 1989761772}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2067087903
 GameObject:
   m_ObjectHideFlags: 0

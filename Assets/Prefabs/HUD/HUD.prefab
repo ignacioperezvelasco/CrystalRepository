@@ -217,7 +217,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 1
+  m_FillAmount: 0
   m_FillClockwise: 0
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -333,7 +333,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 149.09998, y: 196.5}
+  m_AnchoredPosition: {x: 155, y: 135}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &7283109460597838255
@@ -369,7 +369,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 449, y: 60}
+  m_AnchoredPosition: {x: 429, y: 1213}
   m_SizeDelta: {x: 763.4219, y: 74.6983}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &7283109460651405435
@@ -488,9 +488,8 @@ MonoBehaviour:
   player: {fileID: 0}
   sliderLifePlayer: {fileID: 0}
   revolverPositiveGameobject: {fileID: 0}
+  revolverSlider: {fileID: 0}
   bulletImagesPositive: []
-  revolverNegativeImageGameobject: {fileID: 0}
-  bulletImagesNegative: []
   negativeBullets: 0
   positiveBullets: 0
 --- !u!1 &7283109460808397594
