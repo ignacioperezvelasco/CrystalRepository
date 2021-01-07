@@ -28,19 +28,22 @@ public class HUD : MonoBehaviour
     public float negativeBullets;
     public float positiveBullets;
     private bool isChargingPositive;
-    private bool isCharginNegative;
+    private bool isChargingNegative;
     private int currentBulletPositive;
     private bool first_charge;
     private bool second_charge;
+    private bool third_charge;
     private Color32 positiveColor;
     private Color32 negativeColor;
+    private Color32 defaultColor;
 
     // Start is called before the first frame update
     void Start()
     {
         isChargingPositive = false;
-        second_charge = false;
         first_charge = false;
+        second_charge = false;
+        third_charge = false;
 
         _player = player.GetComponent<rvMovementPers>();
         _shootscript = player.GetComponent<ShootingScript>();
@@ -48,6 +51,7 @@ public class HUD : MonoBehaviour
         currentBulletPositive = 0;
         positiveColor = new Color32(255, 0, 0, 255);
         negativeColor = new Color32(0, 0, 255, 255);
+        defaultColor = new Color32(255, 255, 255, 255);
     }
 
     // Update is called once per frame
@@ -98,7 +102,7 @@ public class HUD : MonoBehaviour
             //SEGUNDA CARGA
             else if(second_charge == false)
             {
-                if ((positiveBullets) >= 2 && (positiveBullets) <= 2.9)
+                if ((positiveBullets) >= 2 && (positiveBullets) < 2.9)
                 {
                     ChangeColorBullet(currentBulletPositive, positiveColor);
                     restartFillSlider();
@@ -107,21 +111,22 @@ public class HUD : MonoBehaviour
                 }
             }
             //TERCERA CARGA
-            else if(first_charge == true && second_charge == true)
+            else if(third_charge == false)
             {
-                if(revolverSlider.fillAmount == 1)
+                if ((positiveBullets) >= 2.9)
                 {
                     ChangeColorBullet(currentBulletPositive, positiveColor);
+                    third_charge = true;
                     IncrementBulletPositive(1);
                 }
             }
 
-
             isChargingPositive = true;
         }
+        //CUANDO DISPARA
         else if (isChargingPositive == true)
         {
-            //RESTART CHARGES AND ROTATES
+            //ROTATES AND RESTART CHARGES
             RestartRevolverCharges();
 
             //RESTART VARIABLES
@@ -134,7 +139,8 @@ public class HUD : MonoBehaviour
         {
             positiveBullets = 0;
         }
-        
+
+        Debug.Log("CurrentBullet: " + currentBulletPositive);
     }
     #endregion
 
@@ -156,7 +162,7 @@ public class HUD : MonoBehaviour
     void IncrementBulletPositive(int toInc)
     {
         currentBulletPositive += toInc;
-        if (currentBulletPositive == 3)
+        if (currentBulletPositive >= 3)
         {
             currentBulletPositive = 0;
         }
@@ -173,9 +179,9 @@ public class HUD : MonoBehaviour
     #region RestartColorImages
     void restartColorImages()
     {
-        bulletImagesPositive[0].color = new Color32(255, 255, 255, 255);
-        bulletImagesPositive[1].color = new Color32(255, 255, 255, 255);
-        bulletImagesPositive[2].color = new Color32(255, 255, 255, 255);
+        ChangeColorBullet(0, defaultColor);
+        ChangeColorBullet(1, defaultColor);
+        ChangeColorBullet(2, defaultColor);
     }
     #endregion
 
@@ -200,11 +206,12 @@ public class HUD : MonoBehaviour
             first_charge = false;
             second_charge = false;
         }
-        else if (positiveBullets > 2.9)
+        else if (positiveBullets >= 2.9)
         {
             RotateRevolver(360.0f);
             first_charge = false;
             second_charge = false;
+            third_charge = false;
         }
     }
     #endregion
