@@ -1,9 +1,5 @@
 sceneSetups:
-<<<<<<< HEAD
 - path: Assets/Scenes/MARTI_Scene.unity
-=======
-- path: Assets/Scenes/Ignacio_Scene.unity
->>>>>>> Develop
   isLoaded: 1
   isActive: 1
   isSubScene: 0

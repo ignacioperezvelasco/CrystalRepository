@@ -83,25 +83,21 @@ public class HUD : MonoBehaviour
             //PRIMERA CARGA
             if(first_charge == false)
             {
-                if ((positiveBullets - 1) >= 1 && (positiveBullets - 1) <= 1.9)
+                if ((positiveBullets) >= 1 && (positiveBullets) <= 1.9)
                 {
                     bulletImagesPositive[currentBulletPositive].color = new Color32(255, 0, 0, 255);
                     revolverSlider.fillAmount = 0;
                     first_charge = true;
-
-                    IncrementBulletPositive(1);
                 }
             }
             //SEGUNDA CARGA
             else if(second_charge == false)
             {
-                if ((positiveBullets - 1) >= 2 && (positiveBullets - 1) <= 2.9)
+                if ((positiveBullets) >= 2 && (positiveBullets) <= 2.9)
                 {
                     bulletImagesPositive[currentBulletPositive].color = new Color32(255, 0, 0, 255);
                     revolverSlider.fillAmount = 0;
                     second_charge = true;
-
-                    IncrementBulletPositive(1);
                 }
             }
             //TERCERA CARGA
@@ -110,8 +106,6 @@ public class HUD : MonoBehaviour
                 if(revolverSlider.fillAmount == 1)
                 {
                     bulletImagesPositive[currentBulletPositive].color = new Color32(255, 0, 0, 255);
-
-                    IncrementBulletPositive(1);
                 }
             }
 
@@ -123,7 +117,9 @@ public class HUD : MonoBehaviour
             if (positiveBullets <= 1.9)
             {
                 Debug.Log("Ha disparado una bala");
+                LeanTween.rotate(revolverPositiveGameobject.gameObject, new Vector3(0, 0, 120.0f * (currentBulletPositive + 1)), 0.3f);
                 first_charge = false;
+                IncrementBulletPositive(1);
             }
             else if(positiveBullets >= 2 && positiveBullets <= 2.9)
             {
