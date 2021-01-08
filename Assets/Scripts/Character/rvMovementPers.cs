@@ -23,9 +23,13 @@ public class rvMovementPers : MonoBehaviour
     public LayerMask slowerGround;
     //public cameraScript myCam;
     private GameObject myPlayer;
-    // Update is called once per frame
 
-    [Header("DASH")]
+    //La camara para el movimiento en funcion a ella
+    Camera viewCamera;
+    Vector3 camForward;
+    Vector3 camRight;
+
+[Header("DASH")]
 
     bool isDashing=false;
     float dashTimer = 0f;
@@ -48,6 +52,9 @@ public class rvMovementPers : MonoBehaviour
         dashCounter = timeToNextDash;
         currentHealth = maxHealth;
         myPlayer = GameObject.FindGameObjectWithTag("Player");
+
+        //Seteamos la camara
+        viewCamera = Camera.main;
         
     }
 
@@ -72,9 +79,12 @@ public class rvMovementPers : MonoBehaviour
         else if(!_isGrounded)
             myRb.drag = 0;
 
-        
 
-        desiredVelocity= new Vector3(horizontal,0f,vertical);
+        //Comprobamos la dirección del movimiento respecto a la camara
+        CheckMovementRelativeToCamera();
+
+        //desiredVelocity = new Vector3(horizontal,0f,vertical);
+        desiredVelocity = camForward * vertical + camRight * horizontal;
         desiredVelocity.Normalize();
         //move respect camera
 
@@ -166,5 +176,17 @@ public class rvMovementPers : MonoBehaviour
     public int GetLife()
     {
         return currentHealth;
+    }
+
+    void CheckMovementRelativeToCamera()
+    {
+        camForward = viewCamera.transform.forward;
+        camRight = viewCamera.transform.right;
+
+        camForward.y = 0;
+        camRight.y = 0;
+
+        camForward = camForward.normalized;
+        camRight = camRight.normalized;
     }
 }
