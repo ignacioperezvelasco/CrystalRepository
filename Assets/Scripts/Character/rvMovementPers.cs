@@ -21,11 +21,15 @@ public class rvMovementPers : MonoBehaviour
     public float GroundDistance = 0.2f;
     public LayerMask Ground;
     public LayerMask slowerGround;
-    public cameraScript myCam;
+    //public cameraScript myCam;
     private GameObject myPlayer;
-    // Update is called once per frame
 
-    [Header("DASH")]
+    //La camara para el movimiento en funcion a ella
+    Camera viewCamera;
+    Vector3 camForward;
+    Vector3 camRight;
+
+[Header("DASH")]
 
     bool isDashing=false;
     float dashTimer = 0f;
@@ -48,13 +52,16 @@ public class rvMovementPers : MonoBehaviour
         dashCounter = timeToNextDash;
         currentHealth = maxHealth;
         myPlayer = GameObject.FindGameObjectWithTag("Player");
+
+        //Seteamos la camara
+        viewCamera = Camera.main;
         
     }
 
     void Update()
     {
         
-        myPlayer.transform.LookAt(new Vector3(myCam.myMouse.x, this.transform.position.y, myCam.myMouse.z));
+        //myPlayer.transform.LookAt(new Vector3(myCam.myMouse.x, this.transform.position.y, myCam.myMouse.z));
 
         horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");
@@ -72,9 +79,12 @@ public class rvMovementPers : MonoBehaviour
         else if(!_isGrounded)
             myRb.drag = 0;
 
-        
 
-        desiredVelocity= new Vector3(horizontal,0f,vertical);
+        //Comprobamos la dirección del movimiento respecto a la camara
+        CheckMovementRelativeToCamera();
+
+        //desiredVelocity = new Vector3(horizontal,0f,vertical);
+        desiredVelocity = camForward * vertical + camRight * horizontal;
         desiredVelocity.Normalize();
         //move respect camera
 
@@ -166,5 +176,17 @@ public class rvMovementPers : MonoBehaviour
     public int GetLife()
     {
         return currentHealth;
+    }
+
+    void CheckMovementRelativeToCamera()
+    {
+        camForward = viewCamera.transform.forward;
+        camRight = viewCamera.transform.right;
+
+        camForward.y = 0;
+        camRight.y = 0;
+
+        camForward = camForward.normalized;
+        camRight = camRight.normalized;
     }
 }

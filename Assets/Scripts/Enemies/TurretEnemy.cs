@@ -65,6 +65,12 @@ public class TurretEnemy : MonoBehaviour
         line = GetComponent<LineRenderer>();
 
         player = GameObject.FindGameObjectWithTag("Player").transform;
+
+        //Seteamos las ImanStones
+        frontIman.myPole = iman.POSITIVE;
+        backIman.myPole = iman.POSITIVE;
+        leftIman.myPole = iman.POSITIVE;
+        rightIman.myPole = iman.POSITIVE;
     }
     #endregion
 
@@ -220,11 +226,12 @@ public class TurretEnemy : MonoBehaviour
                 DeactivateLeftStone();
             }
             //Comprobamos la frontal 
-            if (rightIman.myPole == iman.NEGATIVE)
+            if (rightIman.myPole == iman.POSITIVE)
             {
                 DeactivateRightStone();
             }
 
+            DeactivateHead();
 
         }
 

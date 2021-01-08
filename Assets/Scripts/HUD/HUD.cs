@@ -30,6 +30,7 @@ public class HUD : MonoBehaviour
     private bool isChargingPositive;
     private bool isChargingNegative;
     private int currentBulletPositive;
+    private int currentBulletNegative;
     private bool first_charge;
     private bool second_charge;
     private bool third_charge;
@@ -49,6 +50,7 @@ public class HUD : MonoBehaviour
         _shootscript = player.GetComponent<ShootingScript>();
 
         currentBulletPositive = 0;
+        currentBulletNegative = 0;
         positiveColor = new Color32(255, 0, 0, 255);
         negativeColor = new Color32(0, 0, 255, 255);
         defaultColor = new Color32(255, 255, 255, 255);
@@ -67,7 +69,6 @@ public class HUD : MonoBehaviour
         //SLIDER LIFE PLAYER
         SliderPlayerLife();
     }
-
 
     #region SliderPlayerLife
     void SliderPlayerLife()
@@ -94,7 +95,7 @@ public class HUD : MonoBehaviour
                 if ((positiveBullets) >= 1 && (positiveBullets) <= 1.9)
                 {
                     ChangeColorBullet(currentBulletPositive, positiveColor);
-                    restartFillSlider();
+                    RestartFillSlider();
                     first_charge = true;
                     IncrementBulletPositive(1);
                 }
@@ -105,7 +106,7 @@ public class HUD : MonoBehaviour
                 if ((positiveBullets) >= 2 && (positiveBullets) < 2.9)
                 {
                     ChangeColorBullet(currentBulletPositive, positiveColor);
-                    restartFillSlider();
+                    RestartFillSlider();
                     second_charge = true;
                     IncrementBulletPositive(1);
                 }
@@ -127,11 +128,11 @@ public class HUD : MonoBehaviour
         else if (isChargingPositive == true)
         {
             //ROTATES AND RESTART CHARGES
-            RestartRevolverCharges();
+            RestartRevolverCharges(positiveBullets);
 
             //RESTART VARIABLES
-            restartFillSlider();
-            restartColorImages();
+            RestartFillSlider();
+            RestartColorImages();
 
             isChargingPositive = false;
         }
@@ -140,7 +141,9 @@ public class HUD : MonoBehaviour
             positiveBullets = 0;
         }
 
-        Debug.Log("CurrentBullet: " + currentBulletPositive);
+        currentBulletNegative = currentBulletPositive;
+        //Debug.Log("CurrentBullet POSITIVE: " + currentBulletPositive);
+        //Debug.Log("CurrentBullet NEGATIVE: " + currentBulletNegative);
     }
     #endregion
 
@@ -150,11 +153,64 @@ public class HUD : MonoBehaviour
         if (_shootscript.GetIsChargingNegative())
         {
             negativeBullets = _shootscript.GetShootNegative();
+
+            //SLIDER COLOR ROJO
+            revolverSlider.color = new Color32(0, 0, 255, 255);
+            revolverSlider.fillAmount += 1.0f * Time.deltaTime;
+
+            //PRIMERA CARGA
+            if (first_charge == false)
+            {
+                if ((negativeBullets) >= 1 && (negativeBullets) <= 1.9)
+                {
+                    ChangeColorBullet(currentBulletNegative, negativeColor);
+                    RestartFillSlider();
+                    first_charge = true;
+                    IncrementBulletNegative(1);
+                }
+            }
+            //SEGUNDA CARGA
+            else if (second_charge == false)
+            {
+                if ((negativeBullets) >= 2 && (negativeBullets) < 2.9)
+                {
+                    ChangeColorBullet(currentBulletNegative, negativeColor);
+                    RestartFillSlider();
+                    second_charge = true;
+                    IncrementBulletNegative(1);
+                }
+            }
+            //TERCERA CARGA
+            else if (third_charge == false)
+            {
+                if ((negativeBullets) >= 2.9)
+                {
+                    ChangeColorBullet(currentBulletNegative, negativeColor);
+                    third_charge = true;
+                    IncrementBulletNegative(1);
+                }
+            }
+
+            isChargingNegative = true;
         }
-        else if(negativeBullets != 0)
+        //CUANDO DISPARA
+        else if (isChargingNegative == true)
+        {
+            //ROTATES AND RESTART CHARGES
+            RestartRevolverCharges(negativeBullets);
+
+            //RESTART VARIABLES
+            RestartFillSlider();
+            RestartColorImages();
+
+            isChargingNegative = false;
+        }
+        else if (negativeBullets != 0)
         {
             negativeBullets = 0;
         }
+
+        currentBulletPositive = currentBulletNegative;
     }
     #endregion
 
@@ -169,15 +225,26 @@ public class HUD : MonoBehaviour
     }
     #endregion
 
+    #region IncrementBulletNegative
+    void IncrementBulletNegative(int toInc)
+    {
+        currentBulletNegative += toInc;
+        if (currentBulletNegative >= 3)
+        {
+            currentBulletNegative = 0;
+        }
+    }
+    #endregion
+
     #region RestartFillSlider
-    void restartFillSlider()
+    void RestartFillSlider()
     {
         revolverSlider.fillAmount = 0;
     }
     #endregion
 
     #region RestartColorImages
-    void restartColorImages()
+    void RestartColorImages()
     {
         ChangeColorBullet(0, defaultColor);
         ChangeColorBullet(1, defaultColor);
@@ -193,20 +260,20 @@ public class HUD : MonoBehaviour
     #endregion
 
     #region RestartRevolverCharges
-    void RestartRevolverCharges()
+    void RestartRevolverCharges(float bullet)
     {
-        if (positiveBullets <= 1.9)
+        if (bullet <= 1.9)
         {
             RotateRevolver(120.0f);
             first_charge = false;
         }
-        else if (positiveBullets >= 2 && positiveBullets <= 2.9)
+        else if (bullet >= 2 && bullet <= 2.9)
         {
             RotateRevolver(240.0f);
             first_charge = false;
             second_charge = false;
         }
-        else if (positiveBullets >= 2.9)
+        else if (bullet >= 2.9)
         {
             RotateRevolver(360.0f);
             first_charge = false;
