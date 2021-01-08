@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 ﻿{"cameraMode":{"drawMode":0,"name":"Shaded","section":"Shading Mode"},"sceneLighting":true,"audioPlay":false,"sceneViewState":{"showFog":true,"showMaterialUpdate":false,"showSkybox":true,"showFlares":true,"showImageEffects":true,"showParticleSystems":true},"in2DMode":false,"pivot":{"x":420.5084533691406,"y":204.488037109375,"z":27.34185791015625},"rotation":{"x":0.04913971200585365,"y":-0.03535250201821327,"z":-0.0017403224483132363,"w":-0.9981645345687866},"size":299.2979736328125,"orthographic":false}
+=======
+﻿{"cameraMode":{"drawMode":0,"name":"Shaded","section":"Shading Mode"},"sceneLighting":true,"audioPlay":false,"sceneViewState":{"showFog":true,"showMaterialUpdate":false,"showSkybox":true,"showFlares":true,"showImageEffects":true,"showParticleSystems":true},"in2DMode":false,"pivot":{"x":33.84336853027344,"y":-81.20333099365235,"z":-120.390380859375},"rotation":{"x":0.019801396876573564,"y":0.9552227854728699,"z":-0.28797727823257449,"w":0.06570286303758621},"size":88.91114807128906,"orthographic":false}
+>>>>>>> ElementalEnemy

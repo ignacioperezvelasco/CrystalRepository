@@ -38,8 +38,13 @@ public class ImanBehavior : MonoBehaviour
     void Start()
     {
         myRB = this.GetComponent<Rigidbody>();
-        mysphereCollider = this.GetComponentInChildren<SphereCollider>();
-        mysphereCollider.radius = 0.5f;
+        
+        if (mobility != mobilityType.JUSTPOLE)
+        {
+            mysphereCollider = this.GetComponentInChildren<SphereCollider>();
+            mysphereCollider.radius = 0.5f;
+        }
+        
         nearImantableObjects = new List<GameObject>();
         timerActive = timeActive;
         timerImanted = timeImanted;

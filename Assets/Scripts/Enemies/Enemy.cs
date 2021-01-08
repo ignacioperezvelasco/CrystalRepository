@@ -357,4 +357,5 @@ public class Enemy : Agent
         Gizmos.DrawWireSphere(this.transform.position, distanceAlert);
     }
     #endregion
+
 }
