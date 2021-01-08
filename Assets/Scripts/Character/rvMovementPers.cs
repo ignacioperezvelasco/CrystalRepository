@@ -21,7 +21,7 @@ public class rvMovementPers : MonoBehaviour
     public float GroundDistance = 0.2f;
     public LayerMask Ground;
     public LayerMask slowerGround;
-    public cameraScript myCam;
+    //public cameraScript myCam;
     private GameObject myPlayer;
     // Update is called once per frame
 
@@ -54,7 +54,7 @@ public class rvMovementPers : MonoBehaviour
     void Update()
     {
         
-        myPlayer.transform.LookAt(new Vector3(myCam.myMouse.x, this.transform.position.y, myCam.myMouse.z));
+        //myPlayer.transform.LookAt(new Vector3(myCam.myMouse.x, this.transform.position.y, myCam.myMouse.z));
 
         horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");

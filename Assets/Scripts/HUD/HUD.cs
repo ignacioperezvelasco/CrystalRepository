@@ -142,8 +142,8 @@ public class HUD : MonoBehaviour
         }
 
         currentBulletNegative = currentBulletPositive;
-        Debug.Log("CurrentBullet POSITIVE: " + currentBulletPositive);
-        Debug.Log("CurrentBullet NEGATIVE: " + currentBulletNegative);
+        //Debug.Log("CurrentBullet POSITIVE: " + currentBulletPositive);
+        //Debug.Log("CurrentBullet NEGATIVE: " + currentBulletNegative);
     }
     #endregion
 
