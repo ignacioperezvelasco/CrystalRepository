@@ -14,8 +14,9 @@ public class ShootingScript : MonoBehaviour
     public Transform leftPistol;
     bool canShootPositive = true;
     bool canShootNegative = true;
-    float positiveCharge = 1;
-    float negativeCharge = 1;
+    float timerNegative, timerpositive = 0;
+    float positiveCharge = 0;
+    float negativeCharge = 0;
     bool isChargingNegative, isChargingPositive = false;
 
     // Start is called before the first frame update
@@ -31,21 +32,69 @@ public class ShootingScript : MonoBehaviour
         {
             isChargingNegative = true;
         }
-        if (Input.GetButtonUp("Fire1"))
+        if (Input.GetButtonUp("Fire1") && isChargingNegative)
         {
-            ShootNegative();
-            negativeCharge = 1;
+            //Set cooldown
+            switch ((int)negativeCharge)
+            {
+                case 0:
+                    timerNegative = 0;
+                    break;
+                case 1:
+                    timerNegative = 3;
+                    break;
+                case 2:
+                    timerNegative = 2;
+                    break;
+                case 3:
+                    timerNegative = 3;
+                    break;
+                default:
+                    break;
+            }
+            
+            //Shoot if have to
+            if (negativeCharge >= 1)
+                ShootNegative();
+            
+            //reset
+            negativeCharge = 0;
             isChargingNegative = false;
+            //Start CD
+            canShootNegative = false;
         }
         if (Input.GetButtonDown("Fire2") && canShootPositive)
         {
             isChargingPositive = true;
         }
-        if (Input.GetButtonUp("Fire2"))
+        if (Input.GetButtonUp("Fire2") && isChargingPositive)
         {
-            ShootPositive();
-            positiveCharge = 1;
+            //Set cooldown
+            switch ((int)positiveCharge)
+            {
+                case 0:
+                    timerpositive = 0;
+                    break;
+                case 1:
+                    timerpositive = 3;
+                    break;
+                case 2:
+                    timerpositive = 6;
+                    break;
+                case 3:
+                    timerpositive = 10;
+                    break;
+                default:
+                    break;
+            }
+            //shoot if u have
+            if (positiveCharge>=1)
+                ShootPositive();
+            //reset
+            positiveCharge = 0;
             isChargingPositive = false;
+            //Start CD
+            canShootPositive = false;
         }
     }
 
@@ -55,7 +104,16 @@ public class ShootingScript : MonoBehaviour
         {
             if (negativeCharge <= 3)
                 negativeCharge += Time.fixedDeltaTime;
-           // Debug.Log(negativeCharge);
+            // Debug.Log(negativeCharge);
+        }
+        else if (!canShootNegative)
+        {
+            timerNegative -= Time.fixedDeltaTime;
+            if (timerNegative <= 0)
+            {
+                timerNegative = 0;
+                canShootNegative = true;
+            }
         }
         if (isChargingPositive)
         {
@@ -63,13 +121,22 @@ public class ShootingScript : MonoBehaviour
                 positiveCharge += Time.fixedDeltaTime;
             //Debug.Log(positiveCharge);
         }
+        else if (!canShootPositive)
+        {
+            timerpositive -= Time.fixedDeltaTime;
+            if (timerpositive <= 0)
+            {
+                timerpositive = 0;
+                canShootPositive = true;
+            }
+        }
     }
 
     void ShootNegative()
     {
         Rigidbody bulletClone = (Rigidbody)Instantiate(bullet, rightPistol.transform.position, rightPistol.transform.rotation);
         bulletClone.gameObject.GetComponent<BulletScript>().SetPole(iman.NEGATIVE);
-        Debug.Log("Negative");
+        //Debug.Log("Negative");
         bulletClone.gameObject.GetComponent<BulletScript>().SetCharge((int)negativeCharge);
         bulletClone.velocity = transform.forward * bulletSpeed;
     }
@@ -78,7 +145,7 @@ public class ShootingScript : MonoBehaviour
     {
         Rigidbody bulletClone = (Rigidbody)Instantiate(crystal, leftPistol.transform.position, leftPistol.transform.rotation);
         bulletClone.gameObject.GetComponent<BulletScript>().SetPole(iman.POSITIVE);
-        Debug.Log("Positive");
+        //Debug.Log("Positive");
         bulletClone.gameObject.GetComponent<BulletScript>().SetCharge((int)positiveCharge);
         bulletClone.velocity = transform.forward * bulletSpeed;
     }

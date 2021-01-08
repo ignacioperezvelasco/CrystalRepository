@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum mobilityType { MOBILE, STATIC, NONE, SEMIMOVIBLE };
+public enum mobilityType { MOBILE, STATIC, NONE, SEMIMOVIBLE, JUSTPOLE };
 public enum iman { POSITIVE, NEGATIVE, NONE };
 public enum forceType { ATRACT, REPULSE, NONE };
 
@@ -53,29 +53,34 @@ public class ImanBehavior : MonoBehaviour
 
     private void Update()
     {
-        if (myPole != iman.NONE)
-            CalculateDirectionForce();
+        if (mobility != mobilityType.JUSTPOLE)
+        {
+            if (myPole != iman.NONE)
+                CalculateDirectionForce();
+        }
     }
 
     private void FixedUpdate()
-    {        
-        if (myPole != iman.NONE)
+    {
+        if (mobility != mobilityType.JUSTPOLE)
         {
-            if (applyForce && mobility==mobilityType.MOBILE)
+            if (myPole != iman.NONE)
             {
-                //Debug.Log("ha de palicart la fuerza : " + directionForce * force);
-                myRB.AddForce(directionForce * force , ForceMode.Force);
-                directionForce = new Vector3(0, 0, 0);
-                timerActive -= Time.fixedDeltaTime;
-                if (timerActive <= 0)
+                if (applyForce && mobility == mobilityType.MOBILE)
+                {
+                    //Debug.Log("ha de palicart la fuerza : " + directionForce * force);
+                    myRB.AddForce(directionForce * force, ForceMode.Force);
+                    directionForce = new Vector3(0, 0, 0);
+                    timerActive -= Time.fixedDeltaTime;
+                    if (timerActive <= 0)
+                        ResetObject();
+                }
+                else
+                    timerImanted -= Time.fixedDeltaTime;
+                if (timerImanted <= 0)
                     ResetObject();
             }
-            else
-                timerImanted -= Time.fixedDeltaTime;
-            if (timerImanted <= 0)
-                ResetObject();
         }
-
     }
 
     #region UPDATING ELEMENTS NEAR
@@ -184,29 +189,32 @@ public class ImanBehavior : MonoBehaviour
         //ACTIVAMOS SCRIPT OUTLINE
         outline.enabled = true;
 
-        numChargesAdded = numCharge;
-
-        //En caso de tener los radius hardcoded aqui. SINO Cambiarlo a las dos lineas del switch
-        switch (numCharge)
+        if (mobility != mobilityType.JUSTPOLE)
         {
-            case 1:
-                mysphereCollider.enabled = true;
-                mysphereCollider.radius = 3.5f;
-                break;
-            case 2:
-                mysphereCollider.enabled = true;
-                mysphereCollider.radius = 4.5f;
-                break;
-            case 3:
-                mysphereCollider.enabled = true;
-                mysphereCollider.radius = 8;
-                break;
-            default:
-                break;
+            numChargesAdded = numCharge;
+
+            //En caso de tener los radius hardcoded aqui. SINO Cambiarlo a las dos lineas del switch
+            switch (numCharge)
+            {
+                case 1:
+                    mysphereCollider.enabled = true;
+                    mysphereCollider.radius = 3.5f;
+                    break;
+                case 2:
+                    mysphereCollider.enabled = true;
+                    mysphereCollider.radius = 4.5f;
+                    break;
+                case 3:
+                    mysphereCollider.enabled = true;
+                    mysphereCollider.radius = 8;
+                    break;
+                default:
+                    break;
+            }
+            //Reset timers
+            timerActive = timeActive;
+            timerImanted = timeImanted;
         }
-        //Reset timers
-        timerActive = timeActive;
-        timerImanted = timeImanted;
     }
 
     private void ResetObject()
