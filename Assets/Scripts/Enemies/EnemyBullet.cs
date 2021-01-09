@@ -7,7 +7,7 @@ public class EnemyBullet : MonoBehaviour
     #region VARIABLES
     Rigidbody rb;
     public float bulletSpeed = 10;
-    float LifeTime = 10;
+    public float LifeTime = 10;
     #endregion
 
 

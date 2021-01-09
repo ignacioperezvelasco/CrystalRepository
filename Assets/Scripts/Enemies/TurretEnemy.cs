@@ -6,7 +6,16 @@ using DG.Tweening;
 public class TurretEnemy : MonoBehaviour
 {
     #region VARIABLES
-     Transform player;
+    public enum TurretType
+    {
+        PROJECTILE,
+        LASER
+    };
+
+    Transform player;
+
+    public TurretType turretType;
+
     [Header("HEAD")]
     public bool headActivate = true;
     public Transform head;
@@ -17,11 +26,15 @@ public class TurretEnemy : MonoBehaviour
     public float followSpeed;
     bool isInside = false;
 
-    [Header("Shooting")]
+    [Header("LASER")]
+    public GameObject laserEffect;
+
+    [Header("SHOOTING")]
     public float fireRate = 3;
     public Transform shootSpawner;
     public GameObject projectile;
-    [Header("Particles Efect")]
+
+    [Header("PARTICLES EFFECT")]
     public GameObject chargeParticles;
     public float restartParticles = 0.3f;
 
@@ -89,12 +102,17 @@ public class TurretEnemy : MonoBehaviour
                 crosshair.DOMove(new Vector3(player.position.x, crosshair.position.y, player.position.z), followSpeed);
                 head.DOLookAt(new Vector3(player.position.x, crosshair.position.y - 1.5f, player.position.z), followSpeed);
 
-                shootTimer += Time.deltaTime;
-                if (shootTimer >= fireRate)
+                //Dispaamos el proyectil solo si es de tipo proyectil
+                if (turretType == TurretType.PROJECTILE)
                 {
-                    shootTimer = 0;
-                    Shoot();
+                    shootTimer += Time.deltaTime;
+                    if (shootTimer >= fireRate)
+                    {
+                        shootTimer = 0;
+                        Shoot();
+                    }
                 }
+                
             }            
 
             
@@ -124,6 +142,14 @@ public class TurretEnemy : MonoBehaviour
 
                 //Paramos las particulas
                 chargeParticles.SetActive(false);
+
+                line.enabled = false;
+
+                //Si la torreta es laser activamos el sistema de particulas
+                if (turretType == TurretType.LASER)
+                {
+                    laserEffect.SetActive(false);
+                }
             }
 
         }
@@ -161,13 +187,21 @@ public class TurretEnemy : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            line.enabled = true;
+
+            //Si la torreta es laser activamos el sistema de particulas
+            if (turretType == TurretType.LASER)
+            {
+                laserEffect.SetActive(true);
+            }
+
             //encendemos las particulas
             chargeParticles.SetActive(true);
 
             isInside = true;
 
             //Animamos la torreta para que se active
-            ActivateTurretAnimation();
+            ActivateTurretAnimation();            
         }
     }
     #endregion
@@ -177,6 +211,16 @@ public class TurretEnemy : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            line.enabled = false;
+
+            //Si la torreta es laser activamos el sistema de particulas
+            if (turretType == TurretType.LASER)
+            {
+                laserEffect.SetActive(false);
+            }
+
+            isInside = false;
+
             DeactivateTurretAnimation();
         }
     }
