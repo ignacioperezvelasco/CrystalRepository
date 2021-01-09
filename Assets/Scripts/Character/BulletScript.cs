@@ -13,7 +13,7 @@ public class BulletScript : MonoBehaviour
     private void Start()
     {
         initialPosition = this.transform.position;
-        myRB = this.GetComponent<Rigidbody>();
+        myRB = this.GetComponent<Rigidbody>();       
     }
 
     private void Update()
@@ -28,6 +28,7 @@ public class BulletScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("Detecta ostia");
         if (other.tag == "CanBeHitted")
         {
             other.GetComponent<ImanBehavior>().AddCharge(myPole, numCharge, myRB);
