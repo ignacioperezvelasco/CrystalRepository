@@ -271,8 +271,8 @@ public class ImanBehavior : MonoBehaviour
         timerImanted = timeImanted;
         mysphereCollider.radius = 0.5f;
         mysphereCollider.enabled = false;
-
-
+        if (imEnemy)
+            myNavMeshScript.enabled = true;
         //OUTLINE
         outline.OutlineColor = new Color32(0, 0, 0, 0);
         outline.enabled = false;
