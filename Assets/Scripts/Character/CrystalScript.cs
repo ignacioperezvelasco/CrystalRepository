@@ -23,7 +23,7 @@ public class CrystalScript : MonoBehaviour
     {
         if (other.tag == "CanBeHitted")
         {
-            other.GetComponent<ImanBehavior>().AddCharge(iman.POSITIVE, numCharge);
+            //other.GetComponent<ImanBehavior>().AddCharge(iman.POSITIVE, numCharge);
             Die();
         }
     }
