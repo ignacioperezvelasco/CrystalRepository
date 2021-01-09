@@ -38,24 +38,23 @@ public class ShootingScript : MonoBehaviour
             switch ((int)negativeCharge)
             {
                 case 0:
-                    timerNegative = 0;
+                    timerNegative = 1;
                     break;
                 case 1:
-                    timerNegative = 3;
-                    break;
-                case 2:
                     timerNegative = 2;
                     break;
-                case 3:
+                case 2:
                     timerNegative = 3;
+                    break;
+                case 3:
+                    timerNegative = 4;
                     break;
                 default:
                     break;
             }
             
             //Shoot if have to
-            if (negativeCharge >= 1)
-                ShootNegative();
+            ShootNegative();
             
             //reset
             negativeCharge = 0;
@@ -73,23 +72,22 @@ public class ShootingScript : MonoBehaviour
             switch ((int)positiveCharge)
             {
                 case 0:
-                    timerpositive = 0;
+                    timerpositive = 1;
                     break;
                 case 1:
-                    timerpositive = 3;
+                    timerpositive = 2;
                     break;
                 case 2:
-                    timerpositive = 6;
+                    timerpositive = 3;
                     break;
                 case 3:
-                    timerpositive = 10;
+                    timerpositive = 4;
                     break;
                 default:
                     break;
             }
             //shoot if u have
-            if (positiveCharge>=1)
-                ShootPositive();
+            ShootPositive();
             //reset
             positiveCharge = 0;
             isChargingPositive = false;

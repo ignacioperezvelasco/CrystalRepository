@@ -15,7 +15,7 @@ public class MainMenu : MonoBehaviour
         Debug.Log("Empecemos");
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         
-        Invoke("LoadNextScene", 0.5f);
+        //Invoke("LoadNextScene", 0.5f);
     }
 
     public void ExitGame()

@@ -176,49 +176,58 @@ public class ImanBehavior : MonoBehaviour
 
     #endregion
 
-    public void AddCharge(iman typeIman, int numCharge)
+    public void AddCharge(iman typeIman, int numCharge, Rigidbody bullet)
     {
-        //this.gameObject.tag = "Untagged";
-        //Primero asignamos polo para que no haya problemas en otra parte del codigo
-        if (typeIman == iman.POSITIVE)
+
+        if (numCharge > 1)
         {
-            myPole = iman.POSITIVE;
-            outline.OutlineColor = new Color32(255, 0, 0, 255);
+            //Primero asignamos polo para que no haya problemas en otra parte del codigo
+            if (typeIman == iman.POSITIVE)
+            {
+                myPole = iman.POSITIVE;
+                outline.OutlineColor = new Color32(255, 0, 0, 255);
+            }
+            else
+            {
+                myPole = iman.NEGATIVE;
+                outline.OutlineColor = new Color32(0, 0, 255, 255);
+            }
+
+            //ACTIVAMOS SCRIPT OUTLINE
+            outline.enabled = true;
+
+            if (mobility != mobilityType.JUSTPOLE)
+            {
+
+                numChargesAdded = numCharge;
+
+                //En caso de tener los radius hardcoded aqui. SINO Cambiarlo a las dos lineas del switch
+                switch (numCharge)
+                {
+                    case 1:
+                        mysphereCollider.enabled = true;
+                        mysphereCollider.radius = 3.5f;
+                        break;
+                    case 2:
+                        mysphereCollider.enabled = true;
+                        mysphereCollider.radius = 4.5f;
+                        break;
+                    case 3:
+                        mysphereCollider.enabled = true;
+                        mysphereCollider.radius = 8;
+                        break;
+                    default:
+                        break;
+                }
+                //Reset timers
+                timerActive = timeActive;
+                timerImanted = timeImanted;
+            }
         }
         else
         {
-            myPole = iman.NEGATIVE;
-            outline.OutlineColor = new Color32(0, 0, 255, 255);
-        }
-
-        //ACTIVAMOS SCRIPT OUTLINE
-        outline.enabled = true;
-
-        if (mobility != mobilityType.JUSTPOLE)
-        {
-            numChargesAdded = numCharge;
-
-            //En caso de tener los radius hardcoded aqui. SINO Cambiarlo a las dos lineas del switch
-            switch (numCharge)
-            {
-                case 1:
-                    mysphereCollider.enabled = true;
-                    mysphereCollider.radius = 3.5f;
-                    break;
-                case 2:
-                    mysphereCollider.enabled = true;
-                    mysphereCollider.radius = 4.5f;
-                    break;
-                case 3:
-                    mysphereCollider.enabled = true;
-                    mysphereCollider.radius = 8;
-                    break;
-                default:
-                    break;
-            }
-            //Reset timers
-            timerActive = timeActive;
-            timerImanted = timeImanted;
+            //Behavior if is no charge bullet
+            myRB.AddForce(bullet.velocity.normalized*2, ForceMode.Impulse);
         }
     }
 

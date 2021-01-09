@@ -8,10 +8,12 @@ public class BulletScript : MonoBehaviour
     public float distanceCanReach = 40;
     Vector3 initialPosition;
     iman myPole;
+    Rigidbody myRB;
 
     private void Start()
     {
         initialPosition = this.transform.position;
+        myRB = this.GetComponent<Rigidbody>();
     }
 
     private void Update()
@@ -28,7 +30,7 @@ public class BulletScript : MonoBehaviour
     {
         if (other.tag == "CanBeHitted")
         {
-            other.GetComponent<ImanBehavior>().AddCharge(myPole, numCharge);
+            other.GetComponent<ImanBehavior>().AddCharge(myPole, numCharge, myRB);
             Die();
         }
     }
