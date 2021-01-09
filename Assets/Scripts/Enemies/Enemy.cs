@@ -18,7 +18,8 @@ public class Enemy : Agent
     StateEnemy currentState = StateEnemy.PATROL;
     Transform player;
     NavMeshAgent agentNavMesh;
-
+    ImanBehavior myImanBehaviorScript;
+    Rigidbody myRB;
 
     [Header("ENEMY")]
     public int startingLife = 100;
@@ -74,6 +75,12 @@ public class Enemy : Agent
         line.SetPosition(0, baseTelegraph.position);
         line.SetPosition(1, baseTelegraph.position);
         line.enabled = false;
+
+        //Referenciamos nuestro ImanBehavior
+        myImanBehaviorScript = this.GetComponent<ImanBehavior>();
+
+        //Referenciamos RigidBody
+        myRB = this.GetComponent<Rigidbody>();
     }
     #endregion
 
@@ -154,7 +161,7 @@ public class Enemy : Agent
                 }
             default:
                 {
-                    Debug.Log("NO HAY NINGUN ESTADO");
+                    //Debug.Log("NO HAY NINGUN ESTADO");
                     break;
                 }
         }
@@ -183,7 +190,7 @@ public class Enemy : Agent
                 }
             default:
                 {
-                    Debug.Log("NO HAY NINGUN ESTADO");
+                    //Debug.Log("NO HAY NINGUN ESTADO");
                     break;
                 }
         }
@@ -250,58 +257,61 @@ public class Enemy : Agent
         line.SetPosition(0, baseTelegraph.position);
         line.SetPosition(1, targetTelegraph.position);
 
-        if (!isAttacking)
-        {
-            if (Vector3.Distance(player.position, this.transform.position) > 3)
+        if (!myImanBehaviorScript.GetApplyForce())
             {
-                agentNavMesh.SetDestination(player.position);
-            }
 
-            timer += Time.deltaTime;
-            if (timer > timeBetweenAttacks)
+            if (!isAttacking)
             {
-                timer = 0;
-
-                float distanceToplayer = Vector3.Distance(this.transform.position, player.position);
-
-                //SI ESTA CERCA DEL ENEMIGO,ATAQUE EN AREA
-                if (distanceToplayer <= distanceToDoAreaAtttack)
+                if (Vector3.Distance(player.position, this.transform.position) > 3)
                 {
-                    //Paramos al enemigo
-                    agentNavMesh.isStopped = true;
-                    //Hacemos el Ataque en area
-                    attackArea.SetActive(true);
-                    Invoke("DeactivateAreaAttack", 0.5f);
-                }
-                //SI ESTA LEJOS HACEMOS ATAQUE CARGA
-                else
-                {
-                    line.enabled = true;
-                    isAttacking = true;
-                    //Paramos al enemigo
-                    agentNavMesh.isStopped = true;
-                    //Hacemos el ataque embestida
-                    ChargeAttack();
-                    Debug.Log("ATAQUE CARGADO");
+                    agentNavMesh.SetDestination(player.position);
                 }
 
+                timer += Time.deltaTime;
+                if (timer > timeBetweenAttacks)
+                {
+                    timer = 0;
 
+                    float distanceToplayer = Vector3.Distance(this.transform.position, player.position);
+
+                    //SI ESTA CERCA DEL ENEMIGO,ATAQUE EN AREA
+                    if (distanceToplayer <= distanceToDoAreaAtttack)
+                    {
+                        //Paramos al enemigo
+                        agentNavMesh.isStopped = true;
+                        //Hacemos el Ataque en area
+                        attackArea.SetActive(true);
+                        Invoke("DeactivateAreaAttack", 0.5f);
+                    }
+                    //SI ESTA LEJOS HACEMOS ATAQUE CARGA
+                    else
+                    {
+                        line.enabled = true;
+                        isAttacking = true;
+                        //Paramos al enemigo
+                        agentNavMesh.isStopped = true;
+                        //Hacemos el ataque embestida
+                        ChargeAttack();
+                        //Debug.Log("ATAQUE CARGADO");
+                    }
+
+
+                }
             }
-        }
-        else
-        {
-            //line.SetPosition(0, baseTelegraph.position);
-            //line.SetPosition(1, targetTelegraph.position);
-
-            timerAttack += Time.deltaTime;
-            if (timerAttack >= speedTelegraph)
+            else
             {
-                timerAttack = 0;
+                //line.SetPosition(0, baseTelegraph.position);
+                //line.SetPosition(1, targetTelegraph.position);
 
-                JumpToTarget();
+                timerAttack += Time.deltaTime;
+                if (timerAttack >= speedTelegraph)
+                {
+                    timerAttack = 0;
+
+                    JumpToTarget();
+                }
             }
         }
-        
     }
     #endregion
 
@@ -342,9 +352,10 @@ public class Enemy : Agent
     #region STOP ATTACKING
     void StopAttacking()
     {
-        isAttacking = false;
 
-        agentNavMesh.isStopped = false;
+        isAttacking = false;
+        if (!myImanBehaviorScript.GetApplyForce())
+            agentNavMesh.isStopped = false;
     }
     #endregion
 
@@ -356,6 +367,28 @@ public class Enemy : Agent
         Gizmos.DrawWireSphere(this.transform.position, distanceToDoAreaAtttack);
         Gizmos.DrawWireSphere(this.transform.position, distanceAlert);
     }
+    #endregion
+
+    #region DAMAGE
+    private void OnCollisionEnter(Collision collision)
+    {
+        //En caso de estar imantado y que choque con un objeto imantado añadimos daño
+        if ((collision.gameObject.tag == "CanBeHitted") && (myImanBehaviorScript.GetApplyForce()))
+        {
+            float goVelocityMagnitude = collision.gameObject.GetComponent<Rigidbody>().velocity.magnitude;
+            //En caso que la fuerza sea mayor a 4 hacemos daño
+            if ((goVelocityMagnitude + myRB.velocity.magnitude ) > 3)
+            {
+                GetDamage(goVelocityMagnitude + myRB.velocity.magnitude);
+            }
+        }
+    }
+
+    public void GetDamage(float damage)
+    {
+        life -= (int)damage;
+    }
+
     #endregion
 
 }
