@@ -85,44 +85,47 @@ public class HUD : MonoBehaviour
         {
             positiveBullets = _shootscript.GetShootPositive();
 
-            //SLIDER COLOR ROJO
-            revolverSlider.color = new Color32(255, 0, 0, 255);
-            revolverSlider.fillAmount += 1.0f * Time.deltaTime;
+            //EN CASO QUE NO SEA UN CLICK
+            if((positiveBullets) >= 1.1)
+            {
+                //SLIDER COLOR ROJO
+                revolverSlider.color = new Color32(255, 0, 0, 255);
+                revolverSlider.fillAmount += 1.0f * Time.deltaTime;
 
-            //PRIMERA CARGA
-            if(first_charge == false)
-            {
-                if ((positiveBullets) >= 1 && (positiveBullets) <= 1.9)
+                //PRIMERA CARGA
+                if (first_charge == false)
                 {
-                    ChangeColorBullet(currentBulletPositive, positiveColor);
-                    RestartFillSlider();
-                    first_charge = true;
-                    IncrementBulletPositive(1);
+                    if ((positiveBullets) >= 1 && (positiveBullets) <= 1.9)
+                    {
+                        ChangeColorBullet(currentBulletPositive, positiveColor);
+                        RestartFillSlider();
+                        first_charge = true;
+                        IncrementBulletPositive(1);
+                    }
                 }
-            }
-            //SEGUNDA CARGA
-            else if(second_charge == false)
-            {
-                if ((positiveBullets) >= 2 && (positiveBullets) < 2.9)
+                //SEGUNDA CARGA
+                else if (second_charge == false)
                 {
-                    ChangeColorBullet(currentBulletPositive, positiveColor);
-                    RestartFillSlider();
-                    second_charge = true;
-                    IncrementBulletPositive(1);
+                    if ((positiveBullets) >= 2 && (positiveBullets) < 2.9)
+                    {
+                        ChangeColorBullet(currentBulletPositive, positiveColor);
+                        RestartFillSlider();
+                        second_charge = true;
+                        IncrementBulletPositive(1);
+                    }
                 }
-            }
-            //TERCERA CARGA
-            else if(third_charge == false)
-            {
-                if ((positiveBullets) >= 2.9)
+                //TERCERA CARGA
+                else if (third_charge == false)
                 {
-                    ChangeColorBullet(currentBulletPositive, positiveColor);
-                    third_charge = true;
-                    IncrementBulletPositive(1);
+                    if ((positiveBullets) >= 2.9)
+                    {
+                        ChangeColorBullet(currentBulletPositive, positiveColor);
+                        third_charge = true;
+                        IncrementBulletPositive(1);
+                    }
                 }
+                isChargingPositive = true;
             }
-
-            isChargingPositive = true;
         }
         //CUANDO DISPARA
         else if (isChargingPositive == true)
@@ -154,44 +157,49 @@ public class HUD : MonoBehaviour
         {
             negativeBullets = _shootscript.GetShootNegative();
 
-            //SLIDER COLOR ROJO
-            revolverSlider.color = new Color32(0, 0, 255, 255);
-            revolverSlider.fillAmount += 1.0f * Time.deltaTime;
+            //EN CASO QUE MANTENGAMOS PULSADO EL CLICK
+            if(negativeBullets >= 1.1)
+            {
+                //SLIDER COLOR ROJO
+                revolverSlider.color = new Color32(0, 0, 255, 255);
+                revolverSlider.fillAmount += 1.0f * Time.deltaTime;
 
-            //PRIMERA CARGA
-            if (first_charge == false)
-            {
-                if ((negativeBullets) >= 1 && (negativeBullets) <= 1.9)
+                //PRIMERA CARGA
+                if (first_charge == false)
                 {
-                    ChangeColorBullet(currentBulletNegative, negativeColor);
-                    RestartFillSlider();
-                    first_charge = true;
-                    IncrementBulletNegative(1);
+                    if ((negativeBullets) >= 1 && (negativeBullets) <= 1.9)
+                    {
+                        ChangeColorBullet(currentBulletNegative, negativeColor);
+                        RestartFillSlider();
+                        first_charge = true;
+                        IncrementBulletNegative(1);
+                    }
                 }
-            }
-            //SEGUNDA CARGA
-            else if (second_charge == false)
-            {
-                if ((negativeBullets) >= 2 && (negativeBullets) < 2.9)
+                //SEGUNDA CARGA
+                else if (second_charge == false)
                 {
-                    ChangeColorBullet(currentBulletNegative, negativeColor);
-                    RestartFillSlider();
-                    second_charge = true;
-                    IncrementBulletNegative(1);
+                    if ((negativeBullets) >= 2 && (negativeBullets) < 2.9)
+                    {
+                        ChangeColorBullet(currentBulletNegative, negativeColor);
+                        RestartFillSlider();
+                        second_charge = true;
+                        IncrementBulletNegative(1);
+                    }
                 }
-            }
-            //TERCERA CARGA
-            else if (third_charge == false)
-            {
-                if ((negativeBullets) >= 2.9)
+                //TERCERA CARGA
+                else if (third_charge == false)
                 {
-                    ChangeColorBullet(currentBulletNegative, negativeColor);
-                    third_charge = true;
-                    IncrementBulletNegative(1);
+                    if ((negativeBullets) >= 2.9)
+                    {
+                        ChangeColorBullet(currentBulletNegative, negativeColor);
+                        third_charge = true;
+                        IncrementBulletNegative(1);
+                    }
                 }
-            }
 
-            isChargingNegative = true;
+                isChargingNegative = true;
+            }
+            
         }
         //CUANDO DISPARA
         else if (isChargingNegative == true)
