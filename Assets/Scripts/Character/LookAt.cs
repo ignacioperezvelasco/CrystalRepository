@@ -7,6 +7,17 @@ public class LookAt : MonoBehaviour
     #region VARIABLES
     Camera viewCamera;
     public Transform groundChecker;
+
+    [Header("NEGATIVE LASER")]
+    public LineRenderer negativeLaser;
+    public Transform initialNegativeLaser;
+    public Transform finalNegativeLaser;
+
+    [Header("POSITIVE LASER")]
+    public LineRenderer positiveLaser;
+    public Transform initialPoitiveLaser;
+    public Transform finalPositiveLaser;
+
     #endregion
 
     #region START
@@ -34,6 +45,14 @@ public class LookAt : MonoBehaviour
 
             LookAtMouse(point);
         }
+
+        //Seteamos el Laser Negativo
+        negativeLaser.SetPosition(0, initialNegativeLaser.position);
+        negativeLaser.SetPosition(1, finalNegativeLaser.position);
+
+        //Seteamos el Laser Positive
+        positiveLaser.SetPosition(0, initialPoitiveLaser.position);
+        positiveLaser.SetPosition(1, finalPositiveLaser.position);
     }
     #endregion
 
