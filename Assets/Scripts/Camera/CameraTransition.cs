@@ -20,10 +20,7 @@ public class CameraTransition : MonoBehaviour
 
     #endregion
 
-    private void Start()
-    {
-        myTargetCamera = GameObject.Find("TargetCamera").GetComponent<FollowCharacter>();
-    }
+    
 
     private void OnTriggerEnter(Collider other)
     {
