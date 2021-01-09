@@ -208,7 +208,6 @@ public class ImanBehavior : MonoBehaviour
 
     public void AddCharge(iman typeIman, int numCharge, Rigidbody bullet)
     {
-        Debug.Log("Ha dado");
         if (numCharge >= 1)
         {
             //Primero asignamos polo para que no haya problemas en otra parte del codigo
@@ -261,6 +260,19 @@ public class ImanBehavior : MonoBehaviour
         }
     }
 
+    #region GETTERS
+
+    public bool GetApplyForce()
+    {
+        return applyForce;
+    }
+
+    public int GetCharges()
+    {
+        return numChargesAdded;
+    }
+
+    #endregion
     private void ResetObject()
     {
         this.gameObject.tag = "CanBeHitted";
@@ -272,10 +284,12 @@ public class ImanBehavior : MonoBehaviour
         mysphereCollider.radius = 0.5f;
         mysphereCollider.enabled = false;
         if (imEnemy)
+        {
             myNavMeshScript.enabled = true;
+            myRB.isKinematic = false;
+        }
         //OUTLINE
         outline.OutlineColor = new Color32(0, 0, 0, 0);
         outline.enabled = false;
     }
-
 }

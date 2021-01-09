@@ -28,7 +28,6 @@ public class BulletScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Detecta ostia");
         if (other.tag == "CanBeHitted")
         {
             other.GetComponent<ImanBehavior>().AddCharge(myPole, numCharge, myRB);
