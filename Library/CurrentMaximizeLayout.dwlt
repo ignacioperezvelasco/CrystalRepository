@@ -263,7 +263,7 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 296
+    x: 259
     y: 0
     width: 1295
     height: 601
@@ -295,7 +295,7 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 296
+    x: 259
     y: 73
     width: 1293
     height: 580
@@ -486,7 +486,7 @@ MonoBehaviour:
   m_LastFolders:
   - Assets/Prefabs/Player
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: D:\AAUNI\TFG\CrystalRepository
+  m_LastProjectPath: E:\UNI\TFG\PROYECTO\CrystalRepository
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
@@ -644,7 +644,7 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 1591
+    x: 1392
     y: 0
     width: 329
     height: 947
@@ -677,10 +677,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1591
+    x: 1392
     y: 73
-    width: 328
-    height: 926
+    width: 287
+    height: 896
   m_ViewDataDictionary: {fileID: 0}
   m_OpenAddComponentMenu: 0
   m_ObjectsLockedBeforeSerialization: []
