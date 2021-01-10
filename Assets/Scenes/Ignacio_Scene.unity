@@ -1662,6 +1662,11 @@ PrefabInstance:
       propertyPath: m_TagString
       value: CanBeHitted
       objectReference: {fileID: 0}
+    - target: {fileID: 3622517249532212307, guid: d79c472062d815f4a9cd110000636e47,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3622517249532212318, guid: d79c472062d815f4a9cd110000636e47,
         type: 3}
       propertyPath: m_Enabled
@@ -1928,7 +1933,7 @@ PrefabInstance:
     - target: {fileID: 6025142838663353060, guid: 3a91acf6839b9a747831d5711637cca1,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -74.7
+      value: -53.03
       objectReference: {fileID: 0}
     - target: {fileID: 6025142838663353060, guid: 3a91acf6839b9a747831d5711637cca1,
         type: 3}
@@ -1938,7 +1943,7 @@ PrefabInstance:
     - target: {fileID: 6025142838663353060, guid: 3a91acf6839b9a747831d5711637cca1,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6.74
+      value: -4.26
       objectReference: {fileID: 0}
     - target: {fileID: 6025142838663353060, guid: 3a91acf6839b9a747831d5711637cca1,
         type: 3}

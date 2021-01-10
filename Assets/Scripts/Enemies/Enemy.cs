@@ -24,6 +24,7 @@ public class Enemy : Agent
     [Header("ENEMY")]
     public int startingLife = 100;
     public int lifeThershold = 30;
+    public ElementalAmimator animator;
 
     [Header("PATROL")]
     public List<Transform> patrolPoints;
@@ -199,52 +200,56 @@ public class Enemy : Agent
 
     #region PATROL METHODS
 
-        #region FOLLOW PATROL
-        void FollowPatrol()
+    #region FOLLOW PATROL
+    void FollowPatrol()
+    {
+        if (Vector3.Distance(this.transform.position, patrolPoints[currentPatrolPoint].position) < distanceToPoint && !onPoint)
         {
-            if (Vector3.Distance(this.transform.position, patrolPoints[currentPatrolPoint].position) < distanceToPoint && !onPoint)
-            {
-                onPoint = true;
-                //Mirar al siguiente punto y dirigirnos
+            onPoint = true;
 
-                Invoke("LookAtNewDestination", timeToNextPoint / 2);
-                Invoke("SetNewDestination", timeToNextPoint);
-                //SetNewDestination();
-            }
+            animator.IdleAnimation();
+
+            //Mirar al siguiente punto y dirigirnos
+            Invoke("LookAtNewDestination", timeToNextPoint / 2);
+            Invoke("SetNewDestination", timeToNextPoint);
+            //SetNewDestination();
         }
-        #endregion
+    }
+    #endregion
 
-        #region SET NEW DESTINATION
-        void SetNewDestination()
+    #region SET NEW DESTINATION
+    void SetNewDestination()
+    {
+        onPoint = false;
+        //Aumentamos la posicion del array
+        currentPatrolPoint++;
+        if (currentPatrolPoint == patrolPoints.Count)
         {
-            onPoint = false;
-            //Aumentamos la posicion del array
-            currentPatrolPoint++;
-            if (currentPatrolPoint == patrolPoints.Count)
-            {
-                currentPatrolPoint = 0;
-            }
-
-            //Seleccionamos el siguiente destino
-            agentNavMesh.SetDestination(patrolPoints[currentPatrolPoint].position);
-
+            currentPatrolPoint = 0;
         }
-        #endregion
 
-        #region LOOK AT NEW DESTINATION
-        void LookAtNewDestination()
+        //Seleccionamos el siguiente destino
+        agentNavMesh.SetDestination(patrolPoints[currentPatrolPoint].position);
+
+        animator.WalkAnimation();
+
+    }
+    #endregion
+
+    #region LOOK AT NEW DESTINATION
+    void LookAtNewDestination()
+    {
+        int aux = currentPatrolPoint;
+        aux++;
+
+        if (aux == patrolPoints.Count)
         {
-            int aux = currentPatrolPoint;
-            aux++;
-
-            if (aux == patrolPoints.Count)
-            {
-                aux = 0;
-            }
-
-            //Mirar al siguiente punto
-            this.transform.DOLookAt(patrolPoints[aux].position, timeToNextPoint / 2);
+            aux = 0;
         }
+
+        //Mirar al siguiente punto
+        this.transform.DOLookAt(patrolPoints[aux].position, timeToNextPoint / 2);
+    }
     #endregion
 
     #endregion
@@ -258,12 +263,14 @@ public class Enemy : Agent
         line.SetPosition(1, targetTelegraph.position);
 
         if (!myImanBehaviorScript.GetApplyForce())
-            {
+        {
 
             if (!isAttacking)
             {
+                
+
                 if (Vector3.Distance(player.position, this.transform.position) > 3)
-                {
+                {                    
                     agentNavMesh.SetDestination(player.position);
                 }
 
@@ -282,6 +289,9 @@ public class Enemy : Agent
                         //Hacemos el Ataque en area
                         attackArea.SetActive(true);
                         Invoke("DeactivateAreaAttack", 0.5f);
+
+                        //Ponemos la animación de ataque en area
+                        animator.AreaAttackAnimation();
                     }
                     //SI ESTA LEJOS HACEMOS ATAQUE CARGA
                     else
@@ -312,6 +322,11 @@ public class Enemy : Agent
                 }
             }
         }
+        else
+        {
+            //Ponemos la animación de idle
+            animator.IdleAnimation();
+        }
     }
     #endregion
 
@@ -320,6 +335,9 @@ public class Enemy : Agent
     {
         attackArea.SetActive(false);
         agentNavMesh.isStopped = false;
+
+        //Ponemos la animación de caminar
+        animator.WalkAnimation();
     }
     #endregion
 
@@ -339,6 +357,9 @@ public class Enemy : Agent
     #region JUMP TO TARGET
     void JumpToTarget()
     {
+        //Ponemos la animación de ataque  embestida
+        animator.RangeAttackAnimation();
+
         //Desactivamos el lineRenderer
         line.enabled = false;
 
@@ -352,6 +373,8 @@ public class Enemy : Agent
     #region STOP ATTACKING
     void StopAttacking()
     {
+        //Ponemos la animación de caminar
+        animator.WalkAnimation();
 
         isAttacking = false;
         if (!myImanBehaviorScript.GetApplyForce())
