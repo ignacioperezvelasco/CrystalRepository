@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 609703410532210519}
   - component: {fileID: 609703410532210512}
   - component: {fileID: 1752815033930837699}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ImantableObject
   m_TagString: CanBeHitted
   m_Icon: {fileID: 0}
@@ -115,12 +115,13 @@ MonoBehaviour:
   myPole: 2
   whatCanBeImanted:
     serializedVersion: 2
-    m_Bits: 0
-  force: 3
+    m_Bits: 512
+  force: 6
   timerImanted: 8
   timerActive: 3
   timeImanted: 8
   timeActive: 3
+  imEnemy: 0
 --- !u!54 &609703410532210512
 Rigidbody:
   m_ObjectHideFlags: 0
