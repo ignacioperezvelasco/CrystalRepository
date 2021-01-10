@@ -19,6 +19,8 @@ public class ShootingScript : MonoBehaviour
     float negativeCharge = 0;
     bool isChargingNegative, isChargingPositive = false;
 
+    [SerializeField] float cooldown1, cooldown2, cooldown3, cooldown0 = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,16 +40,16 @@ public class ShootingScript : MonoBehaviour
             switch ((int)negativeCharge)
             {
                 case 0:
-                    timerNegative = 1;
+                    timerNegative = cooldown0;
                     break;
                 case 1:
-                    timerNegative = 2;
+                    timerNegative = cooldown1;
                     break;
                 case 2:
-                    timerNegative = 3;
+                    timerNegative = cooldown2;
                     break;
                 case 3:
-                    timerNegative = 4;
+                    timerNegative = cooldown3;
                     break;
                 default:
                     break;
@@ -72,16 +74,16 @@ public class ShootingScript : MonoBehaviour
             switch ((int)positiveCharge)
             {
                 case 0:
-                    timerpositive = 1;
+                    timerpositive = cooldown0;
                     break;
                 case 1:
-                    timerpositive = 2;
+                    timerpositive = cooldown1;
                     break;
                 case 2:
-                    timerpositive = 3;
+                    timerpositive = cooldown2;
                     break;
                 case 3:
-                    timerpositive = 4;
+                    timerpositive = cooldown3;
                     break;
                 default:
                     break;

@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public enum mobilityType { MOBILE, STATIC, NONE, SEMIMOVIBLE, JUSTPOLE };
 public enum iman { POSITIVE, NEGATIVE, NONE };
 public enum forceType { ATRACT, REPULSE, NONE };
+
 
 public class ImanBehavior : MonoBehaviour
 {
@@ -31,7 +33,8 @@ public class ImanBehavior : MonoBehaviour
     forceType myForceType = forceType.NONE;
     int numChargesAdded = 0;
     // Start is called before the first frame update
-
+    public bool imEnemy = false;
+    private NavMeshAgent myNavMeshScript;
     //OUTLINE
     private Outline outline;
 
@@ -41,10 +44,15 @@ public class ImanBehavior : MonoBehaviour
         
         if (mobility != mobilityType.JUSTPOLE)
         {
-            mysphereCollider = this.GetComponentInChildren<SphereCollider>();
+            //mysphereCollider = this.GetComponentInChildren<SphereCollider>();
             mysphereCollider.radius = 0.5f;
         }
-        
+
+        if (imEnemy)
+        {
+            myNavMeshScript = this.GetComponent<NavMeshAgent>();
+        }
+
         nearImantableObjects = new List<GameObject>();
         timerActive = timeActive;
         timerImanted = timeImanted;
@@ -104,6 +112,21 @@ public class ImanBehavior : MonoBehaviour
         }
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if (myPole != iman.NONE)
+        {
+            if (other.gameObject.transform.parent != null)
+            {
+                if (other.gameObject.transform.parent.gameObject.tag == "CanBeHitted")
+                    if (!nearImantableObjects.Contains(other.gameObject.transform.parent.gameObject))
+                    {
+                        nearImantableObjects.Add(other.gameObject.transform.parent.gameObject);
+                    }
+            }
+        }
+    }
+
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.layer == 10)
@@ -138,7 +161,14 @@ public class ImanBehavior : MonoBehaviour
             }
         }
         if (hay)
+        {
             applyForce = true;
+            if (imEnemy)
+            {
+                myNavMeshScript.enabled = false;
+                myRB.isKinematic = false;
+            }
+        }
     }
 
     private Vector3 CalculateOneForce(GameObject myGO, GameObject otherGO, forceType typeOfForce)
@@ -178,8 +208,7 @@ public class ImanBehavior : MonoBehaviour
 
     public void AddCharge(iman typeIman, int numCharge, Rigidbody bullet)
     {
-
-        if (numCharge > 1)
+        if (numCharge >= 1)
         {
             //Primero asignamos polo para que no haya problemas en otra parte del codigo
             if (typeIman == iman.POSITIVE)
@@ -231,6 +260,19 @@ public class ImanBehavior : MonoBehaviour
         }
     }
 
+    #region GETTERS
+
+    public bool GetApplyForce()
+    {
+        return applyForce;
+    }
+
+    public int GetCharges()
+    {
+        return numChargesAdded;
+    }
+
+    #endregion
     private void ResetObject()
     {
         this.gameObject.tag = "CanBeHitted";
@@ -241,10 +283,13 @@ public class ImanBehavior : MonoBehaviour
         timerImanted = timeImanted;
         mysphereCollider.radius = 0.5f;
         mysphereCollider.enabled = false;
-
+        if (imEnemy)
+        {
+            myNavMeshScript.enabled = true;
+            myRB.isKinematic = false;
+        }
         //OUTLINE
         outline.OutlineColor = new Color32(0, 0, 0, 0);
         outline.enabled = false;
     }
-
 }

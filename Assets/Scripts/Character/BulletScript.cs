@@ -13,7 +13,7 @@ public class BulletScript : MonoBehaviour
     private void Start()
     {
         initialPosition = this.transform.position;
-        myRB = this.GetComponent<Rigidbody>();
+        myRB = this.GetComponent<Rigidbody>();       
     }
 
     private void Update()
