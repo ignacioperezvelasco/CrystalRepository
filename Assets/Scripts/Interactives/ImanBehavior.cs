@@ -286,7 +286,7 @@ public class ImanBehavior : MonoBehaviour
         if (imEnemy)
         {
             myNavMeshScript.enabled = true;
-            myRB.isKinematic = false;
+            myRB.isKinematic = true;
         }
         //OUTLINE
         outline.OutlineColor = new Color32(0, 0, 0, 0);
