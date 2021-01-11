@@ -7,6 +7,7 @@ public class LookAt : MonoBehaviour
     #region VARIABLES
     Camera viewCamera;
     public Transform groundChecker;
+    bool isPaused = false;
 
     [Header("NEGATIVE LASER")]
     public LineRenderer negativeLaser;
@@ -32,19 +33,22 @@ public class LookAt : MonoBehaviour
     #region UPDATE
     void Update()
     {
-        //Creamos un rayo de la cámara a la posición del raton en pantalla
-        Ray ray = viewCamera.ScreenPointToRay(Input.mousePosition);
-        //Generamos el plano a los pies de la posicion del personaje
-        Plane groundPlane = new Plane(Vector3.up, new Vector3(0, groundChecker.position.y,0));
-        float rayDistance;
-
-        if (groundPlane.Raycast(ray, out rayDistance))
+        if (!isPaused)
         {
-            Vector3 point = ray.GetPoint(rayDistance);
-            Debug.DrawLine(ray.origin, point, Color.red);
+            //Creamos un rayo de la cámara a la posición del raton en pantalla
+            Ray ray = viewCamera.ScreenPointToRay(Input.mousePosition);
+            //Generamos el plano a los pies de la posicion del personaje
+            Plane groundPlane = new Plane(Vector3.up, new Vector3(0, groundChecker.position.y, 0));
+            float rayDistance;
 
-            LookAtMouse(point);
-        }
+            if (groundPlane.Raycast(ray, out rayDistance))
+            {
+                Vector3 point = ray.GetPoint(rayDistance);
+                Debug.DrawLine(ray.origin, point, Color.red);
+
+                LookAtMouse(point);
+            }
+        }       
 
         //Seteamos el Laser Negativo
         negativeLaser.SetPosition(0, initialNegativeLaser.position);
@@ -66,4 +70,17 @@ public class LookAt : MonoBehaviour
     }
     #endregion
 
+    #region STOP PLAYER
+    public void StopPlayer()
+    {
+        isPaused = true;
+    }
+    #endregion
+
+    #region RESUME PLAYER
+    public void ResumePlayer()
+    {
+        isPaused = false;
+    }
+    #endregion
 }
