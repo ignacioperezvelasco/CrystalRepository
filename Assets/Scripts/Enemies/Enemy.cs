@@ -21,6 +21,7 @@ public class Enemy : Agent
     NavMeshAgent agentNavMesh;
     ImanBehavior myImanBehaviorScript;
     Rigidbody myRB;
+    List<GameObject> gameObjectsHittedMe;
 
     [Header("ENEMY")]
     public float startingLife = 100;
@@ -66,6 +67,7 @@ public class Enemy : Agent
     #region START
     void Start()
     {
+        gameObjectsHittedMe = new List<GameObject>();
         life = startingLife;
         //Buscamos al Player
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
@@ -108,8 +110,7 @@ public class Enemy : Agent
             //Ponemos la animación de morir
             animator.DeathAnimation();
         }
-
-
+        
         if (!isDead)
         {
             //Actualizamos la barra de vide
@@ -122,7 +123,13 @@ public class Enemy : Agent
             //Controlamos el estado actual
             StateBehaviour();
         }
-        
+
+        //CheckGOHittedme
+        if (!myImanBehaviorScript.GetApplyForce() && (gameObjectsHittedMe != null))
+        {
+            gameObjectsHittedMe.Clear();
+        }
+
     }
     #endregion
 
@@ -430,9 +437,13 @@ public class Enemy : Agent
         {
             float goVelocityMagnitude = collision.gameObject.GetComponent<Rigidbody>().velocity.magnitude;
             //En caso que la fuerza sea mayor a 4 hacemos daño
-            if ((goVelocityMagnitude + myRB.velocity.magnitude ) > 3)
+            if ((goVelocityMagnitude + myRB.velocity.magnitude) > 3)
             {
-                GetDamage(goVelocityMagnitude + myRB.velocity.magnitude);
+                if (!gameObjectsHittedMe.Contains(collision.gameObject))
+                {
+                    GetDamage(goVelocityMagnitude + myRB.velocity.magnitude);
+                    gameObjectsHittedMe.Add(collision.gameObject);
+                }
             }
         }
     }
@@ -441,7 +452,7 @@ public class Enemy : Agent
     {
         life -= (int)damage;
     }
-
+       
     #endregion
 
 }

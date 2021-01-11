@@ -6,6 +6,8 @@ public class ShootingScript : MonoBehaviour
 {
     //Gun
     [Header("GUN")]
+    [SerializeField] GameObject negativePS;
+    [SerializeField] GameObject positivePS;
     public float damage = 10f;
     public float bulletSpeed = 100;
     public Rigidbody bullet;
@@ -33,6 +35,7 @@ public class ShootingScript : MonoBehaviour
         if (Input.GetButtonDown("Fire1") && canShootNegative)
         {
             isChargingNegative = true;
+            negativePS.SetActive(true);
         }
         if (Input.GetButtonUp("Fire1") && isChargingNegative)
         {
@@ -63,10 +66,14 @@ public class ShootingScript : MonoBehaviour
             isChargingNegative = false;
             //Start CD
             canShootNegative = false;
+            //PS
+            negativePS.SetActive(false);
+
         }
         if (Input.GetButtonDown("Fire2") && canShootPositive)
         {
             isChargingPositive = true;
+            positivePS.SetActive(true);
         }
         if (Input.GetButtonUp("Fire2") && isChargingPositive)
         {
@@ -95,6 +102,8 @@ public class ShootingScript : MonoBehaviour
             isChargingPositive = false;
             //Start CD
             canShootPositive = false;
+            //PS
+            positivePS.SetActive(false);
         }
     }
 

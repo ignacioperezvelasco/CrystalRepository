@@ -768,6 +768,12 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.1779013, y: 2.893591, z: 9.126877}
   m_Center: {x: -0.21211195, y: 0.94679546, z: 0.19551468}
+--- !u!1 &112171466 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2734018678498489999, guid: 3a91acf6839b9a747831d5711637cca1,
+    type: 3}
+  m_PrefabInstance: {fileID: 895337340}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &120861430
 GameObject:
   m_ObjectHideFlags: 0
@@ -5691,6 +5697,16 @@ PrefabInstance:
       propertyPath: bulletSpeed
       value: 35
       objectReference: {fileID: 0}
+    - target: {fileID: 6025142838663353063, guid: 3a91acf6839b9a747831d5711637cca1,
+        type: 3}
+      propertyPath: negativePS
+      value: 
+      objectReference: {fileID: 1488448188}
+    - target: {fileID: 6025142838663353063, guid: 3a91acf6839b9a747831d5711637cca1,
+        type: 3}
+      propertyPath: positivePS
+      value: 
+      objectReference: {fileID: 112171466}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a91acf6839b9a747831d5711637cca1, type: 3}
 --- !u!1 &904992052
@@ -8491,6 +8507,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1481755048}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1488448188 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8751896470944065118, guid: 3a91acf6839b9a747831d5711637cca1,
+    type: 3}
+  m_PrefabInstance: {fileID: 895337340}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1499639643
 GameObject:
   m_ObjectHideFlags: 0
