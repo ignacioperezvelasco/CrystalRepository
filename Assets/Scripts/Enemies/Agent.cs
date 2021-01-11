@@ -5,9 +5,9 @@ using UnityEngine;
 public class Agent : MonoBehaviour
 {
     //variables
-    public int life;
+    public float life;
     public float speed;
     //methods
-    public void GetHit() { }
-    public void Death() { }
+    public void GetDamage(float _damage) { life -= _damage; }
+    public void Death() { Destroy(this.gameObject); }
 }

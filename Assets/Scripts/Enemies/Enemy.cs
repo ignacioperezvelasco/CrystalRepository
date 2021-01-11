@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 using DG.Tweening;
 
 public class Enemy : Agent
@@ -22,9 +23,14 @@ public class Enemy : Agent
     Rigidbody myRB;
 
     [Header("ENEMY")]
-    public int startingLife = 100;
+    public float startingLife = 100;
     public int lifeThershold = 30;
     public ElementalAmimator animator;
+
+    [Header("HEALTH BAR")]
+    public Image healthBar;
+    public GameObject healthTransform;
+    bool isDead = false;
 
     [Header("PATROL")]
     public List<Transform> patrolPoints;
@@ -60,6 +66,7 @@ public class Enemy : Agent
     #region START
     void Start()
     {
+        life = startingLife;
         //Buscamos al Player
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
 
@@ -88,11 +95,34 @@ public class Enemy : Agent
     #region UPDATE
     void Update()
     {
-        //Controlamos si debe haber cambio de estado
-        CheckState();
+        //Comprobamos si está muerto
+        if (life <= 0 && !isDead)
+        {
+            //Ponemos que esta muerto
+            isDead = true;
+            //Paramos al navMeshAgent
+            agentNavMesh.isStopped = true;
 
-        //Controlamos el estado actual
-        StateBehaviour(); 
+            //Desactivamos la barra de vida
+            healthTransform.SetActive(false);
+            //Ponemos la animación de morir
+            animator.DeathAnimation();
+        }
+
+
+        if (!isDead)
+        {
+            //Actualizamos la barra de vide
+            healthBar.fillAmount = life / startingLife;
+            healthTransform.transform.LookAt(Camera.main.transform);
+
+            //Controlamos si debe haber cambio de estado
+            CheckState();
+
+            //Controlamos el estado actual
+            StateBehaviour();
+        }
+        
     }
     #endregion
 
