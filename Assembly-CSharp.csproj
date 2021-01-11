@@ -96,6 +96,7 @@
     <Compile Include="Assets\LeanTween\Framework\LeanTween.cs" />
     <Compile Include="Assets\LeanTween\Framework\LeanTweenExt.cs" />
     <Compile Include="Assets\QuickOutline\Scripts\Outline.cs" />
+    <Compile Include="Assets\Scripts\ActivateDeactivate.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraTransition.cs" />
     <Compile Include="Assets\Scripts\Camera\FollowCharacter.cs" />
     <Compile Include="Assets\Scripts\Camera\cameraScript.cs" />
@@ -127,6 +128,7 @@
     <Compile Include="Assets\Scripts\Interactives\MathParabola.cs" />
     <Compile Include="Assets\Scripts\Interactives\ParabolaController.cs" />
     <Compile Include="Assets\Scripts\Interactives\Spikes.cs" />
+    <Compile Include="Assets\Scripts\RoomImantableManager.cs" />
     <Compile Include="Assets\Scripts\SimpleCameraController.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
