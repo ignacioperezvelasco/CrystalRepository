@@ -8,10 +8,21 @@ public class PauseMenu : MonoBehaviour
     // Start is called before the first frame update
 
     //VARIABLEs
+    [Header("Player")]
+    public GameObject player;
+
     public static bool GameIsPaused = false;
     public GameObject pauseMenuUI;
 
     private string MainMenu = "Menu Screen TITLE";
+
+    //REFERENCED SCRIPTS
+    private LookAt _lookat;
+
+    void Start()
+    {
+        _lookat = player.GetComponent<LookAt>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -21,10 +32,12 @@ public class PauseMenu : MonoBehaviour
             if (GameIsPaused)
             {
                 Resume();
+                _lookat.ResumePlayer();
             }
             else
             {
                 Pause();
+                _lookat.StopPlayer();
             }
         }
     }
