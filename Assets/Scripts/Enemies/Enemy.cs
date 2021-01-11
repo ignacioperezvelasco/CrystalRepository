@@ -101,7 +101,7 @@ public class Enemy : Agent
             //Ponemos que esta muerto
             isDead = true;
             //Paramos al navMeshAgent
-            agentNavMesh.isStopped = true;
+            //agentNavMesh.isStopped = true;
 
             //Desactivamos la barra de vida
             healthTransform.SetActive(false);
