@@ -107,6 +107,7 @@
     <Compile Include="Assets\Scripts\Character\CrystalScript.cs" />
     <Compile Include="Assets\Scripts\Character\LookAt.cs" />
     <Compile Include="Assets\Scripts\Character\PickUP.cs" />
+    <Compile Include="Assets\Scripts\Character\PlayerLogic.cs" />
     <Compile Include="Assets\Scripts\Character\ShootingScript.cs" />
     <Compile Include="Assets\Scripts\Character\rotateToCam.cs" />
     <Compile Include="Assets\Scripts\Character\rvMovementPers.cs" />

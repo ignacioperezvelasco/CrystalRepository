@@ -20,6 +20,7 @@ public class ShootingScript : MonoBehaviour
     float positiveCharge = 0;
     float negativeCharge = 0;
     bool isChargingNegative, isChargingPositive = false;
+    bool tryingShootPositive = false, tryingShootNegative = false;
 
     [SerializeField] float cooldown1, cooldown2, cooldown3, cooldown0 = 0;
 
@@ -37,6 +38,11 @@ public class ShootingScript : MonoBehaviour
             isChargingNegative = true;
             negativePS.SetActive(true);
         }
+        else if (Input.GetButtonDown("Fire1") && !canShootNegative)
+        {
+            tryingShootNegative = true;
+        }
+
         if (Input.GetButtonUp("Fire1") && isChargingNegative)
         {
             //Set cooldown
@@ -75,6 +81,12 @@ public class ShootingScript : MonoBehaviour
             isChargingPositive = true;
             positivePS.SetActive(true);
         }
+        else if(Input.GetButtonDown("Fire2") && !canShootPositive)
+        {
+            tryingShootPositive = true;
+            //Debug.Log("ESTOY EN COOLDOWN Y PRESIONO");
+        }
+
         if (Input.GetButtonUp("Fire2") && isChargingPositive)
         {
             //Set cooldown
@@ -159,6 +171,7 @@ public class ShootingScript : MonoBehaviour
         bulletClone.velocity = transform.forward * bulletSpeed;
     }
 
+    #region Getter/Setter
     public float GetShootPositive()
     {
         return positiveCharge;
@@ -178,4 +191,36 @@ public class ShootingScript : MonoBehaviour
     {
         return isChargingNegative;
     }
+
+    public bool GetCooldownPositive()
+    {
+        return canShootPositive;
+    }
+
+    public bool GetCooldownNegative()
+    {
+        return canShootNegative;
+    }
+
+    public bool GetTryingShootPositive()
+    {
+        return tryingShootPositive;
+    }
+
+    public void SetTryingShootPositive(bool _tryingShootPositive)
+    {
+        tryingShootPositive = _tryingShootPositive;
+    }
+
+    public bool GetTryingShootNegative()
+    {
+        return tryingShootNegative;
+    }
+
+    public void SetTryingShootNegative(bool _tryingShootNegative)
+    {
+        tryingShootNegative = _tryingShootNegative;
+    }
+    #endregion
+
 }

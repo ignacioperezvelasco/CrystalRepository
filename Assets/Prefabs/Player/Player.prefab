@@ -555,6 +555,7 @@ GameObject:
   - component: {fileID: 6025142838663353065}
   - component: {fileID: 6025142838663353064}
   - component: {fileID: 157555631}
+  - component: {fileID: 2563698222079319664}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -639,15 +640,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5dac8cf4da25f44a93ed80bb97795a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  negativePS: {fileID: 8751896470944065118}
+  positivePS: {fileID: 2734018678498489999}
   damage: 10
   bulletSpeed: 10
   bullet: {fileID: 6096528498339846667, guid: b7c935c248e673d49b81bec311b263e5, type: 3}
   crystal: {fileID: 6096528498339846667, guid: 4122e87882452b44f89d2005c9b3adc3, type: 3}
   rightPistol: {fileID: 2125565634682413074}
   leftPistol: {fileID: 3300129140343338321}
-  cooldown1: 0
-  cooldown2: 0
-  cooldown3: 0
+  cooldown1: 1
+  cooldown2: 2
+  cooldown3: 3
   cooldown0: 0
 --- !u!65 &6025142838663353066
 BoxCollider:
@@ -728,6 +731,20 @@ MonoBehaviour:
   positiveLaser: {fileID: 303016513}
   initialPoitiveLaser: {fileID: 3300129140343338321}
   finalPositiveLaser: {fileID: 1220319252}
+--- !u!114 &2563698222079319664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6025142838663353059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90a861bd1db20d1489dec8829cead117, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  life: 0
+  speed: 0
 --- !u!1 &6025142839301401687
 GameObject:
   m_ObjectHideFlags: 0
@@ -1073,6 +1090,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1914917224}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8751896470944065118 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8751896472858851126, guid: 6e44a2ce2c1feb84d9e4bb2459f6d69c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1914917224}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6666968986528350649
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1147,6 +1170,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6e44a2ce2c1feb84d9e4bb2459f6d69c, type: 3}
+--- !u!1 &2734018678498489999 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8751896472858851126, guid: 6e44a2ce2c1feb84d9e4bb2459f6d69c,
+    type: 3}
+  m_PrefabInstance: {fileID: 6666968986528350649}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3098232189963679395 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8537405675790579482, guid: 6e44a2ce2c1feb84d9e4bb2459f6d69c,
