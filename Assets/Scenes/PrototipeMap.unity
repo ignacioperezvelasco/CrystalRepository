@@ -5443,7 +5443,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33392c57683406c40b54b9f01b0d42fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  type: 1
+  damage: 20
   speed: 2
   platformIman: {fileID: 911904503}
   rightIman: {fileID: 1825909743}
@@ -5459,11 +5460,11 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 803669578}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.73872125, y: 4.554438, z: 0.76900405}
+  m_Center: {x: 0.022905987, y: 1.777218, z: 0.03375411}
 --- !u!23 &803669583
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6677,6 +6678,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Elemental
+      objectReference: {fileID: 0}
+    - target: {fileID: 3622517249532212307, guid: d79c472062d815f4a9cd110000636e47,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d79c472062d815f4a9cd110000636e47, type: 3}
@@ -12208,6 +12214,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
+  damage: 20
   speed: 2
   platformIman: {fileID: 1423444837}
   rightIman: {fileID: 542503141}

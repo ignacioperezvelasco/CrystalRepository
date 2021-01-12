@@ -20,6 +20,7 @@ public class ImantablePlatform : MonoBehaviour
     };
     PlatformState state;
     public PlatformType type;
+    public float damage = 20;
 
     [SerializeField] float speed;
 
@@ -34,6 +35,7 @@ public class ImantablePlatform : MonoBehaviour
     [SerializeField] Transform leftPosition;
 
     GameObject player;
+    bool hitted = false;
     #endregion
 
     #region START
@@ -121,6 +123,8 @@ public class ImantablePlatform : MonoBehaviour
         //Reestablecemos el iman
         platformIman.myPole = iman.NONE;
         platformIman.outline.enabled = false;
+
+        hitted = false;
     }
     #endregion
 
@@ -132,6 +136,8 @@ public class ImantablePlatform : MonoBehaviour
         //Reestablecemos el iman
         platformIman.myPole = iman.NONE;
         platformIman.outline.enabled = false;
+
+        hitted = false;
     }
     #endregion
 
@@ -139,20 +145,27 @@ public class ImantablePlatform : MonoBehaviour
     #region TRIGGER ENTER
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && type == PlatformType.PLATFORM)
         {
             player.transform.SetParent(platformTransform);
+        }
+
+        if (type == PlatformType.RAIL && other.gameObject.layer == LayerMask.NameToLayer("Enemy") && !hitted && state == PlatformState.MOVING)
+        {            
+            hitted = true;
+
+            other.GetComponent<Agent>().GetDamage(damage);
         }
     }
     #endregion
 
-    #region TRIGGER ENTER
+    #region TRIGGER EXIT
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && type == PlatformType.PLATFORM)
         {
             player.transform.SetParent(null);
-        }
+        }        
     }
     #endregion
 
