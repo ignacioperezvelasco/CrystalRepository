@@ -19,7 +19,7 @@ public class HUD : MonoBehaviour
 
     //REVOLVER POSITIVE IMAGE
     [Header("Revolver")]
-    public GameObject revolverPositiveGameobject;
+    public GameObject revolverGameobject;
     public Image revolverSlider;
     public List<Image> bulletImagesPositive;
 
@@ -37,6 +37,11 @@ public class HUD : MonoBehaviour
     private Color32 positiveColor;
     private Color32 negativeColor;
     private Color32 defaultColor;
+    private bool tryingShootPositive;
+    private bool tryingShootNegative;
+    public AnimationCurve curveCooldown;
+    private int idRotateCooldown;
+    private int idRotateFinishShoot;
 
     // Start is called before the first frame update
     void Start()
@@ -54,6 +59,7 @@ public class HUD : MonoBehaviour
         positiveColor = new Color32(255, 0, 0, 255);
         negativeColor = new Color32(0, 0, 255, 255);
         defaultColor = new Color32(255, 255, 255, 255);
+
     }
 
     // Update is called once per frame
@@ -139,8 +145,18 @@ public class HUD : MonoBehaviour
 
             isChargingPositive = false;
         }
+        else if(_shootscript.GetTryingShootPositive())
+        {
+            //COOLDOWN SHOOT
+            if(!LeanTween.isTweening(idRotateCooldown) && !LeanTween.isTweening(idRotateFinishShoot))
+            {
+                RotateRevolverCooldown(60);
+            }
+            _shootscript.SetTryingShootPositive(false);
+        }
         else if(positiveBullets != 0)
         {
+            //RotateRevolverCooldown(45);
             positiveBullets = 0;
         }
 
@@ -213,6 +229,15 @@ public class HUD : MonoBehaviour
 
             isChargingNegative = false;
         }
+        else if (_shootscript.GetTryingShootNegative())
+        {
+            //COOLDOWN SHOOT
+            if (!LeanTween.isTweening(idRotateCooldown) && !LeanTween.isTweening(idRotateFinishShoot))
+            {
+                RotateRevolverCooldown(60);
+            }
+            _shootscript.SetTryingShootNegative(false);
+        }
         else if (negativeBullets != 0)
         {
             negativeBullets = 0;
@@ -263,7 +288,15 @@ public class HUD : MonoBehaviour
     #region RotateRevolver
     void RotateRevolver(float haveToRotate)
     {
-        LeanTween.rotateAroundLocal(revolverPositiveGameobject.gameObject, Vector3.forward, haveToRotate, 0.3f);
+        idRotateFinishShoot = LeanTween.rotateAroundLocal(revolverGameobject.gameObject, Vector3.forward, haveToRotate, 0.3f).id;
+        //LeanTween.rotateAroundLocal(revolverGameobject.gameObject, Vector3.forward, haveToRotate, 0.3f).setEase(curveCooldown);
+    }
+    #endregion
+
+    #region RotateRvolverCooldown
+    void RotateRevolverCooldown(float haveToRotate)
+    {
+        idRotateCooldown = LeanTween.rotateAroundLocal(revolverGameobject.gameObject, Vector3.forward, 60.0f, 0.5f).setEase(curveCooldown).id;
     }
     #endregion
 
