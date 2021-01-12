@@ -448,9 +448,9 @@ public class Enemy : Agent
         }
     }
 
-    public override void GetDamage(float _damage)
+    public void GetDamage(float damage)
     {
-        life -= (int)_damage;
+        life -= (int)damage;
     }
        
     #endregion
