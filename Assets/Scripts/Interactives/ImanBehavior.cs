@@ -36,7 +36,7 @@ public class ImanBehavior : MonoBehaviour
     public bool imEnemy = false;
     private NavMeshAgent myNavMeshScript;
     //OUTLINE
-    private Outline outline;
+    public Outline outline;
 
     void Start()
     {
