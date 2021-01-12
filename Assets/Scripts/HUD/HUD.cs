@@ -10,7 +10,7 @@ public class HUD : MonoBehaviour
     public GameObject player;
 
     //REFERENCED SCRIPTS
-    private rvMovementPers _player;
+    private PlayerLogic _player;
     private ShootingScript _shootscript; 
 
     //HUD sliders
@@ -51,7 +51,7 @@ public class HUD : MonoBehaviour
         second_charge = false;
         third_charge = false;
 
-        _player = player.GetComponent<rvMovementPers>();
+        _player = player.GetComponent<PlayerLogic>();
         _shootscript = player.GetComponent<ShootingScript>();
 
         currentBulletPositive = 0;
@@ -66,7 +66,7 @@ public class HUD : MonoBehaviour
     void Update()
     {
         //VARIABLES TO USE IN HUD
-        lifePlayer = _player.GetLife();
+        lifePlayer = (int)_player.GetLife();
 
         //FUNCTIONS BULLETS 
         isChargingNegativeBullet();

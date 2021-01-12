@@ -1592,6 +1592,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2563698222079319664, guid: 3a91acf6839b9a747831d5711637cca1,
+        type: 3}
+      propertyPath: maxHealth
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 6025142838663353059, guid: 3a91acf6839b9a747831d5711637cca1,
         type: 3}
       propertyPath: m_Name
@@ -1652,45 +1657,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6025142838663353063, guid: 3a91acf6839b9a747831d5711637cca1,
-        type: 3}
-      propertyPath: negativePS
-      value: 
-      objectReference: {fileID: 6025142839793676098}
-    - target: {fileID: 6025142838663353063, guid: 3a91acf6839b9a747831d5711637cca1,
-        type: 3}
-      propertyPath: positivePS
-      value: 
-      objectReference: {fileID: 6025142839793676097}
-    - target: {fileID: 6025142838663353063, guid: 3a91acf6839b9a747831d5711637cca1,
-        type: 3}
-      propertyPath: cooldown1
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6025142838663353063, guid: 3a91acf6839b9a747831d5711637cca1,
-        type: 3}
-      propertyPath: cooldown2
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6025142838663353063, guid: 3a91acf6839b9a747831d5711637cca1,
-        type: 3}
-      propertyPath: cooldown3
-      value: 3
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a91acf6839b9a747831d5711637cca1, type: 3}
---- !u!1 &6025142839793676097 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2734018678498489999, guid: 3a91acf6839b9a747831d5711637cca1,
-    type: 3}
-  m_PrefabInstance: {fileID: 6025142839793676096}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &6025142839793676098 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8751896470944065118, guid: 3a91acf6839b9a747831d5711637cca1,
-    type: 3}
-  m_PrefabInstance: {fileID: 6025142839793676096}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8849778259322129359
 PrefabInstance:
   m_ObjectHideFlags: 0

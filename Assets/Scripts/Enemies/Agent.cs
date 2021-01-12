@@ -8,6 +8,6 @@ public class Agent : MonoBehaviour
     public float life;
     public float speed;
     //methods
-    public void GetDamage(float _damage) { life -= _damage; }
-    public void Death() { Destroy(this.gameObject); }
+    public virtual void GetDamage(float _damage) { life -= _damage; }
+    public virtual void Death() { Destroy(this.gameObject); }
 }

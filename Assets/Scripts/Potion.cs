@@ -5,10 +5,10 @@ using UnityEngine;
 public class Potion : MonoBehaviour
 {
     // Start is called before the first frame update
-
+    [SerializeField] float amountToHeal;
     void Start()
     {
-        
+        amountToHeal = 25;
     }
 
     // Update is called once per frame
@@ -16,17 +16,18 @@ public class Potion : MonoBehaviour
     {
         
     }
-
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player")
         {
             //If the GameObject's name matches the one you suggest, output this message in the console
-            //Debug.Log("Do something here");
+
+            other.gameObject.GetComponent<PlayerLogic>().Heal(amountToHeal);
+
             Destroy(this.gameObject);
-            
+
             //CURAR AL JUGADOR
         }
-
     }
-}
+
+  }
