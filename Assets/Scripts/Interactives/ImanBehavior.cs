@@ -36,7 +36,14 @@ public class ImanBehavior : MonoBehaviour
     public bool imEnemy = false;
     private NavMeshAgent myNavMeshScript;
     //OUTLINE
-    private Outline outline;
+    public Outline outline;
+
+    private void Awake()
+    {
+        //OUTLINE SET
+        outline = this.GetComponent<Outline>();
+        outline.enabled = false;
+    }
 
     void Start()
     {
@@ -57,9 +64,7 @@ public class ImanBehavior : MonoBehaviour
         timerActive = timeActive;
         timerImanted = timeImanted;
 
-        //OUTLINE SET
-        outline = this.GetComponent<Outline>();
-        outline.enabled = false;
+        
 
         //outline.OutlineColor = new Color32(0, 0, 0, 0);
     }
