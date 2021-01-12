@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\ImantableDoor.cs" />
+    <Compile Include="Assets\ImantablePlatform.cs" />
     <Compile Include="Assets\LeanTween\Examples\Archived\OldGUIExamplesCS.cs" />
     <Compile Include="Assets\LeanTween\Examples\Archived\TestingPunch.cs" />
     <Compile Include="Assets\LeanTween\Examples\Archived\TestingRigidbodyCS.cs" />

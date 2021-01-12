@@ -38,6 +38,13 @@ public class ImanBehavior : MonoBehaviour
     //OUTLINE
     public Outline outline;
 
+    private void Awake()
+    {
+        //OUTLINE SET
+        outline = this.GetComponent<Outline>();
+        outline.enabled = false;
+    }
+
     void Start()
     {
         myRB = this.GetComponent<Rigidbody>();
@@ -57,9 +64,7 @@ public class ImanBehavior : MonoBehaviour
         timerActive = timeActive;
         timerImanted = timeImanted;
 
-        //OUTLINE SET
-        outline = this.GetComponent<Outline>();
-        outline.enabled = false;
+        
 
         //outline.OutlineColor = new Color32(0, 0, 0, 0);
     }
