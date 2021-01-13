@@ -12,10 +12,14 @@ public class RoomImantableManager : MonoBehaviour
     public ImanBehavior iman2;
     public ImanBehavior iman3;
     public ImanBehavior iman4;
+    public ImanBehavior iman5;
+    public ImanBehavior iman6;
     bool imanActive1;
     bool imanActive2;
     bool imanActive3;
     bool imanActive4;
+    bool imanActive5;
+    bool imanActive6;
     bool isOpen = false;
     #endregion
 
@@ -44,10 +48,20 @@ public class RoomImantableManager : MonoBehaviour
             {
                 imanActive4 = true;
             }
+            //IMAN 5
+            if (iman5.myPole == iman.NEGATIVE || iman5.myPole == iman.POSITIVE)
+            {
+                imanActive5 = true;
+            }
+            //IMAN 6
+            if (iman6.myPole == iman.NEGATIVE || iman6.myPole == iman.POSITIVE)
+            {
+                imanActive6 = true;
+            }
 
 
             //COMPROBAMOS SI ABRIMOS LA PUERTA
-            if (imanActive1 && imanActive2 && imanActive3 && imanActive4)
+            if (imanActive1 && imanActive2 && imanActive3 && imanActive4 && imanActive5 && imanActive6)
             {
                 isOpen = true;
                 animator.SetBool("Active", true);

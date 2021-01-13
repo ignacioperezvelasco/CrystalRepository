@@ -11,6 +11,7 @@ public class PickUP : MonoBehaviour
     string objectName;
     [SerializeField]
     bool isObjectInside = false;
+    BoxCollider collider;
 
     #endregion
 
@@ -20,6 +21,14 @@ public class PickUP : MonoBehaviour
         if (Input.GetButton("Fire1") && Input.GetButton("Fire2") && isObjectInside)
         {
             objectTransform.DOMove(this.transform.position, speedAtraction);
+            collider.enabled = false;
+        }
+        else
+        {
+            if (isObjectInside)
+            {
+                collider.enabled = true;
+            }
         }
 
     }
@@ -30,23 +39,24 @@ public class PickUP : MonoBehaviour
     {
         if (other.CompareTag("CanBeHitted") && !isObjectInside)
         {
-            Debug.Log("ENTRA UN OBJETO");
-
             isObjectInside = true;
 
             objectName = other.gameObject.name;
             objectTransform = other.transform;
 
+            collider = other.GetComponent<BoxCollider>();
         }
     }
     #endregion
 
-    #region TRIGGER ENTER
+    #region TRIGGER EXIT
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("CanBeHitted") && other.gameObject.name == objectName )
         {
             Debug.Log("ENTRA UN OBJETO");
+
+            collider.enabled = true;
 
             isObjectInside = false;
 

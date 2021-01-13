@@ -20,6 +20,7 @@ public class TurretEnemy : MonoBehaviour
     public bool headActivate = true;
     public Transform head;
     public Transform eyeTurret;
+    public Outline headOutline;
 
     [Header("CROSSHAIR")]
     public Transform crosshair;
@@ -84,6 +85,22 @@ public class TurretEnemy : MonoBehaviour
         backIman.myPole = iman.POSITIVE;
         leftIman.myPole = iman.POSITIVE;
         rightIman.myPole = iman.POSITIVE;
+
+        switch (turretType)
+        {
+            case TurretType.PROJECTILE:
+                {
+                    headOutline.OutlineColor = Color.red;
+                    break;
+                } 
+            case TurretType.LASER:
+                {
+                    headOutline.OutlineColor = Color.red;
+                    break;
+                }
+            default:
+                break;
+        }
     }
     #endregion
 
@@ -113,44 +130,82 @@ public class TurretEnemy : MonoBehaviour
                     }
                 }
                 
-            }            
-
-            
-
-            if (frontIman.myPole == iman.NEGATIVE)
-            {
-                DeactivateFrontStone();
-            }
-            if (backIman.myPole == iman.NEGATIVE)
-            {
-                DeactivateBackStone();
-            }
-            if (leftIman.myPole == iman.NEGATIVE)
-            {
-                DeactivateLeftStone();
-            }
-            if (rightIman.myPole == iman.NEGATIVE)
-            {
-                DeactivateRightStone();
             }
 
-            if (frontIman.myPole == iman.NEGATIVE && backIman.myPole == iman.NEGATIVE &&
-                leftIman.myPole == iman.NEGATIVE && rightIman.myPole == iman.NEGATIVE)
+            switch (turretType)
             {
-                DeactivateHead();
-                headActivate = false;
+                case TurretType.PROJECTILE:
+                    {
+                        if (frontIman.myPole == iman.NEGATIVE)
+                        {
+                            DeactivateFrontStone();
+                        }
+                        if (backIman.myPole == iman.NEGATIVE)
+                        {
+                            DeactivateBackStone();
+                        }
+                        if (leftIman.myPole == iman.NEGATIVE)
+                        {
+                            DeactivateLeftStone();
+                        }
+                        if (rightIman.myPole == iman.NEGATIVE)
+                        {
+                            DeactivateRightStone();
+                        }
 
-                //Paramos las particulas
-                chargeParticles.SetActive(false);
+                        if (frontIman.myPole == iman.NEGATIVE && backIman.myPole == iman.NEGATIVE &&
+                            leftIman.myPole == iman.NEGATIVE && rightIman.myPole == iman.NEGATIVE)
+                        {
+                            DeactivateHead();
+                            headActivate = false;
 
-                line.enabled = false;
+                            //Paramos las particulas
+                            chargeParticles.SetActive(false);
 
-                //Si la torreta es laser activamos el sistema de particulas
-                if (turretType == TurretType.LASER)
-                {
-                    laserEffect.SetActive(false);
-                }
-            }
+                            line.enabled = false;
+                        }
+                        break;
+                    }
+                case TurretType.LASER:
+                    {
+                        if (frontIman.myPole == iman.POSITIVE)
+                        {
+                            DeactivateFrontStone();
+                        }
+                        if (backIman.myPole == iman.POSITIVE)
+                        {
+                            DeactivateBackStone();
+                        }
+                        if (leftIman.myPole == iman.POSITIVE)
+                        {
+                            DeactivateLeftStone();
+                        }
+                        if (rightIman.myPole == iman.POSITIVE)
+                        {
+                            DeactivateRightStone();
+                        }
+
+                        if (frontIman.myPole == iman.POSITIVE && backIman.myPole == iman.POSITIVE &&
+                            leftIman.myPole == iman.POSITIVE && rightIman.myPole == iman.POSITIVE)
+                        {
+                            DeactivateHead();
+                            headActivate = false;
+
+                            //Paramos las particulas
+                            chargeParticles.SetActive(false);
+
+                            line.enabled = false;
+
+                            //Desactivamos el sistema de particulas
+                            
+                            laserEffect.SetActive(false);
+                            
+                        }
+                        break;
+                    }
+                default:
+                    break;
+            }          
 
         }
     }
@@ -229,6 +284,31 @@ public class TurretEnemy : MonoBehaviour
     #region ACTIVATE TURRET ANIMATION
     void ActivateTurretAnimation()
     {
+        //Cambiamos el outline
+        switch (turretType)
+        {
+            case TurretType.PROJECTILE:
+                {
+                    frontIman.outline.OutlineColor = Color.red;
+                    backIman.outline.OutlineColor = Color.red;
+                    leftIman.outline.OutlineColor = Color.red;
+                    rightIman.outline.OutlineColor = Color.red;
+                    break;
+                }
+            case TurretType.LASER:
+                {
+                    frontIman.outline.OutlineColor = Color.blue;
+                    backIman.outline.OutlineColor =  Color.blue;
+                    leftIman.outline.OutlineColor =  Color.blue;
+                    rightIman.outline.OutlineColor = Color.blue;
+                    break;
+                }
+            default:
+                break;
+        }
+        
+        
+
         //Elevamos la cabeza
         head.DOMove(upHead.position, speedAnimation);
 
