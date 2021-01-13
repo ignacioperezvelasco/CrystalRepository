@@ -12,13 +12,44 @@ public class PickUP : MonoBehaviour
     [SerializeField]
     bool isObjectInside = false;
     BoxCollider collider;
+    bool isGrabed = false;
 
     #endregion
 
     #region UPDATE
     void Update()
     {
-        if (Input.GetButton("Fire1") && Input.GetButton("Fire2") && isObjectInside)
+        if (isObjectInside)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                if (isGrabed)
+                {
+                    isGrabed = false;
+                }
+                else
+                {
+                    isGrabed = true;
+                }
+            }
+        }
+        
+
+        if (isObjectInside)
+        {
+            if (isGrabed)
+            {
+                objectTransform.DOMove(this.transform.position, speedAtraction);
+                collider.enabled = false;
+            }
+            else
+            {
+                collider.enabled = true;
+            }
+        }
+        
+
+        /*if (Input.GetButton("Fire1") && Input.GetButton("Fire2") && isObjectInside)
         {
             objectTransform.DOMove(this.transform.position, speedAtraction);
             collider.enabled = false;
@@ -29,7 +60,7 @@ public class PickUP : MonoBehaviour
             {
                 collider.enabled = true;
             }
-        }
+        }*/
 
     }
     #endregion

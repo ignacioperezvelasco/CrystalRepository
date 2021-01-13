@@ -33,17 +33,17 @@ public class ShootingScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Fire1") && canShootNegative)
+        if (Input.GetButtonDown("Fire2") && canShootNegative)
         {
             isChargingNegative = true;
             negativePS.SetActive(true);
         }
-        else if (Input.GetButtonDown("Fire1") && !canShootNegative)
+        else if (Input.GetButtonDown("Fire2") && !canShootNegative)
         {
             tryingShootNegative = true;
         }
 
-        if (Input.GetButtonUp("Fire1") && isChargingNegative)
+        if (Input.GetButtonUp("Fire2") && isChargingNegative)
         {
             //Set cooldown
             switch ((int)negativeCharge)
@@ -76,18 +76,18 @@ public class ShootingScript : MonoBehaviour
             negativePS.SetActive(false);
 
         }
-        if (Input.GetButtonDown("Fire2") && canShootPositive)
+        if (Input.GetButtonDown("Fire1") && canShootPositive)
         {
             isChargingPositive = true;
             positivePS.SetActive(true);
         }
-        else if(Input.GetButtonDown("Fire2") && !canShootPositive)
+        else if(Input.GetButtonDown("Fire1") && !canShootPositive)
         {
             tryingShootPositive = true;
             //Debug.Log("ESTOY EN COOLDOWN Y PRESIONO");
         }
 
-        if (Input.GetButtonUp("Fire2") && isChargingPositive)
+        if (Input.GetButtonUp("Fire1") && isChargingPositive)
         {
             //Set cooldown
             switch ((int)positiveCharge)
