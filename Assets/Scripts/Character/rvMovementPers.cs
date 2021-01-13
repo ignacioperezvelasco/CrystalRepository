@@ -29,8 +29,8 @@ public class rvMovementPers : MonoBehaviour
     Vector3 camForward;
     Vector3 camRight;
 
-[Header("DASH")]
-
+    [Header("DASH")]
+    [SerializeField] GameObject myTrail;
     bool isDashing=false;
     float dashTimer = 0f;
     public float dashvelocity = 30;
@@ -150,10 +150,12 @@ public class rvMovementPers : MonoBehaviour
     {
         if(canDash)
         {
+            myTrail.SetActive(true);
             dashV = desiredVelocity.normalized;
             dashTimer = dashTime;
             isDashing = true;
             canDash = false;
+            Invoke("DeactivateTrail", 0.5f);
         }      
 
     }
@@ -188,5 +190,11 @@ public class rvMovementPers : MonoBehaviour
 
         camForward = camForward.normalized;
         camRight = camRight.normalized;
+    }
+
+    void DeactivateTrail()
+    {
+
+        myTrail.SetActive(false);
     }
 }
