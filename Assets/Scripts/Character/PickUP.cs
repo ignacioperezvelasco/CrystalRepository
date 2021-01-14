@@ -85,7 +85,6 @@ public class PickUP : MonoBehaviour
     {
         if (other.CompareTag("CanBeHitted") && other.gameObject.name == objectName )
         {
-            Debug.Log("ENTRA UN OBJETO");
 
             collider.enabled = true;
 

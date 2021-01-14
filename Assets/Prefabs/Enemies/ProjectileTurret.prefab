@@ -126,7 +126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outlineMode: 0
   outlineColor: {r: 1, g: 1, b: 1, a: 1}
-  outlineWidth: 2
+  outlineWidth: 4
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -1189,8 +1189,12 @@ MonoBehaviour:
   eyeTurret: {fileID: 6720589740923617590}
   headOutline: {fileID: 1639386106}
   crosshair: {fileID: 6720589742442878323}
-  followSpeed: 0.25
+  followSpeed: 0.15
   laserEffect: {fileID: 0}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  damage: 0
   fireRate: 2
   shootSpawner: {fileID: 6720589741992421259}
   projectile: {fileID: 725535111294921866, guid: 8a5644bcbac8f8448a599aa79d832b8b,
@@ -1216,6 +1220,7 @@ MonoBehaviour:
   rightStone: {fileID: 6720589741573401297}
   rightNear: {fileID: 6720589740969682184}
   rightFar: {fileID: 6720589741307942816}
+  isDead: 0
 --- !u!120 &6720589741616491558
 LineRenderer:
   m_ObjectHideFlags: 0

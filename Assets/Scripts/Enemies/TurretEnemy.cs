@@ -13,6 +13,7 @@ public class TurretEnemy : MonoBehaviour
     };
 
     Transform player;
+    PlayerLogic playerLogic;
 
     public TurretType turretType;
 
@@ -29,6 +30,8 @@ public class TurretEnemy : MonoBehaviour
 
     [Header("LASER")]
     public GameObject laserEffect;
+    [SerializeField] LayerMask layerMask;
+    [SerializeField] float damage;
 
     [Header("SHOOTING")]
     public float fireRate = 3;
@@ -71,32 +74,60 @@ public class TurretEnemy : MonoBehaviour
 
     LineRenderer line;
     float shootTimer;
-    bool isDead = false;
+    public bool isDead = false;
     #endregion
 
     #region START
     void Start()
     {
+        //Buscar el player Logic
+        playerLogic = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerLogic>();
+
         line = GetComponent<LineRenderer>();
 
         player = GameObject.FindGameObjectWithTag("Player").transform;
 
-        //Seteamos las ImanStones
-        frontIman.myPole = iman.POSITIVE;
-        backIman.myPole = iman.POSITIVE;
-        leftIman.myPole = iman.POSITIVE;
-        rightIman.myPole = iman.POSITIVE;
+        //Activamos los outlines
+        frontIman.outline.enabled = true;
+        backIman.outline.enabled = true;
+        leftIman.outline.enabled = true;
+        rightIman.outline.enabled = true;
 
         switch (turretType)
         {
             case TurretType.PROJECTILE:
                 {
+                    //Seteamos las ImanStones
+                    frontIman.myPole = iman.POSITIVE;
+                    backIman.myPole = iman.POSITIVE;
+                    leftIman.myPole = iman.POSITIVE;
+                    rightIman.myPole = iman.POSITIVE;
+                    
+                    //Seteamos los Outlines
+                    frontIman.outline.OutlineColor = Color.blue;
+                    backIman.outline.OutlineColor = Color.blue;
+                    leftIman.outline.OutlineColor = Color.blue;
+                    rightIman.outline.OutlineColor = Color.blue;
+
+
                     headOutline.OutlineColor = Color.red;
                     break;
                 } 
             case TurretType.LASER:
                 {
-                    headOutline.OutlineColor = Color.red;
+                    //Seteamos las ImanStones
+                    frontIman.myPole = iman.NEGATIVE;
+                    backIman.myPole = iman.NEGATIVE;
+                    leftIman.myPole = iman.NEGATIVE;
+                    rightIman.myPole = iman.NEGATIVE;
+
+                    //Seteamos los Outlines
+                    frontIman.outline.OutlineColor = Color.red;
+                    backIman.outline.OutlineColor = Color.red;
+                    leftIman.outline.OutlineColor = Color.red;
+                    rightIman.outline.OutlineColor = Color.red;
+                    
+                    headOutline.OutlineColor = Color.blue;
                     break;
                 }
             default:
@@ -120,18 +151,42 @@ public class TurretEnemy : MonoBehaviour
                 {
                     //Actualizamos la posicion de la cabeza y crosshair
                     crosshair.DOMove(new Vector3(player.position.x, crosshair.position.y, player.position.z), followSpeed);
-                    head.DOLookAt(new Vector3(player.position.x, crosshair.position.y - 1.5f, player.position.z), followSpeed);
+                    head.DOLookAt(new Vector3(player.position.x, crosshair.position.y + 1.5f, player.position.z), followSpeed);
 
-                    //Dispaamos el proyectil solo si es de tipo proyectil
-                    if (turretType == TurretType.PROJECTILE)
+                    switch (turretType)
                     {
-                        shootTimer += Time.deltaTime;
-                        if (shootTimer >= fireRate)
-                        {
-                            shootTimer = 0;
-                            Shoot();
-                        }
+                        case TurretType.PROJECTILE:
+                            {
+                                //Dispaamos el proyectil solo si es de tipo proyectil
+                                if (turretType == TurretType.PROJECTILE)
+                                {
+                                    shootTimer += Time.deltaTime;
+                                    if (shootTimer >= fireRate)
+                                    {
+                                        shootTimer = 0;
+                                        Shoot();
+                                    }
+                                }
+                                break;
+                            }
+                        case TurretType.LASER:
+                            {
+                                RaycastHit hit; ;
+                                Debug.DrawRay(eyeTurret.position, (crosshair.position - eyeTurret.position) * 1000, Color.white);
+
+                                if (Physics.Raycast(eyeTurret.position, (crosshair.position - eyeTurret.position), out hit, Mathf.Infinity, layerMask))
+                                {
+                                    if (hit.collider.CompareTag("Player"))
+                                    {
+                                        playerLogic.GetDamage(damage);
+                                    }
+                                }
+                                break;
+                            }
+                        default:
+                            break;
                     }
+                    
 
                 }
 
@@ -166,6 +221,9 @@ public class TurretEnemy : MonoBehaviour
                                 headActivate = false;
 
                                 line.enabled = false;
+
+                                Debug.Log("LA TORRETA SE MUERE");
+                                isDead = true;
                             }
                             break;
                         }
@@ -203,6 +261,7 @@ public class TurretEnemy : MonoBehaviour
 
                                 laserEffect.SetActive(false);
 
+                                isDead = true;
                             }
                             break;
                         }
@@ -346,36 +405,89 @@ public class TurretEnemy : MonoBehaviour
         //Animamos la torreta para que se desactive
         if (headActivate)
         {
-            //Comprobamos la frontal 
-            if (frontIman.myPole == iman.POSITIVE)
+            switch (turretType)
             {
-                DeactivateFrontStone();
-            }
-            //Comprobamos la trasera 
-            if (backIman.myPole == iman.POSITIVE)
-            {
-                DeactivateBackStone();
-            }
-            //Comprobamos la izquierda 
-            if (leftIman.myPole == iman.POSITIVE)
-            {
-                DeactivateLeftStone();
-            }
-            //Comprobamos la frontal 
-            if (rightIman.myPole == iman.POSITIVE)
-            {
-                DeactivateRightStone();
-            }
+                case TurretType.PROJECTILE:
+                    {
+                        //Comprobamos la frontal 
+                        if (frontIman.myPole == iman.POSITIVE)
+                        {
+                            DeactivateFrontStone();
+                        }
+                        //Comprobamos la trasera 
+                        if (backIman.myPole == iman.POSITIVE)
+                        {
+                            DeactivateBackStone();
+                        }
+                        //Comprobamos la izquierda 
+                        if (leftIman.myPole == iman.POSITIVE)
+                        {
+                            DeactivateLeftStone();
+                        }
+                        //Comprobamos la frontal 
+                        if (rightIman.myPole == iman.POSITIVE)
+                        {
+                            DeactivateRightStone();
+                        }
 
-            DeactivateHead();
+                        DeactivateHead();
 
-        }
+                        //Reestablecemos
+                        frontIman.myPole = iman.POSITIVE;
+                        backIman.myPole = iman.POSITIVE;
+                        leftIman.myPole = iman.POSITIVE;
+                        rightIman.myPole = iman.POSITIVE;
 
-        //Reestablecemos
-        frontIman.myPole = iman.POSITIVE;
-        backIman.myPole = iman.POSITIVE;
-        leftIman.myPole = iman.POSITIVE;
-        rightIman.myPole = iman.POSITIVE;
+                        //Seteamos los Outlines
+                        frontIman.outline.OutlineColor = Color.blue;
+                        backIman.outline.OutlineColor = Color.blue;
+                        leftIman.outline.OutlineColor = Color.blue;
+                        rightIman.outline.OutlineColor = Color.blue;
+                        break;
+                    }
+                case TurretType.LASER:
+                    {
+                        //Comprobamos la frontal 
+                        if (frontIman.myPole == iman.NEGATIVE)
+                        {
+                            DeactivateFrontStone();
+                        }
+                        //Comprobamos la trasera 
+                        if (backIman.myPole == iman.NEGATIVE)
+                        {
+                            DeactivateBackStone();
+                        }
+                        //Comprobamos la izquierda 
+                        if (leftIman.myPole == iman.NEGATIVE)
+                        {
+                            DeactivateLeftStone();
+                        }
+                        //Comprobamos la frontal 
+                        if (rightIman.myPole == iman.NEGATIVE)
+                        {
+                            DeactivateRightStone();
+                        }
+
+                        DeactivateHead();
+
+                        //Reestablecemos
+                        frontIman.myPole = iman.NEGATIVE;
+                        backIman.myPole = iman.NEGATIVE;
+                        leftIman.myPole = iman.NEGATIVE;
+                        rightIman.myPole = iman.NEGATIVE;
+
+                        //Seteamos los Outlines
+                        frontIman.outline.OutlineColor = Color.red;
+                        backIman.outline.OutlineColor = Color.red;
+                        leftIman.outline.OutlineColor = Color.red;
+                        rightIman.outline.OutlineColor = Color.red;
+                        break;
+                    }
+                default:
+                    break;
+            }         
+
+        }        
 
         headActivate = true;
     }
@@ -384,7 +496,7 @@ public class TurretEnemy : MonoBehaviour
     #region DEACTIVATE HEAD
     void DeactivateHead()
     {
-        isDead = true;
+        //isDead = true;
         head.DOMove(downHead.position, speedAnimation);
     }
     #endregion

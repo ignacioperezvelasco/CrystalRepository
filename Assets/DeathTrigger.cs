@@ -5,11 +5,30 @@ using UnityEngine.SceneManagement;
 
 public class DeathTrigger : MonoBehaviour
 {
+    PlayerLogic player;
+
+    private void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerLogic>();
+    }
+
+    private void Update()
+    {
+        if (player.GetLife() <= 0)
+        {
+            Reload();
+        }
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            SceneManager.LoadScene("PrototipeMap");
+            Reload();
         }
+    }
+
+    void Reload()
+    {
+        SceneManager.LoadScene("PrototipeMap");
     }
 }

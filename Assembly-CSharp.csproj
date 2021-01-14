@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Activator.cs" />
+    <Compile Include="Assets\AreaAttack.cs" />
     <Compile Include="Assets\DeathTrigger.cs" />
     <Compile Include="Assets\LeanTween\Examples\Archived\OldGUIExamplesCS.cs" />
     <Compile Include="Assets\LeanTween\Examples\Archived\TestingPunch.cs" />
