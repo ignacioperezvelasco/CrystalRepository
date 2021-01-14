@@ -18,7 +18,7 @@ public class FollowCharacter : MonoBehaviour
     #endregion
 
     #region UPDATE
-    void Update()
+    void FixedUpdate()
     {
         this.transform.DOMove(player.position, speedCamera);
     }
