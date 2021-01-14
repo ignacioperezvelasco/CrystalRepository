@@ -1449,6 +1449,16 @@ PrefabInstance:
       propertyPath: headOutline
       value: 
       objectReference: {fileID: 385196988}
+    - target: {fileID: 8196879014239346981, guid: f367e7ba45cf1304482d1c3ca56caae1,
+        type: 3}
+      propertyPath: layerMask.m_Bits
+      value: 2048
+      objectReference: {fileID: 0}
+    - target: {fileID: 8196879014239346981, guid: f367e7ba45cf1304482d1c3ca56caae1,
+        type: 3}
+      propertyPath: damage
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8196879014239346983, guid: f367e7ba45cf1304482d1c3ca56caae1,
         type: 3}
       propertyPath: m_Name
@@ -8211,10 +8221,20 @@ PrefabInstance:
       propertyPath: maxHealth
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 2563698222079319664, guid: 3a91acf6839b9a747831d5711637cca1,
+        type: 3}
+      propertyPath: timeInvencible
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6025142838663353059, guid: 3a91acf6839b9a747831d5711637cca1,
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6025142838663353059, guid: 3a91acf6839b9a747831d5711637cca1,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 6025142838663353060, guid: 3a91acf6839b9a747831d5711637cca1,
         type: 3}

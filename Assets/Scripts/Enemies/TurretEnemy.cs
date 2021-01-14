@@ -13,6 +13,7 @@ public class TurretEnemy : MonoBehaviour
     };
 
     Transform player;
+    PlayerLogic playerLogic;
 
     public TurretType turretType;
 
@@ -29,6 +30,8 @@ public class TurretEnemy : MonoBehaviour
 
     [Header("LASER")]
     public GameObject laserEffect;
+    [SerializeField] LayerMask layerMask;
+    [SerializeField] float damage;
 
     [Header("SHOOTING")]
     public float fireRate = 3;
@@ -77,6 +80,9 @@ public class TurretEnemy : MonoBehaviour
     #region START
     void Start()
     {
+        //Buscar el player Logic
+        playerLogic = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerLogic>();
+
         line = GetComponent<LineRenderer>();
 
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -147,16 +153,42 @@ public class TurretEnemy : MonoBehaviour
                     crosshair.DOMove(new Vector3(player.position.x, crosshair.position.y, player.position.z), followSpeed);
                     head.DOLookAt(new Vector3(player.position.x, crosshair.position.y + 1.5f, player.position.z), followSpeed);
 
-                    //Dispaamos el proyectil solo si es de tipo proyectil
-                    if (turretType == TurretType.PROJECTILE)
+                    switch (turretType)
                     {
-                        shootTimer += Time.deltaTime;
-                        if (shootTimer >= fireRate)
-                        {
-                            shootTimer = 0;
-                            Shoot();
-                        }
+                        case TurretType.PROJECTILE:
+                            {
+                                //Dispaamos el proyectil solo si es de tipo proyectil
+                                if (turretType == TurretType.PROJECTILE)
+                                {
+                                    shootTimer += Time.deltaTime;
+                                    if (shootTimer >= fireRate)
+                                    {
+                                        shootTimer = 0;
+                                        Shoot();
+                                    }
+                                }
+                                break;
+                            }
+                        case TurretType.LASER:
+                            {
+                                RaycastHit hit; ;
+                                Debug.DrawRay(eyeTurret.position, (crosshair.position - eyeTurret.position) * 1000, Color.white);
+
+                                if (Physics.Raycast(eyeTurret.position, (crosshair.position - eyeTurret.position), out hit, Mathf.Infinity, layerMask))
+                                {
+                                    Debug.Log("CHOCA CON ALGO");
+
+                                    if (hit.collider.CompareTag("Player"))
+                                    {
+                                        playerLogic.GetDamage(damage);
+                                    }
+                                }
+                                break;
+                            }
+                        default:
+                            break;
                     }
+                    
 
                 }
 
