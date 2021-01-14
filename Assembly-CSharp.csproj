@@ -134,6 +134,7 @@
     <Compile Include="Assets\Scripts\Interactives\Item.cs" />
     <Compile Include="Assets\Scripts\Interactives\LaunchPlaform.cs" />
     <Compile Include="Assets\Scripts\Interactives\MathParabola.cs" />
+    <Compile Include="Assets\Scripts\Interactives\PSController.cs" />
     <Compile Include="Assets\Scripts\Interactives\ParabolaController.cs" />
     <Compile Include="Assets\Scripts\Interactives\Spikes.cs" />
     <Compile Include="Assets\Scripts\Potion.cs" />
