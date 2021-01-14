@@ -37,7 +37,7 @@ public class Enemy : Agent
 
     [Header("DAMAGE")]
     [SerializeField] float areaDamage = 10;
-    [SerializeField] float chargeDmage = 20;
+    [SerializeField] float chargeDamage = 20;
 
     [Header("PATROL")]
     [SerializeField] List<Transform> patrolPoints;
@@ -57,7 +57,9 @@ public class Enemy : Agent
     [SerializeField] float distanceToDoAreaAtttack = 3;
     [SerializeField] MeshRenderer attackArea;
     [SerializeField] AreaAttack areaAttackLogic;
+    [SerializeField] AreaAttack rangeAttackLogic;
     float timer;
+    bool isCharging = false;
 
     [Header("TELEGRAPHING")]
     public LineRenderer line;
@@ -306,6 +308,11 @@ public class Enemy : Agent
     #region ATTACK BEHAVIOUR
     void AttackBehaviour()
     {
+        //Miramos si esta haciendo el ataque en carga y choca a el player 
+        if (isCharging && rangeAttackLogic.GetIsPlayer())
+        {
+            playerLogic.GetDamage(chargeDamage);
+        }
         line.SetPosition(0, baseTelegraph.position);
         line.SetPosition(1, targetTelegraph.position);
 
@@ -348,6 +355,8 @@ public class Enemy : Agent
                     {
                         line.enabled = true;
                         isAttacking = true;
+
+                        isCharging = true;
                         //Paramos al enemigo
                         agentNavMesh.isStopped = true;
                         //Hacemos el ataque embestida
@@ -391,6 +400,13 @@ public class Enemy : Agent
     }
     #endregion
 
+    #region DEACTIVATE RANGE ATTACK
+    void DeactivaterRangeAttack()
+    {
+        isCharging = false;
+    }
+    #endregion
+
     #region CHARGE ATTACK
     void ChargeAttack()
     {
@@ -417,6 +433,8 @@ public class Enemy : Agent
         this.transform.DOMove(targetTelegraph.position, speedCharging);
 
         Invoke("StopAttacking", speedCharging);
+
+        Invoke("DeactivaterRangeAttack", speedCharging);        
     }
     #endregion
 
