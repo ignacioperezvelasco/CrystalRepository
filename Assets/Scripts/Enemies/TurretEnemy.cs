@@ -176,8 +176,6 @@ public class TurretEnemy : MonoBehaviour
 
                                 if (Physics.Raycast(eyeTurret.position, (crosshair.position - eyeTurret.position), out hit, Mathf.Infinity, layerMask))
                                 {
-                                    Debug.Log("CHOCA CON ALGO");
-
                                     if (hit.collider.CompareTag("Player"))
                                     {
                                         playerLogic.GetDamage(damage);

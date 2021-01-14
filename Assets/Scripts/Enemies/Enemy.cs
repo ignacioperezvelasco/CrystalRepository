@@ -23,33 +23,40 @@ public class Enemy : Agent
     Rigidbody myRB;
     List<GameObject> gameObjectsHittedMe;
 
+    PlayerLogic playerLogic;
+
     [Header("ENEMY")]
-    public float startingLife = 100;
-    public int lifeThershold = 30;
-    public ElementalAmimator animator;
+    [SerializeField] float startingLife = 100;
+    [SerializeField] int lifeThershold = 30;
+    [SerializeField] ElementalAmimator animator;
 
     [Header("HEALTH BAR")]
-    public Image healthBar;
-    public GameObject healthTransform;
+    [SerializeField] Image healthBar;
+    [SerializeField] GameObject healthTransform;
     bool isDead = false;
 
+    [Header("DAMAGE")]
+    [SerializeField] float areaDamage = 10;
+    [SerializeField] float chargeDmage = 20;
+
     [Header("PATROL")]
-    public List<Transform> patrolPoints;
-    public float distanceToPoint = 1;
-    public float timeToNextPoint = 1f;
-    public float distanceAlert = 20;
+    [SerializeField] List<Transform> patrolPoints;
+    [SerializeField] float distanceToPoint = 1;
+    [SerializeField] float timeToNextPoint = 1f;
+    [SerializeField] float distanceAlert = 20;
     int currentPatrolPoint = -1;
     bool onPoint = false;
 
     [Header("SPEEDS")]
-    public float patrolSpeed;
-    public float seekSpeed;
-    public float agressiveSpeed;
+    [SerializeField] float patrolSpeed;
+    [SerializeField] float seekSpeed;
+    [SerializeField] float agressiveSpeed;
 
     [Header("ATTACK")]
-    public float timeBetweenAttacks = 3;
-    public float distanceToDoAreaAtttack = 3;
-    public GameObject attackArea;
+    [SerializeField] float timeBetweenAttacks = 3;
+    [SerializeField] float distanceToDoAreaAtttack = 3;
+    [SerializeField] MeshRenderer attackArea;
+    [SerializeField] AreaAttack areaAttackLogic;
     float timer;
 
     [Header("TELEGRAPHING")]
@@ -71,6 +78,9 @@ public class Enemy : Agent
         life = startingLife;
         //Buscamos al Player
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+
+        //Buscar el player Logic
+        playerLogic = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerLogic>();
 
         //Buscamos el agente Nev
         agentNavMesh = GetComponent<NavMeshAgent>();
@@ -303,9 +313,7 @@ public class Enemy : Agent
         {
 
             if (!isAttacking)
-            {
-                
-
+            {       
                 if (Vector3.Distance(player.position, this.transform.position) > 3)
                 {                    
                     agentNavMesh.SetDestination(player.position);
@@ -324,7 +332,12 @@ public class Enemy : Agent
                         //Paramos al enemigo
                         agentNavMesh.isStopped = true;
                         //Hacemos el Ataque en area
-                        attackArea.SetActive(true);
+                        attackArea.enabled = true;
+
+                        if (areaAttackLogic.GetIsPlayer())
+                        {
+                            playerLogic.GetDamage(areaDamage);
+                        }
                         Invoke("DeactivateAreaAttack", 0.5f);
 
                         //Ponemos la animación de ataque en area
@@ -370,7 +383,7 @@ public class Enemy : Agent
     #region DEACTIVATE AREA ATTACK
     void DeactivateAreaAttack()
     {
-        attackArea.SetActive(false);
+        attackArea.enabled = false;
         agentNavMesh.isStopped = false;
 
         //Ponemos la animación de caminar
