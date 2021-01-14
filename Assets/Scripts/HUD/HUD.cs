@@ -22,11 +22,19 @@ public class HUD : MonoBehaviour
     public GameObject revolverGameobject;
     public Image revolverSlider;
     public List<Image> bulletImagesPositive;
+    public AnimationCurve curveCooldown;
+
+    //IMAGES NEGATIVE AND POSITIVE
+    [Header("Images positive and negative")]
+    public Image positiveImage;
+    public Image negativeImage;
+    public Image borderPositiveImage;
+    public Image borderNegativeImage;
 
     //PRIVATE VARIABLES
     private int lifePlayer;
-    public float negativeBullets;
-    public float positiveBullets;
+    private float negativeBullets;
+    private float positiveBullets;
     private bool isChargingPositive;
     private bool isChargingNegative;
     private int currentBulletPositive;
@@ -37,9 +45,6 @@ public class HUD : MonoBehaviour
     private Color32 positiveColor;
     private Color32 negativeColor;
     private Color32 defaultColor;
-    private bool tryingShootPositive;
-    private bool tryingShootNegative;
-    public AnimationCurve curveCooldown;
     private int idRotateCooldown;
     private int idRotateFinishShoot;
 
@@ -87,12 +92,31 @@ public class HUD : MonoBehaviour
     #region IsChargingPositiveBullet
     void isChargingPositiveBullet()
     {
+        //EN CASO QUE NO ESTE CARGANDO
+        if(positiveBullets == 0)
+        {
+            //BORDER IMAGE
+            borderPositiveImage.enabled = false;
+        }
+
+        //COLOR IMAGE IF THEY ARE NOT COOLDOWN
+        if (_shootscript.GetCooldownPositive())
+        {
+            ColorAlphaImage(positiveImage, 1.0f);
+        }
+
         if (_shootscript.GetIsChargingPositive())
         {
             positiveBullets = _shootscript.GetShootPositive();
 
             //EN CASO QUE NO SEA UN CLICK
-            if((positiveBullets) >= 1.1)
+            if ((positiveBullets) >= 0.1)
+            {
+                //BORDER IMAGE
+                borderPositiveImage.enabled = true;
+            }
+
+            if ((positiveBullets) >= 1.1)
             {
                 //SLIDER COLOR ROJO
                 revolverSlider.color = new Color32(255, 0, 0, 255);
@@ -143,12 +167,15 @@ public class HUD : MonoBehaviour
             RestartFillSlider();
             RestartColorImages();
 
+            //COLOR ALPHA IMAGE
+            ColorAlphaImage(positiveImage, 0.5f);
+
             isChargingPositive = false;
         }
         else if(_shootscript.GetTryingShootPositive())
         {
             //COOLDOWN SHOOT
-            if(!LeanTween.isTweening(idRotateCooldown) && !LeanTween.isTweening(idRotateFinishShoot))
+            if (!LeanTween.isTweening(idRotateCooldown) && !LeanTween.isTweening(idRotateFinishShoot))
             {
                 RotateRevolverCooldown(60);
             }
@@ -156,21 +183,37 @@ public class HUD : MonoBehaviour
         }
         else if(positiveBullets != 0)
         {
-            //RotateRevolverCooldown(45);
             positiveBullets = 0;
         }
-
         currentBulletNegative = currentBulletPositive;
-        //Debug.Log("CurrentBullet POSITIVE: " + currentBulletPositive);
-        //Debug.Log("CurrentBullet NEGATIVE: " + currentBulletNegative);
     }
     #endregion
 
     #region IsChargingNegativeBullet
     void isChargingNegativeBullet()
     {
+        //EN CASO QUE NO ESTE CARGANDO
+        if (negativeBullets == 0)
+        {
+            //BORDER IMAGE
+            borderNegativeImage.enabled = false;
+        }
+
+        //COLOR IMAGE IF THEY ARE NOT COOLDOWN
+        if (_shootscript.GetCooldownNegative())
+        {
+            ColorAlphaImage(negativeImage, 1.0f);
+        }
+
         if (_shootscript.GetIsChargingNegative())
         {
+            //EN CASO QUE NO SEA UN CLICK
+            if ((negativeBullets) >= 0.1)
+            {
+                //BORDER IMAGE
+                borderNegativeImage.enabled = true;
+            }
+
             negativeBullets = _shootscript.GetShootNegative();
 
             //EN CASO QUE MANTENGAMOS PULSADO EL CLICK
@@ -227,7 +270,13 @@ public class HUD : MonoBehaviour
             RestartFillSlider();
             RestartColorImages();
 
+            //COLOR IMAGE WHEN SHOOT
+            ColorAlphaImage(negativeImage, 0.5f);
+
             isChargingNegative = false;
+
+            //BORDER IMAGE
+            borderNegativeImage.enabled = false;
         }
         else if (_shootscript.GetTryingShootNegative())
         {
@@ -328,6 +377,13 @@ public class HUD : MonoBehaviour
     void ChangeColorBullet(int bullet, Color32 color)
     {
         bulletImagesPositive[bullet].color = color;
+    }
+    #endregion
+
+    #region ColorAlphaImage
+    void ColorAlphaImage(Image img, float alpha)
+    {
+        img.color = new Color(img.color.r, img.color.g, img.color.b, alpha);
     }
     #endregion
 }
