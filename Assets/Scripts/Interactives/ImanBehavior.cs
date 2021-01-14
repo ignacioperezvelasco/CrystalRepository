@@ -277,7 +277,10 @@ public class ImanBehavior : MonoBehaviour
         return numChargesAdded;
     }
 
+
+
     #endregion
+
     private void ResetObject()
     {
         this.gameObject.tag = "CanBeHitted";
