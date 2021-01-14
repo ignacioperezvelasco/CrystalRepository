@@ -16,6 +16,7 @@ public class ShootingScript : MonoBehaviour
     public Transform leftPistol;
     bool canShootPositive = true;
     bool canShootNegative = true;
+    bool wantToShotNegative, wantToShotPositive = false;
     float timerNegative, timerpositive = 0;
     float positiveCharge = 0;
     float negativeCharge = 0;
@@ -33,90 +34,9 @@ public class ShootingScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Fire1") && canShootNegative)
-        {
-            isChargingNegative = true;
-            negativePS.SetActive(true);
-        }
-        else if (Input.GetButtonDown("Fire1") && !canShootNegative)
-        {
-            tryingShootNegative = true;
-        }
+        NegativeShootHandler(Input.GetButton("Fire2"), Input.GetButtonUp("Fire2"));
 
-        if (Input.GetButtonUp("Fire1") && isChargingNegative)
-        {
-            //Set cooldown
-            switch ((int)negativeCharge)
-            {
-                case 0:
-                    timerNegative = cooldown0;
-                    break;
-                case 1:
-                    timerNegative = cooldown1;
-                    break;
-                case 2:
-                    timerNegative = cooldown2;
-                    break;
-                case 3:
-                    timerNegative = cooldown3;
-                    break;
-                default:
-                    break;
-            }
-            
-            //Shoot if have to
-            ShootNegative();
-            
-            //reset
-            negativeCharge = 0;
-            isChargingNegative = false;
-            //Start CD
-            canShootNegative = false;
-            //PS
-            negativePS.SetActive(false);
-
-        }
-        if (Input.GetButtonDown("Fire2") && canShootPositive)
-        {
-            isChargingPositive = true;
-            positivePS.SetActive(true);
-        }
-        else if(Input.GetButtonDown("Fire2") && !canShootPositive)
-        {
-            tryingShootPositive = true;
-            //Debug.Log("ESTOY EN COOLDOWN Y PRESIONO");
-        }
-
-        if (Input.GetButtonUp("Fire2") && isChargingPositive)
-        {
-            //Set cooldown
-            switch ((int)positiveCharge)
-            {
-                case 0:
-                    timerpositive = cooldown0;
-                    break;
-                case 1:
-                    timerpositive = cooldown1;
-                    break;
-                case 2:
-                    timerpositive = cooldown2;
-                    break;
-                case 3:
-                    timerpositive = cooldown3;
-                    break;
-                default:
-                    break;
-            }
-            //shoot if u have
-            ShootPositive();
-            //reset
-            positiveCharge = 0;
-            isChargingPositive = false;
-            //Start CD
-            canShootPositive = false;
-            //PS
-            positivePS.SetActive(false);
-        }
+        PositiveShootHandler(Input.GetButton("Fire1"), Input.GetButtonUp("Fire1"));
     }
 
     private void FixedUpdate()
@@ -153,6 +73,125 @@ public class ShootingScript : MonoBehaviour
         }
     }
 
+    #region SHOOTING FUNCTIONS
+    //Controling -
+    void NegativeShootHandler(bool shotButtonDown, bool shotButtonUp)
+    {
+        //Get Input
+        if ((shotButtonDown && !wantToShotNegative) && !wantToShotPositive)
+            wantToShotNegative = true;
+
+        //Can shot?
+        if (wantToShotNegative && canShootNegative)
+        {
+            if (!isChargingPositive && !isChargingNegative)
+            {
+                isChargingNegative = true;
+                negativePS.SetActive(true);
+            }
+        }
+        else if (wantToShotNegative && !canShootNegative)
+        {
+            if (!isChargingPositive)
+                tryingShootNegative = true;
+        }
+        //Shoot
+        if (shotButtonUp && isChargingNegative)
+        {
+            //Set cooldown
+            switch ((int)negativeCharge)
+            {
+                case 0:
+                    timerNegative = cooldown0;
+                    break;
+                case 1:
+                    timerNegative = cooldown1;
+                    break;
+                case 2:
+                    timerNegative = cooldown2;
+                    break;
+                case 3:
+                    timerNegative = cooldown3;
+                    break;
+                default:
+                    break;
+            }
+
+            //Shoot if have to
+            ShootNegative();
+
+            //reset
+            negativeCharge = 0;
+            isChargingNegative = false;
+            wantToShotNegative = false;
+            //Start CD
+            canShootNegative = false;
+            //PS
+            negativePS.SetActive(false);
+
+        }
+        else if (shotButtonUp)
+        {
+            wantToShotNegative = false;
+        }
+    }
+    //Controling +
+    void PositiveShootHandler(bool shotButtonDown, bool shotButtonUp)
+    {
+        if ((shotButtonDown && !wantToShotPositive) && !wantToShotNegative)
+            wantToShotPositive = true;
+
+        if (wantToShotPositive && canShootPositive)
+        {
+            if (!isChargingPositive && !isChargingNegative)
+            {
+                isChargingPositive = true;
+                positivePS.SetActive(true);
+            }
+        }
+        else if (wantToShotPositive && !canShootPositive)
+        {
+            if (!isChargingNegative)
+                tryingShootPositive = true;
+        }
+
+        if (shotButtonUp && isChargingPositive)
+        {
+            //Set cooldown
+            switch ((int)positiveCharge)
+            {
+                case 0:
+                    timerpositive = cooldown0;
+                    break;
+                case 1:
+                    timerpositive = cooldown1;
+                    break;
+                case 2:
+                    timerpositive = cooldown2;
+                    break;
+                case 3:
+                    timerpositive = cooldown3;
+                    break;
+                default:
+                    break;
+            }
+            //shoot if u have
+            ShootPositive();
+            //reset
+            positiveCharge = 0;
+            isChargingPositive = false;
+            wantToShotPositive = false;
+            //Start CD
+            canShootPositive = false;
+            //PS
+            positivePS.SetActive(false);
+        }
+        else if (shotButtonUp)
+        {
+            wantToShotPositive = false;
+        }
+    }
+    //Shoot-
     void ShootNegative()
     {
         Rigidbody bulletClone = (Rigidbody)Instantiate(bullet, rightPistol.transform.position, rightPistol.transform.rotation);
@@ -161,7 +200,7 @@ public class ShootingScript : MonoBehaviour
         bulletClone.gameObject.GetComponent<BulletScript>().SetCharge((int)negativeCharge);
         bulletClone.velocity = transform.forward * bulletSpeed;
     }
-
+    //Shoot+
     void ShootPositive()
     {
         Rigidbody bulletClone = (Rigidbody)Instantiate(crystal, leftPistol.transform.position, leftPistol.transform.rotation);
@@ -170,6 +209,8 @@ public class ShootingScript : MonoBehaviour
         bulletClone.gameObject.GetComponent<BulletScript>().SetCharge((int)positiveCharge);
         bulletClone.velocity = transform.forward * bulletSpeed;
     }
+
+    #endregion
 
     #region Getter/Setter
     public float GetShootPositive()

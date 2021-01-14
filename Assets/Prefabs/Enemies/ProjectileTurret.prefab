@@ -88,6 +88,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6720589740493526362}
+  - component: {fileID: 1639386106}
   m_Layer: 0
   m_Name: TorretaCabeza
   m_TagString: Untagged
@@ -111,6 +112,24 @@ Transform:
   m_Father: {fileID: 6720589741413782732}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &1639386106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6720589740493526361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &6720589740594454567
 GameObject:
   m_ObjectHideFlags: 0
@@ -715,6 +734,8 @@ MonoBehaviour:
   timerActive: 3
   timeImanted: 8
   timeActive: 3
+  imEnemy: 0
+  outline: {fileID: 0}
 --- !u!114 &6720589741141070762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1061,6 +1082,8 @@ MonoBehaviour:
   timerActive: 3
   timeImanted: 8
   timeActive: 3
+  imEnemy: 0
+  outline: {fileID: 0}
 --- !u!114 &6720589741573401299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1108,7 +1131,7 @@ GameObject:
   - component: {fileID: 6720589741616491559}
   - component: {fileID: 6720589741616491558}
   m_Layer: 0
-  m_Name: ProjectileTurret 1
+  m_Name: ProjectileTurret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1164,6 +1187,7 @@ MonoBehaviour:
   headActivate: 1
   head: {fileID: 6720589742152599707}
   eyeTurret: {fileID: 6720589740923617590}
+  headOutline: {fileID: 1639386106}
   crosshair: {fileID: 6720589742442878323}
   followSpeed: 0.25
   laserEffect: {fileID: 0}
@@ -6418,6 +6442,8 @@ MonoBehaviour:
   timerActive: 3
   timeImanted: 8
   timeActive: 3
+  imEnemy: 0
+  outline: {fileID: 0}
 --- !u!114 &6720589741889129561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6668,6 +6694,8 @@ MonoBehaviour:
   timerActive: 3
   timeImanted: 8
   timeActive: 3
+  imEnemy: 0
+  outline: {fileID: 0}
 --- !u!114 &6720589742093566071
 MonoBehaviour:
   m_ObjectHideFlags: 0
