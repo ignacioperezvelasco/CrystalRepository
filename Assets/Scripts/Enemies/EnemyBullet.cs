@@ -8,6 +8,7 @@ public class EnemyBullet : MonoBehaviour
     Rigidbody rb;
     public float bulletSpeed = 10;
     public float LifeTime = 10;
+    public float damage = 10;
     #endregion
 
 
@@ -24,16 +25,18 @@ public class EnemyBullet : MonoBehaviour
 
     #region TRIGGER ENTER
     private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Finish"))
-        {
-            Destroy(this.gameObject);
-        }
+    {      
 
         if (other.CompareTag("Player"))
         {
+            PlayerLogic player = other.GetComponent<PlayerLogic>();
+            player.GetDamage(damage);
+
             Destroy(this.gameObject);
         }
+
+        
+
     }
     #endregion
 
