@@ -44,7 +44,7 @@ public class ShootingScript : MonoBehaviour
         if (isChargingNegative)
         {
             if (negativeCharge <= 3)
-                negativeCharge += Time.fixedDeltaTime;
+                negativeCharge += Time.fixedDeltaTime*2;
             // Debug.Log(negativeCharge);
         }
         else if (!canShootNegative)
@@ -59,7 +59,7 @@ public class ShootingScript : MonoBehaviour
         if (isChargingPositive)
         {
             if (positiveCharge <= 3)
-                positiveCharge += Time.fixedDeltaTime;
+                positiveCharge += Time.fixedDeltaTime*2;
             //Debug.Log(positiveCharge);
         }
         else if (!canShootPositive)
