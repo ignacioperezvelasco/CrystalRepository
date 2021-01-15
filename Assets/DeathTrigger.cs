@@ -29,6 +29,6 @@ public class DeathTrigger : MonoBehaviour
 
     void Reload()
     {
-        SceneManager.LoadScene("PrototipeMap");
+        SceneManager.LoadScene("TestingEnviromentPrototipeMap");
     }
 }

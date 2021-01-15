@@ -103,40 +103,52 @@ public class ImanBehavior : MonoBehaviour
 
     #region UPDATING ELEMENTS NEAR
     private void OnTriggerEnter(Collider other)
-    {        
-        if (myPole != iman.NONE)
+    {
+        if (mobility == mobilityType.MOBILE || mobility == mobilityType.STATIC)
         {
-            if (other.gameObject.transform.parent != null)
-            {                
-                if (other.gameObject.transform.parent.gameObject.tag == "CanBeHitted")
-                    if (!nearImantableObjects.Contains(other.gameObject.transform.parent.gameObject))
-                    {
-                        nearImantableObjects.Add(other.gameObject.transform.parent.gameObject);
-                    }
-            }            
+            if (myPole != iman.NONE)
+            {
+                if (other.gameObject.transform.parent != null)
+                {
+                    Debug.Log(other.gameObject.layer == 9);
+
+                    if (other.gameObject.layer == 9)
+                        if (!nearImantableObjects.Contains(other.gameObject.transform.parent.gameObject))
+                        {
+                            nearImantableObjects.Add(other.gameObject.transform.parent.gameObject);
+                        }
+                }
+            }
         }
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (myPole != iman.NONE)
+        if (mobility == mobilityType.MOBILE || mobility == mobilityType.STATIC)
         {
-            if (other.gameObject.transform.parent != null)
+            if (myPole != iman.NONE)
             {
-                if (other.gameObject.transform.parent.gameObject.tag == "CanBeHitted")
-                    if (!nearImantableObjects.Contains(other.gameObject.transform.parent.gameObject))
-                    {
-                        nearImantableObjects.Add(other.gameObject.transform.parent.gameObject);
-                    }
+                if (other.gameObject.transform.parent != null)
+                {
+                    if (other.gameObject.layer == 9)
+                        if (!nearImantableObjects.Contains(other.gameObject.transform.parent.gameObject))
+                        {
+                            nearImantableObjects.Add(other.gameObject.transform.parent.gameObject);
+                        }
+                }
             }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.layer == 10)
+        if (mobility == mobilityType.MOBILE || mobility == mobilityType.STATIC)
         {
-            nearImantableObjects.Remove(other.gameObject);
+            if (other.gameObject.layer == 9)
+            {
+                if (myPole != iman.NONE)
+                    nearImantableObjects.Remove(other.gameObject.transform.parent.gameObject);
+            }
         }
     }
     #endregion
