@@ -22,6 +22,10 @@ public class Enemy : Agent
     ImanBehavior myImanBehaviorScript;
     Rigidbody myRB;
     List<GameObject> gameObjectsHittedMe;
+    public LayerMask Ground;
+    public Transform _groundChecker;
+    public bool _isGrounded=false;
+    private float GroundDistance = 0.2f;
 
     PlayerLogic playerLogic;
 
@@ -111,6 +115,11 @@ public class Enemy : Agent
     #region UPDATE
     void Update()
     {
+        _isGrounded = Physics.CheckSphere(_groundChecker.position, GroundDistance, Ground, QueryTriggerInteraction.Ignore);
+
+        //HandleKinematic
+        HandleGround(_isGrounded);
+
         //Comprobamos si está muerto
         if (life <= 0 && !isDead)
         {
@@ -318,7 +327,7 @@ public class Enemy : Agent
         line.SetPosition(0, baseTelegraph.position);
         line.SetPosition(1, targetTelegraph.position);
 
-        if (!myImanBehaviorScript.GetApplyForce())
+        if (!myImanBehaviorScript.GetApplyForce() && _isGrounded)
         {
 
             if (!isAttacking)
@@ -450,7 +459,7 @@ public class Enemy : Agent
         animator.WalkAnimation();
 
         isAttacking = false;
-        if (!myImanBehaviorScript.GetApplyForce())
+        if (!myImanBehaviorScript.GetApplyForce() && _isGrounded)
             agentNavMesh.isStopped = false;
     }
     #endregion
@@ -462,6 +471,25 @@ public class Enemy : Agent
     {
         Gizmos.DrawWireSphere(this.transform.position, distanceToDoAreaAtttack);
         Gizmos.DrawWireSphere(this.transform.position, distanceAlert);
+    }
+    #endregion
+
+    #region KINEMATIC
+    void HandleGround(bool isGrounded)
+    {
+        if (!myImanBehaviorScript.GetApplyForce())
+        {
+            if (isGrounded)
+            {
+                if (myRB.isKinematic == false)
+                    myRB.isKinematic = true;
+            }
+            else if (myRB.isKinematic == true)
+            {
+                myRB.isKinematic = false;
+                Debug.Log("deddedeedededed");
+            }
+        }
     }
     #endregion
 
