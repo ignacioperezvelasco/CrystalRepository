@@ -21,6 +21,7 @@ public class ImantablePlatform : MonoBehaviour
     PlatformState state;
     public PlatformType type;
     public float damage = 20;
+    public float forceToPush = 10f;
 
     [SerializeField] float speed;
 
@@ -154,7 +155,7 @@ public class ImantablePlatform : MonoBehaviour
         {            
             hitted = true;
 
-            other.GetComponent<Agent>().GetDamage(damage);
+            other.GetComponent<Agent>().GetDamage(damage, this.transform.position, 4);
         }
     }
     #endregion

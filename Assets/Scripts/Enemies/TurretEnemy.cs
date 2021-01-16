@@ -178,7 +178,7 @@ public class TurretEnemy : MonoBehaviour
                                 {
                                     if (hit.collider.CompareTag("Player"))
                                     {
-                                        playerLogic.GetDamage(damage);
+                                        playerLogic.GetDamage(damage, this.transform.position, 2);
                                     }
                                 }
                                 break;

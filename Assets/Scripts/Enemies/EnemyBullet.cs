@@ -9,6 +9,7 @@ public class EnemyBullet : MonoBehaviour
     public float bulletSpeed = 10;
     public float LifeTime = 10;
     public float damage = 10;
+    public float force = 2;
     #endregion
 
 
@@ -30,7 +31,7 @@ public class EnemyBullet : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             PlayerLogic player = other.GetComponent<PlayerLogic>();
-            player.GetDamage(damage);
+            player.GetDamage(damage, this.transform.position, force);
 
             Destroy(this.gameObject);
         }
