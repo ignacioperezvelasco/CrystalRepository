@@ -13,11 +13,19 @@ public class LookAt : MonoBehaviour
     public LineRenderer negativeLaser;
     public Transform initialNegativeLaser;
     public Transform finalNegativeLaser;
+    Vector3 naturalPositionNegative;
 
     [Header("POSITIVE LASER")]
     public LineRenderer positiveLaser;
     public Transform initialPoitiveLaser;
     public Transform finalPositiveLaser;
+    Vector3 naturalPositionPositive;
+
+    [Header("AUTOAIM")]
+    [SerializeField] Autoaim autoaim;
+    public bool hasTarget = false;
+
+    Vector3 currentTarget;
 
     #endregion
 
@@ -26,6 +34,10 @@ public class LookAt : MonoBehaviour
     {
         //Asignamos nuestra camara
         viewCamera = Camera.main;
+
+        //Guardamos la posicion inical de los laseres
+        naturalPositionPositive = finalPositiveLaser.position;
+        naturalPositionNegative = finalPositiveLaser.position;
     }
     #endregion
 
@@ -37,6 +49,7 @@ public class LookAt : MonoBehaviour
         {
             //Creamos un rayo de la cámara a la posición del raton en pantalla
             Ray ray = viewCamera.ScreenPointToRay(Input.mousePosition);
+
             //Generamos el plano a los pies de la posicion del personaje
             Plane groundPlane = new Plane(Vector3.up, new Vector3(0, groundChecker.position.y, 0));
             float rayDistance;
@@ -46,17 +59,47 @@ public class LookAt : MonoBehaviour
                 Vector3 point = ray.GetPoint(rayDistance);
                 Debug.DrawLine(ray.origin, point, Color.red);
 
-                LookAtMouse(point);
+                //Comprobamos el target actual
+                currentTarget = autoaim.GetCurrentTarget();
+                currentTarget.y = this.transform.position.y;
+
+                //miramos si hay target
+                if (currentTarget != new Vector3(1000, 1000, 1000))
+                {
+                    hasTarget = true;
+                }
+                else
+                {
+                    hasTarget = false;
+                }
+                
+                LookAtMouse(point);                        
             }
-        }       
+        }
 
-        //Seteamos el Laser Negativo
-        negativeLaser.SetPosition(0, initialNegativeLaser.position);
-        negativeLaser.SetPosition(1, finalNegativeLaser.position);
+        if (hasTarget)
+        {
+            //Seteamos el Laser Negativo
+            negativeLaser.SetPosition(0, initialNegativeLaser.position);
+            negativeLaser.SetPosition(1, currentTarget);
 
-        //Seteamos el Laser Positive
-        positiveLaser.SetPosition(0, initialPoitiveLaser.position);
-        positiveLaser.SetPosition(1, finalPositiveLaser.position);
+            //Seteamos el Laser Positive
+            positiveLaser.SetPosition(0, initialPoitiveLaser.position);
+            positiveLaser.SetPosition(1, currentTarget);
+        }
+        else
+        {
+            //Seteamos el Laser Negativo
+            negativeLaser.SetPosition(0, initialNegativeLaser.position);
+            negativeLaser.SetPosition(1, finalNegativeLaser.position);
+
+            //Seteamos el Laser Positive
+            positiveLaser.SetPosition(0, initialPoitiveLaser.position);
+            positiveLaser.SetPosition(1, finalPositiveLaser.position);
+        }
+
+
+        
     }
     #endregion
 
