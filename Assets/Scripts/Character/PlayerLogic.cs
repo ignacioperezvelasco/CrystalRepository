@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class PlayerLogic : Agent
 {
@@ -37,6 +38,29 @@ public class PlayerLogic : Agent
         if (canBeDamaged)
         {
             life -= _damage;
+            canBeDamaged = false;
+        }
+
+        if (life <= 0)
+            Die();
+    }
+
+    public override void GetDamage(float _damage, Vector3 pushPosition, float force)
+    {
+        if (canBeDamaged)
+        {
+            life -= _damage;
+
+            //Calculamos la direccion del empujón
+            Vector3 directionPush = -pushPosition - this.transform.position;
+            directionPush.y = 0;
+            directionPush = directionPush.normalized;
+
+            //Calculamos la posición del empujón
+            Vector3 positionTOJump = this.transform.position + (directionPush * force);
+
+            this.transform.DOJump(positionTOJump, 0.75f, 1, 0.25f);
+
             canBeDamaged = false;
         }
 

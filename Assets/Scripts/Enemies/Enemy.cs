@@ -37,7 +37,9 @@ public class Enemy : Agent
 
     [Header("DAMAGE")]
     [SerializeField] float areaDamage = 10;
+    [SerializeField] float areaPushingForce = 4;
     [SerializeField] float chargeDamage = 20;
+    [SerializeField] float chargePushingForce = 3;
 
     [Header("PATROL")]
     [SerializeField] List<Transform> patrolPoints;
@@ -311,7 +313,7 @@ public class Enemy : Agent
         //Miramos si esta haciendo el ataque en carga y choca a el player 
         if (isCharging && rangeAttackLogic.GetIsPlayer())
         {
-            playerLogic.GetDamage(chargeDamage);
+            playerLogic.GetDamage(chargeDamage, this.transform.position, chargePushingForce);
         }
         line.SetPosition(0, baseTelegraph.position);
         line.SetPosition(1, targetTelegraph.position);
@@ -320,7 +322,10 @@ public class Enemy : Agent
         {
 
             if (!isAttacking)
-            {       
+            {
+                //Miramos al player
+                this.transform.DOLookAt(new Vector3(player.position.x, this.transform.position.y,player.position.z),0.5f);
+
                 if (Vector3.Distance(player.position, this.transform.position) > 3)
                 {                    
                     agentNavMesh.SetDestination(player.position);
@@ -343,7 +348,7 @@ public class Enemy : Agent
 
                         if (areaAttackLogic.GetIsPlayer())
                         {
-                            playerLogic.GetDamage(areaDamage);
+                            playerLogic.GetDamage(areaDamage, this.transform.position, areaPushingForce);
                         }
                         Invoke("DeactivateAreaAttack", 0.5f);
 
