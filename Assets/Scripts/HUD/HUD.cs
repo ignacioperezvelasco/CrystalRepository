@@ -120,7 +120,10 @@ public class HUD : MonoBehaviour
             {
                 //SLIDER COLOR ROJO
                 revolverSlider.color = new Color32(255, 0, 0, 255);
-                revolverSlider.fillAmount += 1.0f * Time.deltaTime;
+                if(positiveBullets<3)
+                    revolverSlider.fillAmount = positiveBullets%1.0f;
+                else
+                    revolverSlider.fillAmount = 1.0f;
 
                 //PRIMERA CARGA
                 if (first_charge == false)
@@ -221,8 +224,10 @@ public class HUD : MonoBehaviour
             {
                 //SLIDER COLOR ROJO
                 revolverSlider.color = new Color32(0, 0, 255, 255);
-                revolverSlider.fillAmount += 1.0f * Time.deltaTime;
-
+                if(negativeBullets<3)
+                    revolverSlider.fillAmount = negativeBullets % 1.0f;
+                else
+                    revolverSlider.fillAmount = 1.0f;
                 //PRIMERA CARGA
                 if (first_charge == false)
                 {
