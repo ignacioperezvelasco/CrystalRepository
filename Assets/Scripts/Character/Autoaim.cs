@@ -23,7 +23,6 @@ public class Autoaim : MonoBehaviour
     #region UPDATE
     void Update()
     {
-        Debug.Log(posiblesTargets.Count);
         CheckNewTarget();        
     }
     #endregion

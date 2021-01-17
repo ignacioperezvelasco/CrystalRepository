@@ -25,10 +25,12 @@ public class ShootingScript : MonoBehaviour
 
     [SerializeField] float cooldown1, cooldown2, cooldown3, cooldown0 = 0;
 
+    LookAt lookAt;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        lookAt = GetComponent<LookAt>();
     }
 
     // Update is called once per frame
@@ -203,7 +205,18 @@ public class ShootingScript : MonoBehaviour
         bulletClone.gameObject.GetComponent<BulletScript>().SetPole(iman.NEGATIVE);
         //Debug.Log("Negative");
         bulletClone.gameObject.GetComponent<BulletScript>().SetCharge((int)negativeCharge);
-        bulletClone.velocity = transform.forward * bulletSpeed;
+
+        //Miramos si hay target o no
+        if (!lookAt.HasTargert())
+        {
+            bulletClone.velocity = transform.forward * bulletSpeed;
+        }
+        else
+        {
+            //miramos la dirección que ha de tener el disparo
+            bulletClone.velocity = lookAt.GetShootDirection() * bulletSpeed;
+
+        }
     }
     //Shoot+
     void ShootPositive()
@@ -212,7 +225,18 @@ public class ShootingScript : MonoBehaviour
         bulletClone.gameObject.GetComponent<BulletScript>().SetPole(iman.POSITIVE);
         //Debug.Log("Positive");
         bulletClone.gameObject.GetComponent<BulletScript>().SetCharge((int)positiveCharge);
-        bulletClone.velocity = transform.forward * bulletSpeed;
+
+        //Miramos si hay target o no
+        if (!lookAt.HasTargert())
+        {
+            bulletClone.velocity = transform.forward * bulletSpeed;
+        }
+        else
+        {
+            //miramos la dirección que ha de tener el disparo
+            bulletClone.velocity = lookAt.GetShootDirection() * bulletSpeed;
+
+        }
     }
 
     #endregion

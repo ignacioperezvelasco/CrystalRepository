@@ -61,11 +61,12 @@ public class LookAt : MonoBehaviour
 
                 //Comprobamos el target actual
                 currentTarget = autoaim.GetCurrentTarget();
-                currentTarget.y = this.transform.position.y;
 
                 //miramos si hay target
                 if (currentTarget != new Vector3(1000, 1000, 1000))
                 {
+
+                    currentTarget.y = this.transform.position.y;
                     hasTarget = true;
                 }
                 else
@@ -124,6 +125,26 @@ public class LookAt : MonoBehaviour
     public void ResumePlayer()
     {
         isPaused = false;
+    }
+    #endregion
+
+    #region GETTER HAS TARGET
+    public bool HasTargert()
+    {
+        return hasTarget;
+    }
+    #endregion
+
+    #region GETTER SHOOT DIRECTION
+    public Vector3 GetShootDirection()
+    {
+        Vector3 targetDirection;        
+
+        targetDirection = autoaim.GetCurrentTarget() - this.transform.position;
+        targetDirection.y = 0;        
+        targetDirection = targetDirection.normalized;
+
+        return targetDirection;
     }
     #endregion
 }
