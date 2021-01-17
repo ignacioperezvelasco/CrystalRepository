@@ -46,13 +46,13 @@ public class PSController : MonoBehaviour
                         switch (num)
                         {
                             case 1:
-                                psp.radius = 3.5f*2;
+                                psp.radius = myIB.sizeSphereOneCharge;
                                 break;
                             case 2:
-                                psp.radius = 4.5f*2;
+                                psp.radius = myIB.sizeSphereTwoCharge;
                                 break;
                             case 3:
-                                psp.radius = 8*2;
+                                psp.radius = myIB.sizeSphereThreeCharge;
                                 Debug.Log("Ha entrado");
                                 break;
                             default:
@@ -101,8 +101,8 @@ public class PSController : MonoBehaviour
                     break;
                 default:
                     break;
-            }          
+            }
         }
-                
+
     }
 }

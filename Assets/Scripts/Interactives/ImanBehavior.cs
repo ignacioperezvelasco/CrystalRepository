@@ -13,7 +13,7 @@ public class ImanBehavior : MonoBehaviour
     [SerializeField] private List<GameObject> nearImantableObjects;
 
     [Header("CHECKING CHARGES")]
-    [SerializeField]SphereCollider mysphereCollider;
+    [SerializeField] SphereCollider mysphereCollider;
     [Header("ELEMENT TYPE")]
     public mobilityType mobility = mobilityType.NONE;
     public iman myPole = iman.NONE;
@@ -26,6 +26,9 @@ public class ImanBehavior : MonoBehaviour
     [SerializeField] float timerActive = 3f;
     [SerializeField] float timeImanted = 8f;
     [SerializeField] float timeActive = 3f;
+    public float sizeSphereOneCharge = 7;
+    public float sizeSphereTwoCharge = 9;
+    public float sizeSphereThreeCharge = 16;
     bool applyForce = false;
     Vector3 directionForce;
     Collider[] others;
@@ -48,7 +51,7 @@ public class ImanBehavior : MonoBehaviour
     void Start()
     {
         myRB = this.GetComponent<Rigidbody>();
-        
+
         if (mobility != mobilityType.JUSTPOLE)
         {
             //mysphereCollider = this.GetComponentInChildren<SphereCollider>();
@@ -64,7 +67,7 @@ public class ImanBehavior : MonoBehaviour
         timerActive = timeActive;
         timerImanted = timeImanted;
 
-        
+
 
         //outline.OutlineColor = new Color32(0, 0, 0, 0);
     }
@@ -160,7 +163,7 @@ public class ImanBehavior : MonoBehaviour
         bool hay = false;
         foreach (GameObject obj in nearImantableObjects)
         {
-            
+
             //comprobamos q se tenga q calcular
             if (obj.GetComponent<ImanBehavior>().myPole != iman.NONE)
             {
@@ -192,7 +195,7 @@ public class ImanBehavior : MonoBehaviour
     {
         Vector3 finalForce = new Vector3(0, 0, 0);
         //Suma de cargas
-        float numChargesSum = (numChargesAdded + otherGO.GetComponent<ImanBehavior>().numChargesAdded)*2f;
+        float numChargesSum = (numChargesAdded + otherGO.GetComponent<ImanBehavior>().numChargesAdded) * 2f;
 
         switch (typeOfForce)
         {
@@ -252,15 +255,15 @@ public class ImanBehavior : MonoBehaviour
                 {
                     case 1:
                         mysphereCollider.enabled = true;
-                        mysphereCollider.radius = 3.5f;
+                        mysphereCollider.radius = sizeSphereOneCharge;
                         break;
                     case 2:
                         mysphereCollider.enabled = true;
-                        mysphereCollider.radius = 4.5f;
+                        mysphereCollider.radius = sizeSphereTwoCharge;
                         break;
                     case 3:
                         mysphereCollider.enabled = true;
-                        mysphereCollider.radius = 8;
+                        mysphereCollider.radius = sizeSphereThreeCharge;
                         break;
                     default:
                         break;
@@ -273,7 +276,7 @@ public class ImanBehavior : MonoBehaviour
         else
         {
             //Behavior if is no charge bullet
-            myRB.AddForce(bullet.velocity.normalized*2, ForceMode.Impulse);
+            myRB.AddForce(bullet.velocity.normalized * 2, ForceMode.Impulse);
         }
     }
 
