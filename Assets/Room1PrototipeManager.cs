@@ -25,4 +25,14 @@ public class Room1PrototipeManager : MonoBehaviour
         }
     }
     #endregion
+
+    #region ERASE BUTTON
+    public void EraseButton()
+    {
+        if (!isOpened)
+        {
+            buttonsCounter--;            
+        }
+    }
+    #endregion
 }

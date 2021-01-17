@@ -53,7 +53,7 @@ public class Autoaim : MonoBehaviour
                     currentTarget.go = posiblesTargets[i].go;
                     currentTarget.index = posiblesTargets[i].index;
 
-                    currentTarget.go.GetComponent<MeshRenderer>().material.color = Color.green;
+                    //currentTarget.go.GetComponent<MeshRenderer>().material.color = Color.green;
                 }
                 //Miramos si el siguiente target de la lista está más cerca que el actual target
                 else if (ditanceToNewTarget < Vector3.Distance(player.position, currentTarget.go.transform.position))
@@ -72,14 +72,14 @@ public class Autoaim : MonoBehaviour
     void UpdateNewTarget(Target _newTarget)
     {
         //el que era target y ya no será le cambiamos el color
-        currentTarget.go.GetComponent<MeshRenderer>().material.color = Color.yellow;
+        //currentTarget.go.GetComponent<MeshRenderer>().material.color = Color.yellow;
 
         //Actualizamos
         currentTarget.go = _newTarget.go;
         currentTarget.index = _newTarget.index;
 
         //el que es target le cambiamos el color
-        currentTarget.go.GetComponent<MeshRenderer>().material.color = Color.green;
+        //currentTarget.go.GetComponent<MeshRenderer>().material.color = Color.green;
     }
     #endregion
 
@@ -106,7 +106,7 @@ public class Autoaim : MonoBehaviour
     #region ADD NEW POSIBLE TARGET
     void AddNewPosibleTarget(GameObject _go)
     {
-        _go.GetComponent<MeshRenderer>().material.color = Color.yellow;
+       //_go.GetComponent<MeshRenderer>().material.color = Color.yellow;
 
         //Creamos el nuevo Target
         Target aux;
@@ -125,7 +125,7 @@ public class Autoaim : MonoBehaviour
     #region ERASE POSIBLE TARGET
     void ErasePosibleTarget(GameObject _go)
     {
-        _go.GetComponent<MeshRenderer>().material.color = Color.red;
+        //_go.GetComponent<MeshRenderer>().material.color = Color.red;
 
         for (int i = 0; i < posiblesTargets.Count; i++)
         {
