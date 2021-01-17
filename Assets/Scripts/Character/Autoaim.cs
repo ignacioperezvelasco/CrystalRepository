@@ -86,7 +86,7 @@ public class Autoaim : MonoBehaviour
     #region TRIGGER ENTER
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Respawn"))
+        if (other.CompareTag("CanBeHitted"))
         {
             AddNewPosibleTarget(other.gameObject);
         }
@@ -96,7 +96,7 @@ public class Autoaim : MonoBehaviour
     #region TRIGGER EXIT
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Respawn"))
+        if (other.CompareTag("CanBeHitted"))
         {
             ErasePosibleTarget(other.gameObject);
         }
@@ -152,7 +152,15 @@ public class Autoaim : MonoBehaviour
     #region GET TARGET
     public Vector3 GetCurrentTarget()
     {
-        return currentTarget.go.transform.position;
+        if (currentTarget.go != null)
+        {
+            return currentTarget.go.transform.position;
+        }
+        else
+        {
+            return new Vector3(1000, 1000, 1000);
+        }
+        
     }
     #endregion
 }
