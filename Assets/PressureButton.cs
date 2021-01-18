@@ -15,5 +15,13 @@ public class PressureButton : MonoBehaviour
         }
     }
 
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("CanBeHitted"))
+        {
+            manager.EraseButton();
+        }
+    }
+
 
 }
