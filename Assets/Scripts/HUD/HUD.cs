@@ -30,6 +30,7 @@ public class HUD : MonoBehaviour
     public Image negativeImage;
     public Image borderPositiveImage;
     public Image borderNegativeImage;
+        
 
     //PRIVATE VARIABLES
     private int lifePlayer;
@@ -74,8 +75,8 @@ public class HUD : MonoBehaviour
         lifePlayer = (int)_player.GetLife();
 
         //FUNCTIONS BULLETS 
-        isChargingNegativeBullet();
         isChargingPositiveBullet();
+        isChargingNegativeBullet();
 
         //SLIDER LIFE PLAYER
         SliderPlayerLife();
@@ -107,11 +108,13 @@ public class HUD : MonoBehaviour
 
         if (_shootscript.GetIsChargingPositive())
         {
+
             positiveBullets = _shootscript.GetShootPositive();
 
             //EN CASO QUE NO SEA UN CLICK
             if ((positiveBullets) >= 0.1)
-            {
+            {             
+
                 //BORDER IMAGE
                 borderPositiveImage.enabled = true;
             }
@@ -152,6 +155,7 @@ public class HUD : MonoBehaviour
                 {
                     if ((positiveBullets) >= 2.9)
                     {
+
                         ChangeColorBullet(currentBulletPositive, positiveColor);
                         third_charge = true;
                         IncrementBulletPositive(1);
@@ -163,6 +167,7 @@ public class HUD : MonoBehaviour
         //CUANDO DISPARA
         else if (isChargingPositive == true)
         {
+
             //ROTATES AND RESTART CHARGES
             RestartRevolverCharges(positiveBullets);
 

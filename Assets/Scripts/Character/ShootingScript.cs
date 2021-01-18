@@ -25,6 +25,14 @@ public class ShootingScript : MonoBehaviour
 
     [SerializeField] float cooldown1, cooldown2, cooldown3, cooldown0 = 0;
 
+    [Header("SOUNDS")]
+    [SerializeField] AudioSource shoot;
+    [SerializeField] AudioSource chargingSound;
+    [SerializeField] AudioSource cooldownSound;
+    bool isCharging = false;
+    bool isCooldownPlaying = false;
+    float cooldownTimer = 0;
+
     LookAt lookAt;
 
     // Start is called before the first frame update
@@ -39,6 +47,32 @@ public class ShootingScript : MonoBehaviour
         NegativeShootHandler(Input.GetButton("Fire2"), Input.GetButtonUp("Fire2"));
 
         PositiveShootHandler(Input.GetButton("Fire1"), Input.GetButtonUp("Fire1"));
+
+        if (isChargingNegative || isChargingPositive)
+        {
+            if (!isCharging)
+            {
+                isCharging = true;
+                chargingSound.Play();
+            }
+        }
+        else if(!isChargingNegative && !isChargingPositive)
+        {
+            isCharging = false;
+            chargingSound.Stop();
+        }
+
+
+        if (isCooldownPlaying)
+        {
+            cooldownTimer += Time.deltaTime;
+            if (cooldownTimer >= 0.46f)
+            {
+                cooldownTimer = 0;
+                isCooldownPlaying = false;
+            }
+        }
+
     }
 
     private void FixedUpdate()
@@ -100,7 +134,17 @@ public class ShootingScript : MonoBehaviour
         else if (wantToShotNegative && !canShootNegative)
         {
             if (!isChargingPositive)
+            {
                 tryingShootNegative = true;
+
+                //comprobamos si ya esta sonando
+                if (!isCooldownPlaying)
+                {
+                    cooldownSound.Play();
+
+                    isCooldownPlaying = true;
+                }
+            }
         }
         //Shoot
         if (shotButtonUp && isChargingNegative)
@@ -159,7 +203,17 @@ public class ShootingScript : MonoBehaviour
         else if (wantToShotPositive && !canShootPositive)
         {
             if (!isChargingNegative)
+            {
                 tryingShootPositive = true;
+
+                //comprobamos si ya esta sonando
+                if (!isCooldownPlaying)
+                {
+                    cooldownSound.Play();
+
+                    isCooldownPlaying = true;
+                }
+            }
         }
 
         if (shotButtonUp && isChargingPositive)
@@ -210,11 +264,17 @@ public class ShootingScript : MonoBehaviour
         if (!lookAt.HasTargert())
         {
             bulletClone.velocity = transform.forward * bulletSpeed;
+            //Hacemos play del sonido
+            shoot.Play();
         }
         else
         {
+
             //miramos la dirección que ha de tener el disparo
             bulletClone.velocity = lookAt.GetShootDirection() * bulletSpeed;
+
+            //Hacemos play del sonido
+            shoot.Play();
 
         }
     }
@@ -230,11 +290,16 @@ public class ShootingScript : MonoBehaviour
         if (!lookAt.HasTargert())
         {
             bulletClone.velocity = transform.forward * bulletSpeed;
+            //Hacemos play del sonido
+            shoot.Play();
         }
         else
         {
             //miramos la dirección que ha de tener el disparo
             bulletClone.velocity = lookAt.GetShootDirection() * bulletSpeed;
+
+            //Hacemos play del sonido
+            shoot.Play();
 
         }
     }
