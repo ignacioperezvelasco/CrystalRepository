@@ -14,7 +14,7 @@ public class PauseMenu : MonoBehaviour
     public static bool GameIsPaused = false;
     public GameObject pauseMenuUI;
 
-    private string MainMenu = "Menu Screen TITLE";
+    public string MainMenu = "MainMenu";
 
     //REFERENCED SCRIPTS
     private LookAt _lookat;
