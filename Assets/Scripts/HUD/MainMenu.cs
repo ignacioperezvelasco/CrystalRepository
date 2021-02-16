@@ -80,13 +80,11 @@ public class MainMenu : MonoBehaviour
         float startIn = (ButtonList[numButton].transform.position.x + (widthButton / 2));
         float distanceToMove = moveTo - startIn;*/
 
-        float startIn = ButtonList[numButton].gameObject.GetComponent<RectTransform>().offsetMax.x;
         float moveTo = RedList[numButton].gameObject.GetComponent<RectTransform>().offsetMin.x;
-
-        Debug.Log(moveTo);
+        float finalDestination = moveTo - ButtonList[numButton].gameObject.GetComponent<RectTransform>().rect.width / 2;
 
         //MOVE TO X
-        LeanTween.moveX(ButtonList[numButton].gameObject, moveTo, 1f);
+        LeanTween.moveLocalX(ButtonList[numButton].gameObject, moveTo, 1f);
     }
     #endregion
 }
