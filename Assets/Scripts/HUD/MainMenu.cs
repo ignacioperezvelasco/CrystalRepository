@@ -13,9 +13,7 @@ public class MainMenu : MonoBehaviour
     {
         //HAY QUE AÑADIR LA ESCENA AL BUILDEAR
         Debug.Log("Empecemos");
-        //SceneManager.LoadScene(sceneToOpen);
-
-        Invoke("LoadNextScene", 0.5f);
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void ExitGame()
