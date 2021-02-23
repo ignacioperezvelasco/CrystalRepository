@@ -35,6 +35,14 @@ public class ImanBehavior : MonoBehaviour
     GameObject otherGO;
     forceType myForceType = forceType.NONE;
     int numChargesAdded = 0;
+
+    //Explosion Variables
+    bool hasToExplode = false;
+    float counterToExplode = 2.0f;
+    [SerializeField] float timeToExplode = 2.0f;
+    int otherImantableCharges = 0;
+    Transform otherImantableTransform;
+
     // Start is called before the first frame update
     public bool imEnemy = false;
     private NavMeshAgent myNavMeshScript;
@@ -66,7 +74,7 @@ public class ImanBehavior : MonoBehaviour
         nearImantableObjects = new List<GameObject>();
         timerActive = timeActive;
         timerImanted = timeImanted;
-
+        counterToExplode = timeToExplode;
 
 
         //outline.OutlineColor = new Color32(0, 0, 0, 0);
@@ -88,13 +96,26 @@ public class ImanBehavior : MonoBehaviour
             if (myPole != iman.NONE)
             {
                 if (applyForce && mobility == mobilityType.MOBILE)
-                {
-                    //Debug.Log("ha de palicart la fuerza : " + directionForce * force);
+                {                    
                     myRB.AddForce(directionForce * force, ForceMode.Force);
+                    if (imEnemy)
+                        Debug.Log(directionForce * force);
                     directionForce = new Vector3(0, 0, 0);
                     timerActive -= Time.fixedDeltaTime;
                     if (timerActive <= 0)
-                        ResetObject();
+                    {
+                        if (hasToExplode)
+                        {
+                            hasToExplode = false;
+                            counterToExplode = timeToExplode;
+                            Explode();
+                            otherImantableCharges = 0;
+                            otherImantableTransform = null;
+                        }
+                        else
+                            ResetObject();
+                    }                        
+                    
                 }
                 else
                     timerImanted -= Time.fixedDeltaTime;
@@ -113,7 +134,7 @@ public class ImanBehavior : MonoBehaviour
             {
                 if (other.gameObject.transform.parent != null)
                 {
-                    Debug.Log(other.gameObject.layer == 9);
+                    //Debug.Log(other.gameObject.layer == 9);
 
                     if (other.gameObject.layer == 9)
                         if (!nearImantableObjects.Contains(other.gameObject.transform.parent.gameObject))
@@ -154,8 +175,32 @@ public class ImanBehavior : MonoBehaviour
             }
         }
     }
+
     #endregion
 
+    #region HANDLE EXPLOSION
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.tag == "CanBeHitted")
+        {
+            if ((mobility == mobilityType.MOBILE) && (!hasToExplode))
+            {
+                hasToExplode = true;
+                otherImantableCharges = collision.collider.gameObject.GetComponent<ImanBehavior>().GetCharges();
+                otherImantableTransform = collision.collider.gameObject.transform;
+            }
+        }
+    }
+
+    private void Explode()
+    {
+        Vector3 directionExplosionForce = this.transform.position - otherImantableTransform.position;
+        directionExplosionForce.Normalize();
+        myRB.AddForce(directionExplosionForce * numChargesAdded * otherImantableCharges * 70, ForceMode.Impulse);
+        
+    }
+    #endregion
+    
     #region calculate Forces
 
     void CalculateDirectionForce()
