@@ -26,11 +26,9 @@ public class CameraTransition : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            //transformCamera.DOMove(newTransformCamera.position, 4f);
             targetCamera.DORotate(newRotationTarget, speedTransition);
             mainCamera.DOFieldOfView(newFOV, speedTransition);
-
-            //mainCamera.DOShakePosition(1f,2f,10);
+            
         }
     }
 }
