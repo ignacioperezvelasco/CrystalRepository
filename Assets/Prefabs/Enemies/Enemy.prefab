@@ -9625,6 +9625,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Elemental
       objectReference: {fileID: 0}
+    - target: {fileID: 5410129694641868956, guid: d79c472062d815f4a9cd110000636e47,
+        type: 3}
+      propertyPath: explosionPS
+      value: 
+      objectReference: {fileID: 198060521554951974, guid: bd4cf73fcea9e5b408d347ac02cc8284,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d79c472062d815f4a9cd110000636e47, type: 3}
 --- !u!4 &8820225508135538108 stripped

@@ -40,6 +40,7 @@ public class ImanBehavior : MonoBehaviour
     bool hasToExplode = false;
     float counterToExplode = 2.0f;
     [SerializeField] float timeToExplode = 2.0f;
+    [SerializeField] GameObject explosionPS;
     int otherImantableCharges = 0;
     Transform otherImantableTransform;
 
@@ -58,6 +59,7 @@ public class ImanBehavior : MonoBehaviour
 
     void Start()
     {
+        
         myRB = this.GetComponent<Rigidbody>();
 
         if (mobility != mobilityType.JUSTPOLE)
@@ -177,15 +179,18 @@ public class ImanBehavior : MonoBehaviour
             {
                 otherImantableCharges = collision.collider.gameObject.GetComponent<ImanBehavior>().GetCharges();
                 otherImantableTransform = collision.collider.gameObject.transform;
-                Explode(collision.collider.gameObject.transform.position, collision.collider.gameObject.GetComponent<ImanBehavior>().GetCharges());
+                
+                Explode(collision.collider.gameObject.transform.position, collision.collider.gameObject.GetComponent<ImanBehavior>().GetCharges(), collision.collider.ClosestPoint(collision.collider.gameObject.transform.position));
             }
         }
     }
 
-    private void Explode(Vector3 pos, int otherCharges)
+    private void Explode(Vector3 pos, int otherCharges, Vector3 explosionPoint)
     {
         Vector3 directionExplosionForce = this.transform.position - pos;
         directionExplosionForce.Normalize();
+        GameObject GO = Instantiate(explosionPS, this.transform.position, Quaternion.identity) as GameObject;
+        GO.transform.SetParent(this.transform);
         myRB.AddForce(directionExplosionForce * (numChargesAdded + otherCharges) * 30, ForceMode.Impulse);
         ResetObject();
     }
