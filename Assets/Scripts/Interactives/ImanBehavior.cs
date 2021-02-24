@@ -99,20 +99,10 @@ public class ImanBehavior : MonoBehaviour
                 {                    
                     myRB.AddForce(directionForce * force, ForceMode.Force);
                     if (imEnemy)
-                        Debug.Log(directionForce * force);
                     directionForce = new Vector3(0, 0, 0);
                     timerActive -= Time.fixedDeltaTime;
                     if (timerActive <= 0)
-                    {
-                        if (hasToExplode)
-                        {
-                            hasToExplode = false;
-                            counterToExplode = timeToExplode;
-                            Explode();
-                            otherImantableCharges = 0;
-                            otherImantableTransform = null;
-                        }
-                        else
+                    {                       
                             ResetObject();
                     }                        
                     
@@ -183,21 +173,21 @@ public class ImanBehavior : MonoBehaviour
     {
         if (collision.collider.tag == "CanBeHitted")
         {
-            if ((mobility == mobilityType.MOBILE) && (!hasToExplode))
+            if (mobility == mobilityType.MOBILE)
             {
-                hasToExplode = true;
                 otherImantableCharges = collision.collider.gameObject.GetComponent<ImanBehavior>().GetCharges();
                 otherImantableTransform = collision.collider.gameObject.transform;
+                Explode(collision.collider.gameObject.transform.position, collision.collider.gameObject.GetComponent<ImanBehavior>().GetCharges());
             }
         }
     }
 
-    private void Explode()
+    private void Explode(Vector3 pos, int otherCharges)
     {
-        Vector3 directionExplosionForce = this.transform.position - otherImantableTransform.position;
+        Vector3 directionExplosionForce = this.transform.position - pos;
         directionExplosionForce.Normalize();
-        myRB.AddForce(directionExplosionForce * numChargesAdded * otherImantableCharges * 70, ForceMode.Impulse);
-        
+        myRB.AddForce(directionExplosionForce * (numChargesAdded + otherCharges) * 30, ForceMode.Impulse);
+        ResetObject();
     }
     #endregion
     
