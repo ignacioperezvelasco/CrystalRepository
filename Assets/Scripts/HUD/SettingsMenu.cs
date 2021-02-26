@@ -14,6 +14,7 @@ public class SettingsMenu : MonoBehaviour
     public int selectedRes;
 
     public TextMeshProUGUI resText;
+    public TMP_Dropdown dropdownResolution;
 
     // Start is called before the first frame update
     void Start()
@@ -90,10 +91,17 @@ public class SettingsMenu : MonoBehaviour
         Screen.SetResolution(resolutions[selectedRes].width, resolutions[selectedRes].height, fullscreenToggle.isOn);
     }
 
+    public void DropDownResolution()
+    {
+        string[] splitString = dropdownResolution.options[dropdownResolution.value].text.Split('x');
+        Screen.SetResolution(int.Parse(splitString[0]), int.Parse(splitString[1]), fullscreenToggle.isOn);
+    }
+
     public void ApplyChanges()
     {
-        SetResolution();
+        DropDownResolution();
         ApplyFullScreen();
         ApplyVSync();
+        DropDownResolution();
     }
 }
