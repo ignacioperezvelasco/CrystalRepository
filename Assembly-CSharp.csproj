@@ -62,7 +62,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\CameraShake.cs" />
     <Compile Include="Assets\LeanTween\Examples\Archived\OldGUIExamplesCS.cs" />
     <Compile Include="Assets\LeanTween\Examples\Archived\TestingPunch.cs" />
     <Compile Include="Assets\LeanTween\Examples\Archived\TestingRigidbodyCS.cs" />
@@ -103,6 +102,7 @@
     <Compile Include="Assets\Scripts\Camera\CameraTransition.cs" />
     <Compile Include="Assets\Scripts\Camera\FollowCharacter.cs" />
     <Compile Include="Assets\Scripts\Camera\cameraScript.cs" />
+    <Compile Include="Assets\Scripts\CameraShake.cs" />
     <Compile Include="Assets\Scripts\Character\Autoaim.cs" />
     <Compile Include="Assets\Scripts\Character\BulletScript.cs" />
     <Compile Include="Assets\Scripts\Character\CrystalScript.cs" />
@@ -113,6 +113,7 @@
     <Compile Include="Assets\Scripts\Character\rotateToCam.cs" />
     <Compile Include="Assets\Scripts\Character\rvMovementPers.cs" />
     <Compile Include="Assets\Scripts\DeathTrigger.cs" />
+    <Compile Include="Assets\Scripts\Elevator.cs" />
     <Compile Include="Assets\Scripts\Enemies\Agent.cs" />
     <Compile Include="Assets\Scripts\Enemies\ElementalAmimator.cs" />
     <Compile Include="Assets\Scripts\Enemies\Enemy.cs" />
