@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 ﻿{"cameraMode":{"drawMode":0,"name":"Shaded","section":"Shading Mode"},"sceneLighting":true,"audioPlay":false,"sceneViewState":{"showFog":true,"showMaterialUpdate":false,"showSkybox":true,"showFlares":true,"showImageEffects":true,"showParticleSystems":true},"in2DMode":true,"pivot":{"x":667.4229125976563,"y":342.2244567871094,"z":-341.18572998046877},"rotation":{"x":0.0,"y":0.0,"z":0.0,"w":1.0},"size":266.5170593261719,"orthographic":true}
+=======
+﻿{"cameraMode":{"drawMode":0,"name":"Shaded","section":"Shading Mode"},"sceneLighting":true,"audioPlay":false,"sceneViewState":{"showFog":true,"showMaterialUpdate":true,"showSkybox":true,"showFlares":true,"showImageEffects":true,"showParticleSystems":true},"in2DMode":false,"pivot":{"x":-22.913475036621095,"y":5.111072540283203,"z":256.475341796875},"rotation":{"x":0.22797152400016786,"y":-0.7570295929908752,"z":0.3381134569644928,"w":0.5106405019760132},"size":17.701387405395509,"orthographic":false}
+>>>>>>> Develop
