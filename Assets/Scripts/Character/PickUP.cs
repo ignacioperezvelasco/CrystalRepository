@@ -30,6 +30,7 @@ public class PickUP : MonoBehaviour
                 else
                 {
                     isGrabed = true;
+                    objectTransform.rotation = this.transform.rotation;
                 }
             }
         }

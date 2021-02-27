@@ -27,6 +27,8 @@ public class LookAt : MonoBehaviour
 
     Vector3 currentTarget;
 
+    bool isStoped;
+
     #endregion
 
     #region START
@@ -45,7 +47,7 @@ public class LookAt : MonoBehaviour
     #region UPDATE
     void Update()
     {
-        if (!isPaused)
+        if (!isPaused && !isStoped)
         {
             //Creamos un rayo de la cámara a la posición del raton en pantalla
             Ray ray = viewCamera.ScreenPointToRay(Input.mousePosition);
@@ -145,6 +147,20 @@ public class LookAt : MonoBehaviour
         targetDirection = targetDirection.normalized;
 
         return targetDirection;
+    }
+    #endregion
+
+    #region STOP
+    public void Stop()
+    {
+        isStoped = true;
+    }
+    #endregion
+
+    #region RESUME
+    public void Resume()
+    {
+        isStoped = false;
     }
     #endregion
 }

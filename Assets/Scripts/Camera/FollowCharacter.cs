@@ -14,6 +14,8 @@ public class FollowCharacter : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+
+        this.transform.position = player.position;
     }
     #endregion
 

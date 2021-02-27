@@ -2,13 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 using DG.Tweening;
 
 public class DialogueManager : MonoBehaviour
 {
     #region VARIABLES
+    //Para el player
+    rvMovementPers playerMovement;
     //Para el texto
     [Header("DIALOGUE")]
+    [SerializeField] float startingDelay = 1;
+    [SerializeField] float dialogueSpeed = 20;
     public GameObject canvasDialogue;
     public Animator dialogueAnimator;
 
@@ -22,68 +27,74 @@ public class DialogueManager : MonoBehaviour
 
     bool isplayerInside = false;
     bool dialogueIsStarted = false;
-
-    //Para la cámara
-    [Header("CAMERA")]
-    public Transform cameraDialogueHanlder;
-    public Transform newPositionCamera;
-    Camera cameraMain;
-    Vector3 lastCameraPosition;
-    Vector3 lastCamerRotation;
-    float lastFOV;
+    
     Transform playerTransform;
+
+    private IEnumerator coroutine;
+
+    bool isTyping = false;
+    bool writeFullSentence = false;
+    bool activated = false;
     #endregion
 
     #region START
     void Start()
     {
+        //Buscamos el player movement
+        playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<rvMovementPers>();
+
         sentences = new Queue<string>();
 
         canvasDialogue.SetActive(false);
-
-        cameraMain = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
     }
     #endregion
 
     #region UPDATE
     private void Update()
     {
-        if (dialogueIsStarted && Input.anyKeyDown)
+        if (dialogueIsStarted && Input.anyKeyDown && !isTyping)
         {
             //Enseñamos la siguiente frase
             DisplayNextSentence();
         }
-
-        if (isplayerInside && Input.GetKeyDown(KeyCode.E) && !dialogueIsStarted)
+        else if (dialogueIsStarted && Input.anyKeyDown && isTyping)
         {
+            writeFullSentence = true;
+        }
+
+        if (isplayerInside && !activated)
+        {
+
+            activated = true;
+            InitializeDialogue();
+
             //activamos el canvas
             canvasDialogue.SetActive(true);
 
             //Activamos la animación
             dialogueAnimator.SetBool("isOpen", true);
 
-            //Iniciamos el dialogo
-            dialogueIsStarted = true;
-            triggerDialogue.TriggerDialogue();
-
-            //Guardamos la posición de la cámara
-            lastCameraPosition = cameraMain.transform.position;
-            lastCamerRotation = cameraMain.transform.rotation.eulerAngles;
-            lastFOV = cameraMain.fieldOfView;
-
-            //Movemos la cámara
-            cameraMain.transform.DOMove(newPositionCamera.position, 1f);
-            cameraMain.transform.DORotate(newPositionCamera.rotation.eulerAngles, 1f);
-            cameraMain.DOFieldOfView(65,1f);
-
         }      
         
+    }
+    #endregion
+
+    #region INITIALIZE DIALOGUE
+    void InitializeDialogue()
+    {
+
+        dialogueIsStarted = true;
+        //Iniciamos el dialogo
+        triggerDialogue.TriggerDialogue();
     }
     #endregion
 
     #region START DIALOGUE
     public void StartDialogue(Dialogue dialogue)
     {
+        //Paramos al jugador
+        playerMovement.StopMovement();
+
         //Cogemos el texto
         nameText.text = dialogue.nameNPC;
 
@@ -111,20 +122,47 @@ public class DialogueManager : MonoBehaviour
 
         string sentence = sentences.Dequeue();
         StopAllCoroutines();
-        StartCoroutine(TypeSentence(sentence));
+
+        coroutine = TypeSentence(sentence);
+        StartCoroutine(coroutine);
     }
     #endregion
 
     #region TYPE SENTENCE
     IEnumerator TypeSentence(string sentence)
     {
+        isTyping = true;
+
         dialogueText.text = "";
         foreach (char letter in sentence.ToCharArray())
         {
-            dialogueText.text += letter;
-            yield return null;
+            //Si se han saltado el texto
+            if (writeFullSentence)
+            {
+                writeFullSentence = false;
+                dialogueText.text = sentence;
+                isTyping = false;
+
+                //Paramos la corutina
+                StopCoroutine(coroutine);
+            }
+            else
+            {
+                dialogueText.text += letter;
+                if (letter == '.' || letter == ',' || letter == '?' || letter == '!')
+                {
+                    yield return new WaitForSeconds(0.75f);
+                }
+                else
+                {
+                    yield return new WaitForSeconds(1 / dialogueSpeed);
+                }
+            }
+            
 
         }
+
+       
 
     }
     #endregion
@@ -132,15 +170,17 @@ public class DialogueManager : MonoBehaviour
     #region END DIALOGUE
     public void EndDialogue()
     {
+
         //Activamos la animación del Dialogo
         dialogueAnimator.SetBool("isOpen", false);
 
-        //Dejamos la cámara donde estaba antes de empezar el dialogo
-        cameraMain.transform.DOMove(lastCameraPosition, 1f);
-        cameraMain.transform.DORotate(lastCamerRotation, 1f);
-        cameraMain.DOFieldOfView(lastFOV, 1f);
+        ////Dejamos la cámara donde estaba antes de empezar el dialogo
+        //cameraMain.transform.DOMove(lastCameraPosition, 1f);
+        //cameraMain.transform.DORotate(lastCamerRotation, 1f);
+        //cameraMain.DOFieldOfView(lastFOV, 1f);
 
         Invoke("DeactivateCanvas", 0.45f);
+
     }
     #endregion
 
@@ -149,8 +189,12 @@ public class DialogueManager : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            dialogueText.text = "";
+
             isplayerInside = true;
             playerTransform = other.GetComponent<Transform>();
+
+
         }
     }
     #endregion
@@ -168,9 +212,12 @@ public class DialogueManager : MonoBehaviour
     #region DEACTIVATE CANVAS
     void DeactivateCanvas()
     {
+        //Dejamos volver a mover al player
+        playerMovement.ResumeMovement();
+
         //desactivamos el Canvas
         canvasDialogue.SetActive(false);
-        dialogueIsStarted = false;
+        //dialogueIsStarted = false;
     }
     #endregion
 
