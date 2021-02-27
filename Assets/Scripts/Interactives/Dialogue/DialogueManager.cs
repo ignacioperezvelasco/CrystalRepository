@@ -13,6 +13,7 @@ public class DialogueManager : MonoBehaviour
     //Para el texto
     [Header("DIALOGUE")]
     [SerializeField] float startingDelay = 1;
+    [SerializeField] float dialogueSpeed = 20;
     public GameObject canvasDialogue;
     public Animator dialogueAnimator;
 
@@ -28,6 +29,8 @@ public class DialogueManager : MonoBehaviour
     bool dialogueIsStarted = false;
     
     Transform playerTransform;
+
+    private IEnumerator coroutine;
     #endregion
 
     #region START
@@ -120,7 +123,9 @@ public class DialogueManager : MonoBehaviour
 
         string sentence = sentences.Dequeue();
         StopAllCoroutines();
-        StartCoroutine(TypeSentence(sentence));
+
+        coroutine = TypeSentence(sentence);
+        StartCoroutine(coroutine);
     }
     #endregion
 
@@ -131,7 +136,14 @@ public class DialogueManager : MonoBehaviour
         foreach (char letter in sentence.ToCharArray())
         {
             dialogueText.text += letter;
-            yield return null;
+            if (letter == '.' || letter == ',' || letter == '?' || letter == '!')
+            {
+                yield return new WaitForSeconds(0.75f);
+            }
+            else
+            {
+                yield return  new WaitForSeconds(1/dialogueSpeed);                    
+            }
 
         }
 

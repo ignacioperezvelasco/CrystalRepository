@@ -13610,7 +13610,6 @@ GameObject:
   - component: {fileID: 301438551}
   - component: {fileID: 301438550}
   - component: {fileID: 301438548}
-  - component: {fileID: 301438547}
   - component: {fileID: 301438546}
   - component: {fileID: 301438545}
   m_Layer: 0
@@ -13647,7 +13646,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac77fdeb9584f7647bb578201e59d806, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingDelay: 1
+  startingDelay: 1.5
+  dialogueSpeed: 20
   canvasDialogue: {fileID: 1261002278}
   dialogueAnimator: {fileID: 456792841}
   nameText: {fileID: 1657160438}
@@ -13668,7 +13668,7 @@ MonoBehaviour:
   dialogue:
     nameNPC: GYDA
     sentences:
-    - 'Oh my God...   what a fall!!
+    - 'Oh my God, what a fall!
 
       I have been very lucky.'
     - 'What???
@@ -13678,21 +13678,6 @@ MonoBehaviour:
 
       Now I have to look for it if I want to have one opportunity
       to get out of here.'
---- !u!114 &301438547
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 301438543}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c090840389383743ac3b2747d61db85, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 2
-  gameObjects:
-  - {fileID: 631628850}
 --- !u!82 &301438548
 AudioSource:
   m_ObjectHideFlags: 0
@@ -22558,6 +22543,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingDelay: 1
+  dialogueSpeed: 20
   canvasDialogue: {fileID: 1929915139}
   dialogueAnimator: {fileID: 1980158162}
   nameText: {fileID: 1413932482}
