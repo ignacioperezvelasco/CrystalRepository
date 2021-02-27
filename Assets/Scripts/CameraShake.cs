@@ -9,6 +9,7 @@ public class CameraShake : MonoBehaviour
 
     bool alreadyActivated = false;
     Camera cameraMain;
+
     [Header("SHAKE")]
     [SerializeField] float duration = 1f;
     [SerializeField] float intensity = 2f;
@@ -32,7 +33,7 @@ public class CameraShake : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player") && !alreadyActivated)
-        {
+        {   
             alreadyActivated = true;
             ShakeCamera();            
 
@@ -46,7 +47,7 @@ public class CameraShake : MonoBehaviour
 
     #region CAMERA SHAKE
     void ShakeCamera()
-    {
+    {      
         //Generate the shake
         cameraMain.DOShakePosition(duration,intensity,vibration, random);
         cameraMain.DOShakeRotation(duration, intensity, vibration, random);

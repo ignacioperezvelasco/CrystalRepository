@@ -47,6 +47,10 @@ public class rvMovementPers : MonoBehaviour
     private int maxHealth = 100;
     bool onLiquidSlower = false;
 
+
+    bool isStoped = false;
+    LookAt lookAt;
+
     private void Start()
     {
         dashCounter = timeToNextDash;
@@ -55,95 +59,102 @@ public class rvMovementPers : MonoBehaviour
 
         //Seteamos la camara
         viewCamera = Camera.main;
+
+        lookAt = GetComponent<LookAt>();
         
     }
 
     void Update()
     {
-        
-        //myPlayer.transform.LookAt(new Vector3(myCam.myMouse.x, this.transform.position.y, myCam.myMouse.z));
-
-        horizontal = Input.GetAxisRaw("Horizontal");
-        vertical = Input.GetAxisRaw("Vertical");
-
-        _isGrounded = Physics.CheckSphere(_groundChecker.position, GroundDistance, Ground, QueryTriggerInteraction.Ignore);
-
-
-        if (_isGrounded && ((myRb.drag != 7)|| (myRb.drag != 14)))
+        if (!isStoped)
         {
-            if(isSlowed)
-                myRb.drag = 25;
-            else
-                myRb.drag = 7;
-        }      
-        else if(!_isGrounded)
-            myRb.drag = 0;
+            //myPlayer.transform.LookAt(new Vector3(myCam.myMouse.x, this.transform.position.y, myCam.myMouse.z));
+
+            horizontal = Input.GetAxisRaw("Horizontal");
+            vertical = Input.GetAxisRaw("Vertical");
+
+            _isGrounded = Physics.CheckSphere(_groundChecker.position, GroundDistance, Ground, QueryTriggerInteraction.Ignore);
 
 
-        //Comprobamos la dirección del movimiento respecto a la camara
-        CheckMovementRelativeToCamera();
-
-        //desiredVelocity = new Vector3(horizontal,0f,vertical);
-        desiredVelocity = camForward * vertical + camRight * horizontal;
-        desiredVelocity.Normalize();
-        //move respect camera
-
-        float angle = Vector3.Angle(desiredVelocity, myRb.velocity.normalized);
-
-        if (!_isGrounded)
-        {
-            desiredVelocity *= airControl;
-            Vector3 aux = new Vector3(myRb.velocity.x, 0, myRb.velocity.z);
-            if ((angle < 80) && (aux.magnitude > maxSpeed))
+            if (_isGrounded && ((myRb.drag != 7) || (myRb.drag != 14)))
             {
-                desiredVelocity = new Vector3(0, 0, 0);
+                if (isSlowed)
+                    myRb.drag = 25;
+                else
+                    myRb.drag = 7;
             }
-        }
-        else if (doubleJumped)
-            doubleJumped = false;
+            else if (!_isGrounded)
+                myRb.drag = 0;
 
-        if (Input.GetButtonDown("Jump"))
-        {
-            
-        }
 
-        
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            Dash();
-        }
+            //Comprobamos la dirección del movimiento respecto a la camara
+            CheckMovementRelativeToCamera();
+
+            //desiredVelocity = new Vector3(horizontal,0f,vertical);
+            desiredVelocity = camForward * vertical + camRight * horizontal;
+            desiredVelocity.Normalize();
+            //move respect camera
+
+            float angle = Vector3.Angle(desiredVelocity, myRb.velocity.normalized);
+
+            if (!_isGrounded)
+            {
+                desiredVelocity *= airControl;
+                Vector3 aux = new Vector3(myRb.velocity.x, 0, myRb.velocity.z);
+                if ((angle < 80) && (aux.magnitude > maxSpeed))
+                {
+                    desiredVelocity = new Vector3(0, 0, 0);
+                }
+            }
+            else if (doubleJumped)
+                doubleJumped = false;
+
+            if (Input.GetButtonDown("Jump"))
+            {
+
+            }
+
+
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                Dash();
+            }
+        }        
     }
 
 
     private void FixedUpdate()
     {
-        if (!isDashing)
-            myRb.AddForce((desiredVelocity * speed ), ForceMode.Acceleration);
+        if (!isStoped)
+        {
+            if (!isDashing)
+                myRb.AddForce((desiredVelocity * speed), ForceMode.Acceleration);
 
-        if ((myRb.velocity.magnitude > maxSpeed) && _isGrounded)
-        {
-            myRb.velocity = myRb.velocity.normalized * maxSpeed;
-        }
-        if (isDashing)
-        {
-            myRb.MovePosition(myRb.position + dashV * dashvelocity * 2 * Time.fixedDeltaTime);
-            dashTimer -= Time.fixedDeltaTime;
-            if (dashTimer <= 0f)
+            if ((myRb.velocity.magnitude > maxSpeed) && _isGrounded)
             {
-                isDashing = false;
+                myRb.velocity = myRb.velocity.normalized * maxSpeed;
             }
-        }
-       
-        if (!canDash)
-        {
-            dashCounter -= Time.fixedDeltaTime;
-            if (dashCounter <= 0)
+            if (isDashing)
             {
-                dashCounter = timeToNextDash;
-                canDash = true;
+                myRb.MovePosition(myRb.position + dashV * dashvelocity * 2 * Time.fixedDeltaTime);
+                dashTimer -= Time.fixedDeltaTime;
+                if (dashTimer <= 0f)
+                {
+                    isDashing = false;
+                }
             }
 
-        }
+            if (!canDash)
+            {
+                dashCounter -= Time.fixedDeltaTime;
+                if (dashCounter <= 0)
+                {
+                    dashCounter = timeToNextDash;
+                    canDash = true;
+                }
+
+            }
+        }        
     }  
 
     void Dash()
@@ -196,5 +207,19 @@ public class rvMovementPers : MonoBehaviour
     {
 
         myTrail.SetActive(false);
+    }
+
+    public void StopMovement()
+    {
+        isStoped = true;
+
+        lookAt.Stop();
+    }
+
+    public void ResumeMovement()
+    {
+        isStoped = false;
+
+        lookAt.Resume();
     }
 }
