@@ -99,6 +99,7 @@
     <Compile Include="Assets\Prefabs\LightRays2D\Script\LightRays2DAbstract.cs" />
     <Compile Include="Assets\Prefabs\LightRays2D\Script\LightRays2DCanvas.cs" />
     <Compile Include="Assets\QuickOutline\Scripts\Outline.cs" />
+    <Compile Include="Assets\RoomFallEnemy.cs" />
     <Compile Include="Assets\Scripts\ActivateDeactivate.cs" />
     <Compile Include="Assets\Scripts\Activator.cs" />
     <Compile Include="Assets\Scripts\AreaAttack.cs" />
