@@ -14,6 +14,7 @@ public class PSController : MonoBehaviour
     bool isemitingPositive = false;
     ParticleSystem.ShapeModule psp;
     ParticleSystem.ShapeModule psn;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -53,7 +54,7 @@ public class PSController : MonoBehaviour
                                 break;
                             case 3:
                                 psp.radius = myIB.sizeSphereThreeCharge;
-                                Debug.Log("Ha entrado");
+                                //Debug.Log("Ha entrado");
                                 break;
                             default:
                                 break;
