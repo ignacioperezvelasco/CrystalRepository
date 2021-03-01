@@ -109,6 +109,7 @@
     <Compile Include="Assets\Scripts\CameraShake.cs" />
     <Compile Include="Assets\Scripts\Character\Autoaim.cs" />
     <Compile Include="Assets\Scripts\Character\BulletScript.cs" />
+    <Compile Include="Assets\Scripts\Character\ClimbStairs.cs" />
     <Compile Include="Assets\Scripts\Character\CrystalScript.cs" />
     <Compile Include="Assets\Scripts\Character\LookAt.cs" />
     <Compile Include="Assets\Scripts\Character\PickUP.cs" />

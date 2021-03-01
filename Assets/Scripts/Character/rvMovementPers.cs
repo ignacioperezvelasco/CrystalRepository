@@ -76,11 +76,8 @@ public class rvMovementPers : MonoBehaviour
             _isGrounded = Physics.CheckSphere(_groundChecker.position, GroundDistance, Ground, QueryTriggerInteraction.Ignore);
 
 
-            if (_isGrounded && ((myRb.drag != 7) || (myRb.drag != 14)))
-            {
-                if (isSlowed)
-                    myRb.drag = 25;
-                else
+            if (_isGrounded && (myRb.drag != 7))
+            {                
                     myRb.drag = 7;
             }
             else if (!_isGrounded)
