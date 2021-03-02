@@ -41,6 +41,9 @@ public class ImanBehavior : MonoBehaviour
     //OUTLINE
     public Outline outline;
 
+    //Explosion
+    bool hasToExplote = false;
+
     private void Awake()
     {
         //OUTLINE SET
@@ -67,8 +70,6 @@ public class ImanBehavior : MonoBehaviour
         timerActive = timeActive;
         timerImanted = timeImanted;
 
-
-
         //outline.OutlineColor = new Color32(0, 0, 0, 0);
     }
 
@@ -94,7 +95,11 @@ public class ImanBehavior : MonoBehaviour
                     directionForce = new Vector3(0, 0, 0);
                     timerActive -= Time.fixedDeltaTime;
                     if (timerActive <= 0)
+                    {
                         ResetObject();
+                        if (hasToExplote)
+                            Explode();
+                    }
                 }
                 else
                     timerImanted -= Time.fixedDeltaTime;
@@ -155,6 +160,23 @@ public class ImanBehavior : MonoBehaviour
         }
     }
     #endregion
+
+    #region HANDLEEXPLOSION
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.tag == "CanBeHitted")
+        {
+            timerActive = 0;
+            hasToExplote = true;
+        }
+    }
+
+    void Explode()
+    {
+        hasToExplote = false;
+    }
+    #endregion
+
 
     #region calculate Forces
 
