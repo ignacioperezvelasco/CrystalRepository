@@ -45,7 +45,8 @@ public class ImanBehavior : MonoBehaviour
     bool hasToExplote = false;
     int otherCharges = 0;
     Vector3 midlePoint = new Vector3(0, 0, 0);
-    [SerializeField] float explosionForce = 1000;
+    [SerializeField] float explosionForce = 1500;
+    [SerializeField] GameObject explosionVFX;
 
     private void Awake()
     {
@@ -73,7 +74,6 @@ public class ImanBehavior : MonoBehaviour
         timerActive = timeActive;
         timerImanted = timeImanted;
 
-        //outline.OutlineColor = new Color32(0, 0, 0, 0);
     }
 
     private void Update()
@@ -99,9 +99,9 @@ public class ImanBehavior : MonoBehaviour
                     timerActive -= Time.fixedDeltaTime;
                     if (timerActive <= 0)
                     {
-                        ResetObject();
                         if (hasToExplote)
                             Explode();
+                        ResetObject();
                     }
                 }
                 else
@@ -169,14 +169,16 @@ public class ImanBehavior : MonoBehaviour
     {
         if (collision.collider.tag == "CanBeHitted")
         {
-            timerActive = 0;
+            if(!imEnemy)
+                timerActive = 0;
             if (myPole == iman.POSITIVE)
             {
                 hasToExplote = true;
                 midlePoint = (collision.collider.transform.position + this.transform.position) / 2;
             }
             otherCharges = collision.collider.GetComponent<ImanBehavior>().GetCharges();
-            Debug.Log(otherCharges);
+            if (imEnemy)
+                Explode();
         }
     }
     
@@ -190,7 +192,7 @@ public class ImanBehavior : MonoBehaviour
             if (rb != null)
             {
                 rb.AddExplosionForce((otherCharges + numChargesAdded) * explosionForce, midlePoint, (otherCharges + numChargesAdded + 5));
-                Debug.Log("Ha entrado");
+                Instantiate(explosionVFX, midlePoint, Quaternion.identity);
             }
         }
        
