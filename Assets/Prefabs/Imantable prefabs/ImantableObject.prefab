@@ -122,7 +122,11 @@ MonoBehaviour:
   timerActive: 3
   timeImanted: 8
   timeActive: 3
+  sizeSphereOneCharge: 7
+  sizeSphereTwoCharge: 9
+  sizeSphereThreeCharge: 16
   imEnemy: 0
+  outline: {fileID: 1752815033930837699}
 --- !u!54 &609703410532210512
 Rigidbody:
   m_ObjectHideFlags: 0
