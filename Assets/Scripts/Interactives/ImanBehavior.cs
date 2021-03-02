@@ -43,6 +43,10 @@ public class ImanBehavior : MonoBehaviour
 
     //Explosion
     bool hasToExplote = false;
+    int otherCharges = 0;
+    Vector3 midlePoint = new Vector3(0, 0, 0);
+    [SerializeField] float explosionForce = 1500;
+    [SerializeField] GameObject explosionVFX;
 
     private void Awake()
     {
@@ -70,7 +74,6 @@ public class ImanBehavior : MonoBehaviour
         timerActive = timeActive;
         timerImanted = timeImanted;
 
-        //outline.OutlineColor = new Color32(0, 0, 0, 0);
     }
 
     private void Update()
@@ -96,9 +99,9 @@ public class ImanBehavior : MonoBehaviour
                     timerActive -= Time.fixedDeltaTime;
                     if (timerActive <= 0)
                     {
-                        ResetObject();
                         if (hasToExplote)
                             Explode();
+                        ResetObject();
                     }
                 }
                 else
@@ -166,13 +169,33 @@ public class ImanBehavior : MonoBehaviour
     {
         if (collision.collider.tag == "CanBeHitted")
         {
-            timerActive = 0;
-            hasToExplote = true;
+            if(!imEnemy)
+                timerActive = 0;
+            if (myPole == iman.POSITIVE)
+            {
+                hasToExplote = true;
+                midlePoint = (collision.collider.transform.position + this.transform.position) / 2;
+            }
+            otherCharges = collision.collider.GetComponent<ImanBehavior>().GetCharges();
+            if (imEnemy)
+                Explode();
         }
     }
-
+    
     void Explode()
     {
+        
+        Collider[] colliders = Physics.OverlapSphere(this.transform.position, (otherCharges + numChargesAdded + 5));
+        foreach (Collider hit in colliders)
+        {
+            Rigidbody rb = hit.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.AddExplosionForce((otherCharges + numChargesAdded) * explosionForce, midlePoint, (otherCharges + numChargesAdded + 5));
+                Instantiate(explosionVFX, midlePoint, Quaternion.identity);
+            }
+        }
+       
         hasToExplote = false;
     }
     #endregion
