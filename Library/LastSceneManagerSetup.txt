@@ -1,9 +1,5 @@
 sceneSetups:
-<<<<<<< HEAD
-- path: Assets/Scenes/LEVELS/LEVEL_1.unity
-=======
-- path: Assets/Scenes/MARTI_Scene.unity
->>>>>>> HUD
+- path: Assets/_PROJECT/SCENES/LEVELS/LEVEL_1.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
