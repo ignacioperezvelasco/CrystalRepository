@@ -394,7 +394,7 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
---- !u!1001 &1889892088
+--- !u!1001 &1684111724
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -426,12 +426,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4960540784018117220, guid: e0e29aa681793904b9b9a1f398b497dc,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 91224119af6b9e84a9c25e9434b2da27,
-        type: 3}
     - target: {fileID: 5910912299138690859, guid: e0e29aa681793904b9b9a1f398b497dc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -541,16 +535,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CanvasMainMenu
-      objectReference: {fileID: 0}
-    - target: {fileID: 5910912299885255873, guid: e0e29aa681793904b9b9a1f398b497dc,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5910912300457893894, guid: e0e29aa681793904b9b9a1f398b497dc,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6240073756014887522, guid: e0e29aa681793904b9b9a1f398b497dc,
         type: 3}
