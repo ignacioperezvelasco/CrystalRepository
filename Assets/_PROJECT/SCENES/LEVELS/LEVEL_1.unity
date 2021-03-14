@@ -1195,7 +1195,7 @@ Transform:
   m_LocalScale: {x: 1.913322, y: 2.2669785, z: 2.9059682}
   m_Children: []
   m_Father: {fileID: 45903372}
-  m_RootOrder: 21
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &19642365
 MonoBehaviour:
@@ -1209,6 +1209,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d483e606376fe7c4d8fa45ca02feb940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newFOV: 50
+  targetCamera: {fileID: 907205355}
+  newRotationTarget: {x: 0, y: 0, z: 0}
+  speedTransition: 0
 --- !u!65 &19642366
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1666,7 +1670,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 24407360}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 81.39, y: 6.63, z: 64.979996}
+  m_LocalPosition: {x: 80.06, y: 6.63, z: 71.05}
   m_LocalScale: {x: 6.0544, y: 2.2669785, z: 1.5988}
   m_Children: []
   m_Father: {fileID: 45903372}
@@ -1684,6 +1688,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d483e606376fe7c4d8fa45ca02feb940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newFOV: 55
+  targetCamera: {fileID: 907205355}
+  newRotationTarget: {x: 50, y: 315, z: 0}
+  speedTransition: 1.5
 --- !u!65 &24407363
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1695,8 +1703,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.2925072, y: 1, z: 1}
-  m_Center: {x: -0.095299385, y: 0, z: 0}
+  m_Size: {x: 2.5365984, y: 1, z: 7.606575}
+  m_Center: {x: -0.02915528, y: 0, z: 0.5390724}
 --- !u!33 &24407364
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -2647,7 +2655,6 @@ Transform:
   - {fileID: 1021323261}
   - {fileID: 24407361}
   - {fileID: 1259776309}
-  - {fileID: 1562114341}
   - {fileID: 1341185182}
   - {fileID: 1934257267}
   - {fileID: 679098511}
@@ -2845,6 +2852,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d483e606376fe7c4d8fa45ca02feb940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newFOV: 55
+  targetCamera: {fileID: 907205355}
+  newRotationTarget: {x: 50, y: 315, z: 0}
+  speedTransition: 1.5
 --- !u!65 &52571122
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2856,8 +2867,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.1648583, y: 1, z: 1}
+  m_Center: {x: -0.08242986, y: 0, z: 3.2737354e-13}
 --- !u!33 &52571123
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -3960,7 +3971,7 @@ Transform:
   m_LocalScale: {x: 2.4392624, y: 2.2669785, z: 7.524994}
   m_Children: []
   m_Father: {fileID: 45903372}
-  m_RootOrder: 32
+  m_RootOrder: 31
   m_LocalEulerAnglesHint: {x: 0, y: -55.737003, z: 0}
 --- !u!114 &78601450
 MonoBehaviour:
@@ -3974,6 +3985,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d483e606376fe7c4d8fa45ca02feb940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newFOV: 50
+  targetCamera: {fileID: 907205355}
+  newRotationTarget: {x: 0, y: 0, z: 0}
+  speedTransition: 0
 --- !u!65 &78601451
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4958,6 +4973,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d483e606376fe7c4d8fa45ca02feb940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newFOV: 70
+  targetCamera: {fileID: 907205355}
+  newRotationTarget: {x: 60, y: 270, z: 0}
+  speedTransition: 1.5
 --- !u!65 &101035554
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6261,7 +6280,7 @@ Transform:
   m_LocalScale: {x: 4.7633915, y: 2.2669785, z: 7.524994}
   m_Children: []
   m_Father: {fileID: 45903372}
-  m_RootOrder: 38
+  m_RootOrder: 37
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &126282859
 MonoBehaviour:
@@ -6275,6 +6294,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d483e606376fe7c4d8fa45ca02feb940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newFOV: 50
+  targetCamera: {fileID: 907205355}
+  newRotationTarget: {x: 0, y: 0, z: 0}
+  speedTransition: 0
 --- !u!65 &126282860
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6592,7 +6615,7 @@ Transform:
   m_LocalScale: {x: 6.0544, y: 2.2669785, z: 1.5988}
   m_Children: []
   m_Father: {fileID: 45903372}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &134581532
 MonoBehaviour:
@@ -6606,6 +6629,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d483e606376fe7c4d8fa45ca02feb940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newFOV: 70
+  targetCamera: {fileID: 907205355}
+  newRotationTarget: {x: 50, y: 315, z: 0}
+  speedTransition: 1.5
 --- !u!65 &134581533
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6617,8 +6644,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.5789504, y: 1, z: 1}
-  m_Center: {x: -0.23852096, y: 0, z: 0}
+  m_Size: {x: 1.5789504, y: 1, z: 2.2921019}
+  m_Center: {x: -0.23852096, y: 0, z: -0.6460504}
 --- !u!33 &134581534
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -8191,7 +8218,7 @@ Transform:
   m_LocalScale: {x: 3.7917368, y: 1.2106571, z: 9.357879}
   m_Children: []
   m_Father: {fileID: 45903372}
-  m_RootOrder: 28
+  m_RootOrder: 27
   m_LocalEulerAnglesHint: {x: 0, y: 26.624, z: 0}
 --- !u!114 &170313956
 MonoBehaviour:
@@ -8205,6 +8232,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d483e606376fe7c4d8fa45ca02feb940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newFOV: 50
+  targetCamera: {fileID: 907205355}
+  newRotationTarget: {x: 0, y: 0, z: 0}
+  speedTransition: 0
 --- !u!65 &170313957
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16447,7 +16478,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &296590789
 Animator:
   serializedVersion: 3
@@ -16823,7 +16854,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 301438543}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac77fdeb9584f7647bb578201e59d806, type: 3}
   m_Name: 
@@ -20506,7 +20537,7 @@ Transform:
   m_LocalScale: {x: 2.4875097, y: 2.2669785, z: 7.768234}
   m_Children: []
   m_Father: {fileID: 45903372}
-  m_RootOrder: 23
+  m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &364074118
 MonoBehaviour:
@@ -20520,6 +20551,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d483e606376fe7c4d8fa45ca02feb940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newFOV: 50
+  targetCamera: {fileID: 907205355}
+  newRotationTarget: {x: 0, y: 0, z: 0}
+  speedTransition: 0
 --- !u!65 &364074119
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -21410,7 +21445,7 @@ Transform:
   m_LocalScale: {x: 2.4392624, y: 2.2669785, z: 7.524994}
   m_Children: []
   m_Father: {fileID: 45903372}
-  m_RootOrder: 34
+  m_RootOrder: 33
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &398695704
 MonoBehaviour:
@@ -21424,6 +21459,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d483e606376fe7c4d8fa45ca02feb940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newFOV: 50
+  targetCamera: {fileID: 907205355}
+  newRotationTarget: {x: 0, y: 0, z: 0}
+  speedTransition: 0
 --- !u!65 &398695705
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -22768,6 +22807,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d483e606376fe7c4d8fa45ca02feb940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newFOV: 70
+  targetCamera: {fileID: 907205355}
+  newRotationTarget: {x: 60, y: 270, z: 0}
+  speedTransition: 1.5
 --- !u!65 &425278523
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -23003,7 +23046,7 @@ Transform:
   m_LocalScale: {x: 6.0544, y: 2.2669785, z: 1.5988}
   m_Children: []
   m_Father: {fileID: 45903372}
-  m_RootOrder: 42
+  m_RootOrder: 41
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &433738851
 MonoBehaviour:
@@ -23017,6 +23060,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d483e606376fe7c4d8fa45ca02feb940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newFOV: 50
+  targetCamera: {fileID: 907205355}
+  newRotationTarget: {x: 0, y: 0, z: 0}
+  speedTransition: 0
 --- !u!65 &433738852
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -34173,7 +34220,7 @@ Transform:
   m_LocalScale: {x: 2.4392624, y: 2.2669785, z: 7.524994}
   m_Children: []
   m_Father: {fileID: 45903372}
-  m_RootOrder: 33
+  m_RootOrder: 32
   m_LocalEulerAnglesHint: {x: 0, y: -55.737003, z: 0}
 --- !u!114 &657742030
 MonoBehaviour:
@@ -34187,6 +34234,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d483e606376fe7c4d8fa45ca02feb940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newFOV: 50
+  targetCamera: {fileID: 907205355}
+  newRotationTarget: {x: 0, y: 0, z: 0}
+  speedTransition: 0
 --- !u!65 &657742031
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -35549,7 +35600,7 @@ Transform:
   m_LocalScale: {x: 2.4392624, y: 2.2669785, z: 17.522806}
   m_Children: []
   m_Father: {fileID: 45903372}
-  m_RootOrder: 25
+  m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 34.411003, z: 0}
 --- !u!114 &674379493
 MonoBehaviour:
@@ -35563,6 +35614,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d483e606376fe7c4d8fa45ca02feb940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newFOV: 50
+  targetCamera: {fileID: 907205355}
+  newRotationTarget: {x: 0, y: 0, z: 0}
+  speedTransition: 0
 --- !u!65 &674379494
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -35804,7 +35859,7 @@ Transform:
   m_LocalScale: {x: 8.058546, y: 2.2669785, z: 11.497733}
   m_Children: []
   m_Father: {fileID: 45903372}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &679098512
 MonoBehaviour:
@@ -35818,6 +35873,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d483e606376fe7c4d8fa45ca02feb940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newFOV: 60
+  targetCamera: {fileID: 907205355}
+  newRotationTarget: {x: 45, y: 300, z: 0}
+  speedTransition: 1.5
 --- !u!65 &679098513
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -50257,7 +50316,7 @@ Transform:
   m_LocalScale: {x: 2.4392624, y: 2.2669785, z: 7.524994}
   m_Children: []
   m_Father: {fileID: 45903372}
-  m_RootOrder: 30
+  m_RootOrder: 29
   m_LocalEulerAnglesHint: {x: 0, y: 34.411003, z: 0}
 --- !u!114 &737926802
 MonoBehaviour:
@@ -50271,6 +50330,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d483e606376fe7c4d8fa45ca02feb940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newFOV: 50
+  targetCamera: {fileID: 907205355}
+  newRotationTarget: {x: 0, y: 0, z: 0}
+  speedTransition: 0
 --- !u!65 &737926803
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -50622,7 +50685,7 @@ Transform:
   m_LocalScale: {x: 2.4392624, y: 2.2669785, z: 7.524994}
   m_Children: []
   m_Father: {fileID: 45903372}
-  m_RootOrder: 39
+  m_RootOrder: 38
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &747857892
 MonoBehaviour:
@@ -50636,6 +50699,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d483e606376fe7c4d8fa45ca02feb940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newFOV: 50
+  targetCamera: {fileID: 907205355}
+  newRotationTarget: {x: 0, y: 0, z: 0}
+  speedTransition: 0
 --- !u!65 &747857893
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -50860,7 +50927,7 @@ Transform:
   m_LocalScale: {x: 1.913322, y: 2.2669785, z: 2.9059682}
   m_Children: []
   m_Father: {fileID: 45903372}
-  m_RootOrder: 22
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &755465765
 MonoBehaviour:
@@ -50874,6 +50941,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d483e606376fe7c4d8fa45ca02feb940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newFOV: 50
+  targetCamera: {fileID: 907205355}
+  newRotationTarget: {x: 0, y: 0, z: 0}
+  speedTransition: 0
 --- !u!65 &755465766
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -51879,6 +51950,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d483e606376fe7c4d8fa45ca02feb940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newFOV: 70
+  targetCamera: {fileID: 907205355}
+  newRotationTarget: {x: 40, y: 315, z: 0}
+  speedTransition: 1.5
 --- !u!65 &763413454
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -52196,7 +52271,7 @@ Transform:
   m_LocalScale: {x: 2.4392624, y: 2.2669785, z: 7.524994}
   m_Children: []
   m_Father: {fileID: 45903372}
-  m_RootOrder: 36
+  m_RootOrder: 35
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &769502930
 MonoBehaviour:
@@ -52210,6 +52285,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d483e606376fe7c4d8fa45ca02feb940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newFOV: 50
+  targetCamera: {fileID: 907205355}
+  newRotationTarget: {x: 0, y: 0, z: 0}
+  speedTransition: 0
 --- !u!65 &769502931
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -55628,7 +55707,7 @@ Transform:
   m_LocalScale: {x: 6.0544, y: 2.2669785, z: 1.5988}
   m_Children: []
   m_Father: {fileID: 45903372}
-  m_RootOrder: 17
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &836955278
 MonoBehaviour:
@@ -55642,6 +55721,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d483e606376fe7c4d8fa45ca02feb940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newFOV: 50
+  targetCamera: {fileID: 907205355}
+  newRotationTarget: {x: 0, y: 0, z: 0}
+  speedTransition: 0
 --- !u!65 &836955279
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -57818,7 +57901,7 @@ Transform:
   m_LocalScale: {x: 3.0666142, y: 2.2669785, z: 2.9059682}
   m_Children: []
   m_Father: {fileID: 45903372}
-  m_RootOrder: 20
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &905532034
 MonoBehaviour:
@@ -57832,6 +57915,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d483e606376fe7c4d8fa45ca02feb940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newFOV: 50
+  targetCamera: {fileID: 907205355}
+  newRotationTarget: {x: 0, y: 0, z: 0}
+  speedTransition: 0
 --- !u!65 &905532035
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -58039,6 +58126,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 906802666}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &907205355 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1565312929269763269, guid: afb4da3e7fce9604389fb3e511d6858a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1412020436}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &909164391
 GameObject:
   m_ObjectHideFlags: 0
@@ -59522,7 +59615,7 @@ Transform:
   m_LocalScale: {x: 2.4392624, y: 2.2669785, z: 7.524994}
   m_Children: []
   m_Father: {fileID: 45903372}
-  m_RootOrder: 31
+  m_RootOrder: 30
   m_LocalEulerAnglesHint: {x: 0, y: -55.737003, z: 0}
 --- !u!114 &936266056
 MonoBehaviour:
@@ -59536,6 +59629,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d483e606376fe7c4d8fa45ca02feb940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newFOV: 50
+  targetCamera: {fileID: 907205355}
+  newRotationTarget: {x: 0, y: 0, z: 0}
+  speedTransition: 0
 --- !u!65 &936266057
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -63394,6 +63491,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d483e606376fe7c4d8fa45ca02feb940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newFOV: 45
+  targetCamera: {fileID: 907205355}
+  newRotationTarget: {x: 50, y: 315, z: 0}
+  speedTransition: 1.5
 --- !u!65 &1015623330
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -63405,8 +63506,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.7266423, y: 1, z: 12.046392}
+  m_Center: {x: -0.36332104, y: 0, z: -5.5231924}
 --- !u!33 &1015623331
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -63446,7 +63547,7 @@ Transform:
   m_LocalScale: {x: 6.0544, y: 2.2669785, z: 1.5988}
   m_Children: []
   m_Father: {fileID: 45903372}
-  m_RootOrder: 16
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1019120861
 MonoBehaviour:
@@ -63460,6 +63561,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d483e606376fe7c4d8fa45ca02feb940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newFOV: 50
+  targetCamera: {fileID: 907205355}
+  newRotationTarget: {x: 0, y: 0, z: 0}
+  speedTransition: 0
 --- !u!65 &1019120862
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -63508,7 +63613,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1021323260}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 78.740005, y: 6.63, z: 51.339993}
+  m_LocalPosition: {x: 78.740005, y: 6.63, z: 53.9}
   m_LocalScale: {x: 9.471503, y: 2.2669785, z: 2.9712098}
   m_Children: []
   m_Father: {fileID: 45903372}
@@ -63526,6 +63631,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d483e606376fe7c4d8fa45ca02feb940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newFOV: 65
+  targetCamera: {fileID: 907205355}
+  newRotationTarget: {x: 30, y: 300, z: 0}
+  speedTransition: 1.5
 --- !u!65 &1021323263
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -63537,8 +63646,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.3127058, y: 1, z: 2.2121172}
+  m_Center: {x: -0.15635294, y: 0, z: -0.29478654}
 --- !u!33 &1021323264
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -73050,7 +73159,7 @@ Transform:
   m_LocalScale: {x: 2.4392624, y: 2.2669785, z: 17.522806}
   m_Children: []
   m_Father: {fileID: 45903372}
-  m_RootOrder: 27
+  m_RootOrder: 26
   m_LocalEulerAnglesHint: {x: 0, y: 34.411003, z: 0}
 --- !u!114 &1210332646
 MonoBehaviour:
@@ -73064,6 +73173,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d483e606376fe7c4d8fa45ca02feb940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newFOV: 50
+  targetCamera: {fileID: 907205355}
+  newRotationTarget: {x: 0, y: 0, z: 0}
+  speedTransition: 0
 --- !u!65 &1210332647
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -73496,7 +73609,7 @@ Transform:
   m_LocalScale: {x: 2.4392624, y: 2.2669785, z: 7.524994}
   m_Children: []
   m_Father: {fileID: 45903372}
-  m_RootOrder: 29
+  m_RootOrder: 28
   m_LocalEulerAnglesHint: {x: 0, y: 34.411003, z: 0}
 --- !u!114 &1217608430
 MonoBehaviour:
@@ -73510,6 +73623,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d483e606376fe7c4d8fa45ca02feb940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newFOV: 50
+  targetCamera: {fileID: 907205355}
+  newRotationTarget: {x: 0, y: 0, z: 0}
+  speedTransition: 0
 --- !u!65 &1217608431
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -75866,6 +75983,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d483e606376fe7c4d8fa45ca02feb940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newFOV: 55
+  targetCamera: {fileID: 907205355}
+  newRotationTarget: {x: 50, y: 290, z: 0}
+  speedTransition: 1.5
 --- !u!65 &1259776311
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -78388,7 +78509,7 @@ Transform:
   m_LocalScale: {x: 2.4392624, y: 2.2669785, z: 17.522806}
   m_Children: []
   m_Father: {fileID: 45903372}
-  m_RootOrder: 26
+  m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 0, y: 34.411003, z: 0}
 --- !u!114 &1316635196
 MonoBehaviour:
@@ -78402,6 +78523,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d483e606376fe7c4d8fa45ca02feb940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newFOV: 50
+  targetCamera: {fileID: 907205355}
+  newRotationTarget: {x: 0, y: 0, z: 0}
+  speedTransition: 0
 --- !u!65 &1316635197
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -78460,7 +78585,7 @@ Transform:
   m_LocalScale: {x: 6.0544, y: 2.2669785, z: 1.5988}
   m_Children: []
   m_Father: {fileID: 45903372}
-  m_RootOrder: 19
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1319780274
 MonoBehaviour:
@@ -78474,6 +78599,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d483e606376fe7c4d8fa45ca02feb940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newFOV: 50
+  targetCamera: {fileID: 907205355}
+  newRotationTarget: {x: 0, y: 0, z: 0}
+  speedTransition: 0
 --- !u!65 &1319780275
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -78827,6 +78956,11 @@ PrefabInstance:
         type: 3}
       propertyPath: speed
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3577232120826207303, guid: 7554d4a154b5db849bf5c646760674a8,
+        type: 3}
+      propertyPath: type
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3577232122056587334, guid: 7554d4a154b5db849bf5c646760674a8,
         type: 3}
@@ -79601,7 +79735,7 @@ Transform:
   m_LocalScale: {x: 6.0544, y: 2.2669785, z: 1.5988}
   m_Children: []
   m_Father: {fileID: 45903372}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1341185183
 MonoBehaviour:
@@ -79615,6 +79749,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d483e606376fe7c4d8fa45ca02feb940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newFOV: 70
+  targetCamera: {fileID: 907205355}
+  newRotationTarget: {x: 50, y: 315, z: 0}
+  speedTransition: 1.5
 --- !u!65 &1341185184
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -79626,8 +79764,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.2925072, y: 1, z: 1}
-  m_Center: {x: -0.095299385, y: 0, z: 0}
+  m_Size: {x: 1.5529162, y: 1, z: 1.496522}
+  m_Center: {x: -0.22550388, y: 0, z: 0.2482607}
 --- !u!33 &1341185185
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -80915,7 +81053,7 @@ Transform:
   m_LocalScale: {x: 7.100099, y: 2.2669785, z: 17.522806}
   m_Children: []
   m_Father: {fileID: 45903372}
-  m_RootOrder: 24
+  m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1371180897
 MonoBehaviour:
@@ -80929,6 +81067,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d483e606376fe7c4d8fa45ca02feb940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newFOV: 50
+  targetCamera: {fileID: 907205355}
+  newRotationTarget: {x: 0, y: 0, z: 0}
+  speedTransition: 0
 --- !u!65 &1371180898
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -82239,7 +82381,7 @@ Transform:
   m_LocalScale: {x: 6.0544, y: 2.2669785, z: 1.5988}
   m_Children: []
   m_Father: {fileID: 45903372}
-  m_RootOrder: 40
+  m_RootOrder: 39
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1388290488
 MonoBehaviour:
@@ -82253,6 +82395,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d483e606376fe7c4d8fa45ca02feb940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newFOV: 50
+  targetCamera: {fileID: 907205355}
+  newRotationTarget: {x: 0, y: 0, z: 0}
+  speedTransition: 0
 --- !u!65 &1388290489
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -87662,7 +87808,7 @@ Transform:
   m_LocalScale: {x: 2.4392624, y: 2.2669785, z: 7.524994}
   m_Children: []
   m_Father: {fileID: 45903372}
-  m_RootOrder: 37
+  m_RootOrder: 36
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1490925762
 MonoBehaviour:
@@ -87676,6 +87822,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d483e606376fe7c4d8fa45ca02feb940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newFOV: 50
+  targetCamera: {fileID: 907205355}
+  newRotationTarget: {x: 0, y: 0, z: 0}
+  speedTransition: 0
 --- !u!65 &1490925763
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -90345,7 +90495,7 @@ Transform:
   m_LocalScale: {x: 6.0544, y: 2.2669785, z: 1.5988}
   m_Children: []
   m_Father: {fileID: 45903372}
-  m_RootOrder: 15
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1544080717
 MonoBehaviour:
@@ -90359,6 +90509,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d483e606376fe7c4d8fa45ca02feb940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newFOV: 50
+  targetCamera: {fileID: 907205355}
+  newRotationTarget: {x: 0, y: 0, z: 0}
+  speedTransition: 0
 --- !u!65 &1544080718
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -91713,7 +91867,7 @@ Transform:
   m_LocalScale: {x: 2.4392624, y: 2.2669785, z: 7.524994}
   m_Children: []
   m_Father: {fileID: 45903372}
-  m_RootOrder: 35
+  m_RootOrder: 34
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &1561877542
 MonoBehaviour:
@@ -91727,6 +91881,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d483e606376fe7c4d8fa45ca02feb940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newFOV: 50
+  targetCamera: {fileID: 907205355}
+  newRotationTarget: {x: 0, y: 0, z: 0}
+  speedTransition: 0
 --- !u!65 &1561877543
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -91826,72 +91984,6 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1562105097}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1562114340
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1562114341}
-  - component: {fileID: 1562114344}
-  - component: {fileID: 1562114343}
-  - component: {fileID: 1562114342}
-  m_Layer: 0
-  m_Name: Transition (11)
-  m_TagString: Untagged
-  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1562114341
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1562114340}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 81.409996, y: 6.63, z: 77.55}
-  m_LocalScale: {x: 6.0544, y: 2.2669785, z: 1.5988}
-  m_Children: []
-  m_Father: {fileID: 45903372}
-  m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1562114342
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1562114340}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d483e606376fe7c4d8fa45ca02feb940, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!65 &1562114343
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1562114340}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.2925072, y: 1, z: 1}
-  m_Center: {x: -0.095299385, y: 0, z: 0}
---- !u!33 &1562114344
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1562114340}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1566900404
 GameObject:
@@ -92294,6 +92386,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d483e606376fe7c4d8fa45ca02feb940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newFOV: 70
+  targetCamera: {fileID: 907205355}
+  newRotationTarget: {x: 40, y: 315, z: 0}
+  speedTransition: 1.5
 --- !u!65 &1573487500
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -99114,17 +99210,17 @@ PrefabInstance:
     - target: {fileID: 6025142838663353060, guid: 3a91acf6839b9a747831d5711637cca1,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 38.51
+      value: 25.69
       objectReference: {fileID: 0}
     - target: {fileID: 6025142838663353060, guid: 3a91acf6839b9a747831d5711637cca1,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 15.53
+      value: 8.24
       objectReference: {fileID: 0}
     - target: {fileID: 6025142838663353060, guid: 3a91acf6839b9a747831d5711637cca1,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 203.05
+      value: 40.68
       objectReference: {fileID: 0}
     - target: {fileID: 6025142838663353060, guid: 3a91acf6839b9a747831d5711637cca1,
         type: 3}
@@ -109136,7 +109232,7 @@ Transform:
   m_LocalScale: {x: 6.0544, y: 2.2669785, z: 1.5988}
   m_Children: []
   m_Father: {fileID: 45903372}
-  m_RootOrder: 18
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1891485984
 MonoBehaviour:
@@ -109150,6 +109246,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d483e606376fe7c4d8fa45ca02feb940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newFOV: 50
+  targetCamera: {fileID: 907205355}
+  newRotationTarget: {x: 0, y: 0, z: 0}
+  speedTransition: 0
 --- !u!65 &1891485985
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -111288,11 +111388,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1934257266}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 81.39, y: 6.63, z: 63.239998}
+  m_LocalPosition: {x: 80.06, y: 6.63, z: 63.86}
   m_LocalScale: {x: 10.363922, y: 2.2669785, z: 1.5988}
   m_Children: []
   m_Father: {fileID: 45903372}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1934257268
 MonoBehaviour:
@@ -111306,6 +111406,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d483e606376fe7c4d8fa45ca02feb940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newFOV: 65
+  targetCamera: {fileID: 907205355}
+  newRotationTarget: {x: 30, y: 300, z: 0}
+  speedTransition: 1.5
 --- !u!65 &1934257269
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -111317,8 +111421,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.160498, y: 1, z: 1}
+  m_Center: {x: -0.080249205, y: 0, z: 0}
 --- !u!33 &1934257270
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -112932,7 +113036,7 @@ Transform:
   m_LocalScale: {x: 6.0544, y: 2.2669785, z: 1.5988}
   m_Children: []
   m_Father: {fileID: 45903372}
-  m_RootOrder: 41
+  m_RootOrder: 40
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1967853348
 MonoBehaviour:
@@ -112946,6 +113050,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d483e606376fe7c4d8fa45ca02feb940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newFOV: 50
+  targetCamera: {fileID: 907205355}
+  newRotationTarget: {x: 0, y: 0, z: 0}
+  speedTransition: 0
 --- !u!65 &1967853349
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -116853,7 +116961,7 @@ Transform:
   m_LocalScale: {x: 6.0544, y: 2.2669785, z: 1.5988}
   m_Children: []
   m_Father: {fileID: 45903372}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &2062417654
 MonoBehaviour:
@@ -116867,6 +116975,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d483e606376fe7c4d8fa45ca02feb940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newFOV: 40
+  targetCamera: {fileID: 907205355}
+  newRotationTarget: {x: 20, y: 270, z: 0}
+  speedTransition: 1.5
 --- !u!65 &2062417655
 BoxCollider:
   m_ObjectHideFlags: 0

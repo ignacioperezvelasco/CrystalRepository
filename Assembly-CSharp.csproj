@@ -103,6 +103,7 @@
     <Compile Include="Assets\_PROJECT\SCRIPTS\ActivateDeactivate.cs" />
     <Compile Include="Assets\_PROJECT\SCRIPTS\Activator.cs" />
     <Compile Include="Assets\_PROJECT\SCRIPTS\AreaAttack.cs" />
+    <Compile Include="Assets\_PROJECT\SCRIPTS\Camera\CameraTransition.cs" />
     <Compile Include="Assets\_PROJECT\SCRIPTS\Camera\FollowCharacter.cs" />
     <Compile Include="Assets\_PROJECT\SCRIPTS\Camera\cameraScript.cs" />
     <Compile Include="Assets\_PROJECT\SCRIPTS\CameraShake.cs" />

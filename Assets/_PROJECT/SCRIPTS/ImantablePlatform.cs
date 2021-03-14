@@ -16,7 +16,8 @@ public class ImantablePlatform : MonoBehaviour
     public enum PlatformType
     {
         PLATFORM,
-        RAIL
+        RAIL,
+        ELEVATOR
     };
     PlatformState state;
     public PlatformType type;
@@ -25,18 +26,23 @@ public class ImantablePlatform : MonoBehaviour
 
     [SerializeField] float speed;
 
-    [Header("RIGHT DOOR")]
+    [Header("IMANS")]
     [SerializeField] ImanBehavior platformIman;
     [SerializeField] ImanBehavior rightIman;
     [SerializeField] ImanBehavior leftIman;
 
-    [Header("POSITIONS")]
+    [Header("TRASNFORMS")]
     [SerializeField] Transform platformTransform;
     [SerializeField] Transform rightPosition;
     [SerializeField] Transform leftPosition;
 
     GameObject player;
     bool hitted = false;
+
+    [Header("ELEVATOR")]
+    [SerializeField] float elevatorDuration = 4;
+    float elevatorTimer = 0;
+    bool elevatorActivated = false;    
     #endregion
 
     #region START
@@ -72,47 +78,101 @@ public class ImantablePlatform : MonoBehaviour
     #region UPDATE
     void Update()
     {
-        switch (state)
+        switch (type)
         {
-            case PlatformState.RIGHT_SIDE:
+            case PlatformType.PLATFORM:
+                {
+                    switch (state)
+                    {
+                        case PlatformState.RIGHT_SIDE:
+                            {
+                                if (platformIman.myPole == rightIman.myPole)
+                                {
+                                    //Pasamos el estado a Moving
+                                    state = PlatformState.MOVING;
+
+                                    // Movemos la plataforma al otro lado
+                                    platformTransform.DOMove(leftPosition.position, speed);
+
+                                    //Preparamos que se reestablezca el estado
+                                    Invoke("ArriveToLeft", speed);
+                                }
+                                break;
+                            }
+                        case PlatformState.LEFT_SIDE:
+                            {
+                                if (platformIman.myPole == leftIman.myPole)
+                                {
+                                    //Pasamos el estado a Moving
+                                    state = PlatformState.MOVING;
+
+                                    // Movemos la plataforma al otro lado
+                                    platformTransform.DOMove(rightPosition.position, speed);
+
+                                    //Preparamos que se reestablezca el estado
+                                    Invoke("ArriveToRight", speed);
+                                }
+                                break;
+                            }
+                        case PlatformState.MOVING:
+                            {
+                                break;
+                            }
+                        default:
+                            {
+                                break;
+                            }
+                    }
+                    break;
+                }
+            case PlatformType.RAIL:
+                {
+                    break;
+                }
+            case PlatformType.ELEVATOR:
                 {
                     if (platformIman.myPole == rightIman.myPole)
                     {
-                        //Pasamos el estado a Moving
-                        state = PlatformState.MOVING;
+                        if (!elevatorActivated)
+                        {
+                            //Ponemos a true
+                            elevatorActivated = true;
 
-                        // Movemos la plataforma al otro lado
-                        platformTransform.DOMove(leftPosition.position,speed);
+                           // Subimos el ascensor
+                            platformTransform.DOMove(leftPosition.position, speed);
+                        }
+                        else
+                        {
+                            elevatorTimer += Time.deltaTime;
 
-                        //Preparamos que se reestablezca el estado
-                        Invoke("ArriveToLeft", speed);
+                            if (elevatorTimer >= elevatorDuration)
+                            {
+                                elevatorTimer = 0;
+
+                                //Reseteamos el polo del ascensor
+                                platformIman.myPole = iman.NONE;
+                                platformIman.outline.OutlineColor = Color.white; 
+
+                            }
+                        }
                     }
-                    break;
-                }
-            case PlatformState.LEFT_SIDE:
-                {
-                    if (platformIman.myPole == leftIman.myPole)
+                    else
                     {
-                        //Pasamos el estado a Moving
-                        state = PlatformState.MOVING;
+                        if (elevatorActivated)
+                        {
+                            //Desactivamos el ascensor
+                            elevatorActivated = false;
 
-                        // Movemos la plataforma al otro lado
-                        platformTransform.DOMove(rightPosition.position, speed);
-
-                        //Preparamos que se reestablezca el estado
-                        Invoke("ArriveToRight", speed);
+                            // Bajamos el ascensor
+                            platformTransform.DOMove(rightPosition.position, speed/2);
+                        }
                     }
-                    break;
-                }
-            case PlatformState.MOVING:
-                {
                     break;
                 }
             default:
-                {
-                    break;
-                }
+                break;
         }
+        
     }
     #endregion
 
@@ -133,7 +193,6 @@ public class ImantablePlatform : MonoBehaviour
     void ArriveToLeft()
     {
         state = PlatformState.LEFT_SIDE;
-
         //Reestablecemos el iman
         platformIman.myPole = iman.NONE;
         platformIman.outline.enabled = false;

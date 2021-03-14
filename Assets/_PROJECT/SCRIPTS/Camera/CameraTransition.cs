@@ -7,8 +7,8 @@ public class CameraTransition : MonoBehaviour
 {
     #region VARIABLES
     [Header("CAMERA")]
-    [SerializeField] Camera mainCamera;
     [SerializeField] int newFOV;
+    Camera mainCamera;
 
     [Header("TARGET CAMERA")]
     [SerializeField] Transform targetCamera;
@@ -20,7 +20,11 @@ public class CameraTransition : MonoBehaviour
 
     #endregion
 
-    
+
+    private void Start()
+    {
+        mainCamera = Camera.main;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
