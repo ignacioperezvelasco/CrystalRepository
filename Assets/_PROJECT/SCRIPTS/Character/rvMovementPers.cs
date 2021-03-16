@@ -68,7 +68,7 @@ public class rvMovementPers : MonoBehaviour
     {
         if (!isStoped)
         {
-            //myPlayer.transform.LookAt(new Vector3(myCam.myMouse.x, this.transform.position.y, myCam.myMouse.z));
+
 
             horizontal = Input.GetAxisRaw("Horizontal");
             vertical = Input.GetAxisRaw("Vertical");
@@ -76,12 +76,9 @@ public class rvMovementPers : MonoBehaviour
             _isGrounded = Physics.CheckSphere(_groundChecker.position, GroundDistance, Ground, QueryTriggerInteraction.Ignore);
 
 
-            if (_isGrounded && ((myRb.drag != 7) || (myRb.drag != 14)))
+            if (_isGrounded && ((myRb.drag != 1) || (myRb.drag != 14)))
             {
-                if (isSlowed)
-                    myRb.drag = 25;
-                else
-                    myRb.drag = 7;
+                myRb.drag = 1;
             }
             else if (!_isGrounded)
                 myRb.drag = 0;
@@ -119,7 +116,9 @@ public class rvMovementPers : MonoBehaviour
             {
                 Dash();
             }
-        }        
+        }
+        else
+            Debug.Log("isstopped");
     }
 
 

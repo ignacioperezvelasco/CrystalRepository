@@ -191,7 +191,11 @@ public class ImanBehavior : MonoBehaviour
             Rigidbody rb = hit.GetComponent<Rigidbody>();
             if (rb != null)
             {
-                rb.AddExplosionForce((otherCharges + numChargesAdded) * explosionForce, midlePoint, (otherCharges + numChargesAdded + 5));
+                rb.velocity = Vector3.zero;
+                if(rb.gameObject.tag=="Player")
+                    rb.AddExplosionForce((otherCharges + numChargesAdded) * explosionForce, midlePoint, (otherCharges + numChargesAdded + 5),3, ForceMode.Force);
+                else
+                    rb.AddExplosionForce((otherCharges + numChargesAdded) * explosionForce, midlePoint, (otherCharges + numChargesAdded + 5),0,ForceMode.Force);
                 Instantiate(explosionVFX, midlePoint, Quaternion.identity);
             }
         }
