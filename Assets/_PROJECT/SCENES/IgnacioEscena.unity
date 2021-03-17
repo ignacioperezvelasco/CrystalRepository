@@ -418,7 +418,7 @@ PrefabInstance:
     - target: {fileID: 5755061400945115347, guid: ca650b9e91a380f45a005c317a497b91,
         type: 3}
       propertyPath: m_Mass
-      value: 7
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5755061400945115348, guid: ca650b9e91a380f45a005c317a497b91,
         type: 3}
@@ -5487,6 +5487,12 @@ PrefabInstance:
       propertyPath: force
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 231614512086542704, guid: 9b570243284187d44a1e5b8a02248cfb,
+        type: 3}
+      propertyPath: explosionVFX
+      value: 
+      objectReference: {fileID: 1222550491574178, guid: bd4cf73fcea9e5b408d347ac02cc8284,
+        type: 3}
     - target: {fileID: 3191415212019759049, guid: 9b570243284187d44a1e5b8a02248cfb,
         type: 3}
       propertyPath: m_Materials.Array.size
@@ -5585,12 +5591,12 @@ PrefabInstance:
     - target: {fileID: 5163394427513343027, guid: 9b570243284187d44a1e5b8a02248cfb,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5197849277348911738, guid: 9b570243284187d44a1e5b8a02248cfb,
         type: 3}
       propertyPath: m_Mass
-      value: 15
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5785206643514660640, guid: 9b570243284187d44a1e5b8a02248cfb,
         type: 3}
@@ -5754,7 +5760,7 @@ PrefabInstance:
     - target: {fileID: 5755061400945115347, guid: ca650b9e91a380f45a005c317a497b91,
         type: 3}
       propertyPath: m_Mass
-      value: 7
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5755061400945115348, guid: ca650b9e91a380f45a005c317a497b91,
         type: 3}
@@ -6162,7 +6168,7 @@ PrefabInstance:
     - target: {fileID: 1565312929269763268, guid: afb4da3e7fce9604389fb3e511d6858a,
         type: 3}
       propertyPath: speedCamera
-      value: 0.1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1565312929269763269, guid: afb4da3e7fce9604389fb3e511d6858a,
         type: 3}

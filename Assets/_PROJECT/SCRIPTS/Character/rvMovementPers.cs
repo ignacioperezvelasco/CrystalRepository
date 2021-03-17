@@ -75,15 +75,6 @@ public class rvMovementPers : MonoBehaviour
 
             _isGrounded = Physics.CheckSphere(_groundChecker.position, GroundDistance, Ground, QueryTriggerInteraction.Ignore);
 
-
-            if (_isGrounded && ((myRb.drag != 1) || (myRb.drag != 14)))
-            {
-                myRb.drag = 1;
-            }
-            else if (!_isGrounded)
-                myRb.drag = 0;
-
-
             //Comprobamos la dirección del movimiento respecto a la camara
             CheckMovementRelativeToCamera();
 
@@ -105,13 +96,7 @@ public class rvMovementPers : MonoBehaviour
             }
             else if (doubleJumped)
                 doubleJumped = false;
-
-            if (Input.GetButtonDown("Jump"))
-            {
-
-            }
-
-
+                   
             if (Input.GetKeyDown(KeyCode.LeftShift))
             {
                 Dash();
@@ -127,7 +112,11 @@ public class rvMovementPers : MonoBehaviour
         if (!isStoped)
         {
             if (!isDashing)
+            {
                 myRb.AddForce((desiredVelocity * speed), ForceMode.Acceleration);
+                if ((horizontal == 0) && (vertical == 0) && _isGrounded)                
+                    myRb.velocity = Vector3.zero;                
+            }
 
             if ((myRb.velocity.magnitude > maxSpeed) && _isGrounded)
             {

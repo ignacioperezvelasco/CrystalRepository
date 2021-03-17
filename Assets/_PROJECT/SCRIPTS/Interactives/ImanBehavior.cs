@@ -169,6 +169,7 @@ public class ImanBehavior : MonoBehaviour
     {
         if (collision.collider.tag == "CanBeHitted")
         {
+            
             if(!imEnemy)
                 timerActive = 0;
             if (myPole == iman.POSITIVE)
@@ -196,7 +197,8 @@ public class ImanBehavior : MonoBehaviour
                     rb.AddExplosionForce((otherCharges + numChargesAdded) * explosionForce, midlePoint, (otherCharges + numChargesAdded + 5),3, ForceMode.Force);
                 else
                     rb.AddExplosionForce((otherCharges + numChargesAdded) * explosionForce, midlePoint, (otherCharges + numChargesAdded + 5),0,ForceMode.Force);
-                Instantiate(explosionVFX, midlePoint, Quaternion.identity);
+                if(myPole==iman.POSITIVE)
+                    Instantiate(explosionVFX, midlePoint, Quaternion.identity);
             }
         }
        
