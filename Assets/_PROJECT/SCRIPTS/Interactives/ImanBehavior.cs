@@ -121,7 +121,6 @@ public class ImanBehavior : MonoBehaviour
             {
                 if (other.gameObject.transform.parent != null)
                 {
-                    Debug.Log(other.gameObject.layer == 9);
 
                     if (other.gameObject.layer == 9)
                         if (!nearImantableObjects.Contains(other.gameObject.transform.parent.gameObject))

@@ -5633,6 +5633,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8820225508135538109, guid: 9b570243284187d44a1e5b8a02248cfb,
+        type: 3}
+      propertyPath: rend
+      value: 
+      objectReference: {fileID: 2030128685}
     - target: {fileID: 8820225508902788799, guid: 9b570243284187d44a1e5b8a02248cfb,
         type: 3}
       propertyPath: m_IsActive
@@ -6034,6 +6039,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!137 &2030128685 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 3191415212019759049, guid: 9b570243284187d44a1e5b8a02248cfb,
+    type: 3}
+  m_PrefabInstance: {fileID: 975521400}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &699257556492615636
 PrefabInstance:
   m_ObjectHideFlags: 0

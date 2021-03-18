@@ -77,6 +77,11 @@ public class Enemy : Agent
     float timerAttack = 0;
     [Header("CHARGE")]
     public float speedCharging = 0.7f;
+
+    [Header("Shaders")]
+    [SerializeField]Renderer rend;
+    bool shaderActive = false;
+    iman shaderState = iman.NONE;
     #endregion
 
     #region START
@@ -109,6 +114,9 @@ public class Enemy : Agent
 
         //Referenciamos RigidBody
         myRB = this.GetComponent<Rigidbody>();
+
+        
+
     }
     #endregion
 
@@ -153,6 +161,8 @@ public class Enemy : Agent
             gameObjectsHittedMe.Clear();
         }
 
+        //ShaderHandle
+        HandleShader();
     }
     #endregion
 
@@ -487,7 +497,6 @@ public class Enemy : Agent
             else if (myRB.isKinematic == true)
             {
                 myRB.isKinematic = false;
-                Debug.Log("deddedeedededed");
             }
         }
     }
@@ -516,7 +525,38 @@ public class Enemy : Agent
     {
         life -= (int)damage;
     }
-       
+
+    #endregion
+
+    #region SHADER
+    void HandleShader()
+    {
+        if (myImanBehaviorScript.myPole == iman.NONE && shaderState != iman.NONE)
+        {
+            //Scale a 0
+            rend.materials[1].SetFloat("Vector1_9B88008B", 0f);
+            shaderState = iman.NONE;
+        }
+        else if (myImanBehaviorScript.myPole == iman.NEGATIVE && shaderState != iman.NEGATIVE)
+        {
+
+            //Scale
+            rend.materials[1].SetFloat("Vector1_9B88008B", 20f);
+            //blue 
+            rend.materials[1].SetColor("Color_77181350", new Color(0.1f, 0.1f, 255, 1));
+            //FlagBool
+            shaderState = iman.NEGATIVE;
+        }
+        else if (myImanBehaviorScript.myPole == iman.POSITIVE && shaderState != iman.POSITIVE)
+        {
+            //Scale
+            rend.materials[1].SetFloat("Vector1_9B88008B", 20f);
+            //red
+            rend.materials[1].SetColor("Color_77181350", new Color(255, 0, 0, 1));
+            //FlagBool
+            shaderState = iman.POSITIVE;
+        }
+    }
     #endregion
 
 }
