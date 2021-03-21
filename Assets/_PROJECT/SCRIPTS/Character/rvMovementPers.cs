@@ -111,27 +111,32 @@ public class rvMovementPers : MonoBehaviour
     {
         if (!isStoped)
         {
+            //Movement
             if (!isDashing)
             {
+                //Add velocity
                 myRb.AddForce((desiredVelocity * speed), ForceMode.Acceleration);
                 if ((horizontal == 0) && (vertical == 0) && _isGrounded)                
-                    myRb.velocity = Vector3.zero;                
+                    myRb.velocity = Vector3.zero;
+                
+                //Max velocity
+                if ((myRb.velocity.magnitude > maxSpeed) && _isGrounded)
+                {
+                    myRb.velocity = myRb.velocity.normalized * maxSpeed;
+                }
             }
-
-            if ((myRb.velocity.magnitude > maxSpeed) && _isGrounded)
-            {
-                myRb.velocity = myRb.velocity.normalized * maxSpeed;
-            }
+            
+            //Do dash
             if (isDashing)
             {
-                myRb.MovePosition(myRb.position + dashV * dashvelocity * 2 * Time.fixedDeltaTime);
+                myRb.MovePosition(myRb.position + dashV * dashvelocity *  Time.fixedDeltaTime);
                 dashTimer -= Time.fixedDeltaTime;
                 if (dashTimer <= 0f)
                 {
                     isDashing = false;
                 }
             }
-
+            //Counter dash
             if (!canDash)
             {
                 dashCounter -= Time.fixedDeltaTime;
