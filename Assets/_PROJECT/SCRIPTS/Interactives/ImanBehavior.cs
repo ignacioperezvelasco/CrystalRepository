@@ -121,7 +121,6 @@ public class ImanBehavior : MonoBehaviour
             {
                 if (other.gameObject.transform.parent != null)
                 {
-                    Debug.Log(other.gameObject.layer == 9);
 
                     if (other.gameObject.layer == 9)
                         if (!nearImantableObjects.Contains(other.gameObject.transform.parent.gameObject))
@@ -169,6 +168,7 @@ public class ImanBehavior : MonoBehaviour
     {
         if (collision.collider.tag == "CanBeHitted")
         {
+            
             if(!imEnemy)
                 timerActive = 0;
             if (myPole == iman.POSITIVE)
@@ -191,8 +191,13 @@ public class ImanBehavior : MonoBehaviour
             Rigidbody rb = hit.GetComponent<Rigidbody>();
             if (rb != null)
             {
-                rb.AddExplosionForce((otherCharges + numChargesAdded) * explosionForce, midlePoint, (otherCharges + numChargesAdded + 5));
-                Instantiate(explosionVFX, midlePoint, Quaternion.identity);
+                rb.velocity = Vector3.zero;
+                if(rb.gameObject.tag=="Player")
+                    rb.AddExplosionForce((otherCharges + numChargesAdded) * explosionForce, midlePoint, (otherCharges + numChargesAdded + 5),3, ForceMode.Force);
+                else
+                    rb.AddExplosionForce((otherCharges + numChargesAdded) * explosionForce, midlePoint, (otherCharges + numChargesAdded + 5),0,ForceMode.Force);
+                if(myPole==iman.POSITIVE)
+                    Instantiate(explosionVFX, midlePoint, Quaternion.identity);
             }
         }
        
