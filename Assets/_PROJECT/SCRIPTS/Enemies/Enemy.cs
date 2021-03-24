@@ -61,11 +61,14 @@ public class Enemy : Agent
     [Header("ATTACK")]
     [SerializeField] float timeBetweenAttacks = 3;
     [SerializeField] float distanceToDoAreaAtttack = 3;
+    [SerializeField] float forceExplosion = 10000;
     [SerializeField] MeshRenderer attackArea;
     [SerializeField] AreaAttack areaAttackLogic;
     [SerializeField] AreaAttack rangeAttackLogic;
     float timer;
     bool isCharging = false;
+    GameObject auxiliar;
+    [SerializeField] GameObject explosionVFX;
 
     [Header("TELEGRAPHING")]
     public LineRenderer line;
@@ -367,7 +370,21 @@ public class Enemy : Agent
 
                         if (areaAttackLogic.GetIsPlayer())
                         {
-                            playerLogic.GetDamage(areaDamage, this.transform.position, areaPushingForce);
+                            //playerLogic.GetDamage(areaDamage, this.transform.position, areaPushingForce);
+                            Collider[] colliders = Physics.OverlapSphere(this.transform.position, 7);
+                            foreach (Collider hit in colliders)
+                            {
+                                Rigidbody rb = hit.GetComponent<Rigidbody>();
+                                if (rb != null)
+                                {
+                                    rb.velocity = Vector3.zero;
+                                    
+                                    rb.AddExplosionForce(forceExplosion, this.transform.position, forceExplosion, 2, ForceMode.Force);
+
+                                    auxiliar=Instantiate(explosionVFX, this.transform.position, Quaternion.identity);
+                                    auxiliar.transform.localScale = new Vector3(7, 7, 7);
+                                }
+                            }
                         }
                         Invoke("DeactivateAreaAttack", 0.5f);
 
@@ -505,20 +522,7 @@ public class Enemy : Agent
     #region DAMAGE
     private void OnCollisionEnter(Collision collision)
     {
-        //En caso de estar imantado y que choque con un objeto imantado añadimos daño
-        if ((collision.gameObject.tag == "CanBeHitted") && (myImanBehaviorScript.GetApplyForce()))
-        {
-            float goVelocityMagnitude = collision.gameObject.GetComponent<Rigidbody>().velocity.magnitude;
-            //En caso que la fuerza sea mayor a 4 hacemos daño
-            if ((goVelocityMagnitude + myRB.velocity.magnitude) > 3)
-            {
-                if (!gameObjectsHittedMe.Contains(collision.gameObject))
-                {
-                    GetDamage(goVelocityMagnitude + myRB.velocity.magnitude);
-                    gameObjectsHittedMe.Add(collision.gameObject);
-                }
-            }
-        }
+        
     }
 
     public void GetDamage(float damage)
