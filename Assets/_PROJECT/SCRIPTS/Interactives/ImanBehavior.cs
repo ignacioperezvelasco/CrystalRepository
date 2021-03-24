@@ -47,6 +47,7 @@ public class ImanBehavior : MonoBehaviour
     Vector3 midlePoint = new Vector3(0, 0, 0);
     [SerializeField] float explosionForce = 1500;
     [SerializeField] GameObject explosionVFX;
+    [SerializeField] Enemy myEnemyScript;
 
     private void Awake()
     {
@@ -183,8 +184,7 @@ public class ImanBehavior : MonoBehaviour
     }
     
     void Explode()
-    {
-        
+    {        
         Collider[] colliders = Physics.OverlapSphere(this.transform.position, (otherCharges + numChargesAdded + 5));
         foreach (Collider hit in colliders)
         {
@@ -200,7 +200,11 @@ public class ImanBehavior : MonoBehaviour
                     Instantiate(explosionVFX, midlePoint, Quaternion.identity);
             }
         }
-       
+        if (imEnemy)
+        {
+            //Daño a enemigo
+            myEnemyScript.GetDamage(otherCharges + numChargesAdded);
+        }
         hasToExplote = false;
     }
     #endregion
