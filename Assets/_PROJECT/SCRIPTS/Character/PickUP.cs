@@ -13,8 +13,9 @@ public class PickUP : MonoBehaviour
     bool isObjectInside = false;
     BoxCollider collider;
     bool isGrabed = false;
-
-    #endregion
+    [SerializeField] Collider pickedCollider;
+    Rigidbody objectRb;
+    #endregion    
 
     #region UPDATE
     void Update()
@@ -26,11 +27,20 @@ public class PickUP : MonoBehaviour
                 if (isGrabed)
                 {
                     isGrabed = false;
+                    pickedCollider.enabled = false;
+                    collider.enabled = true;
+                    objectRb.isKinematic = false;
+                    objectTransform.parent = null;
                 }
                 else
                 {
                     isGrabed = true;
+                    collider.enabled = false;
+                    objectRb.isKinematic = true;
+                    pickedCollider.enabled = true;
+                    objectTransform.parent = this.transform;
                     objectTransform.rotation = this.transform.rotation;
+
                 }
             }
         }
@@ -40,29 +50,13 @@ public class PickUP : MonoBehaviour
         {
             if (isGrabed)
             {
-                objectTransform.DOMove(this.transform.position, speedAtraction);
-                collider.enabled = false;
+                //objectTransform.DOMove(this.transform.position, speedAtraction);
             }
             else
             {
                 collider.enabled = true;
             }
         }
-        
-
-        /*if (Input.GetButton("Fire1") && Input.GetButton("Fire2") && isObjectInside)
-        {
-            objectTransform.DOMove(this.transform.position, speedAtraction);
-            collider.enabled = false;
-        }
-        else
-        {
-            if (isObjectInside)
-            {
-                collider.enabled = true;
-            }
-        }*/
-
     }
     #endregion
 
@@ -77,6 +71,7 @@ public class PickUP : MonoBehaviour
             objectTransform = other.transform;
 
             collider = other.GetComponent<BoxCollider>();
+            objectRb = other.GetComponent<Rigidbody>();
         }
     }
     #endregion
