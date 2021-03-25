@@ -7,6 +7,7 @@ public class ElementalAmimator : MonoBehaviour
 
     #region VARIABLES
     public Animator elementalAnimator;
+    [SerializeField]GameObject explosionVFX;
     #endregion
 
     #region UPDATE
@@ -80,4 +81,24 @@ public class ElementalAmimator : MonoBehaviour
         elementalAnimator.SetTrigger("Death");
     }
     #endregion
+
+    void ExplosionAreaAttack()
+    {
+
+        //playerLogic.GetDamage(areaDamage, this.transform.position, areaPushingForce);
+        Collider[] colliders = Physics.OverlapSphere(this.transform.position, 7);
+        foreach (Collider hit in colliders)
+        {
+            Rigidbody rb = hit.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.velocity = Vector3.zero;
+
+                rb.AddExplosionForce(10000, this.transform.position, 12, 2, ForceMode.Force);
+            }
+        }
+        GameObject auxiliar = Instantiate(explosionVFX, this.transform.position, Quaternion.identity);
+        auxiliar.transform.localScale = new Vector3(7, 7, 7);
+        Debug.Log("deddededede");
+    }
 }

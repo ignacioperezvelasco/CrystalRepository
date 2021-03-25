@@ -365,34 +365,15 @@ public class Enemy : Agent
                     {
                         //Paramos al enemigo
                         agentNavMesh.isStopped = true;
-                        //Hacemos el Ataque en area
-                        attackArea.enabled = true;
-
-                        if (areaAttackLogic.GetIsPlayer())
-                        {
-                            //playerLogic.GetDamage(areaDamage, this.transform.position, areaPushingForce);
-                            Collider[] colliders = Physics.OverlapSphere(this.transform.position, 7);
-                            foreach (Collider hit in colliders)
-                            {
-                                Rigidbody rb = hit.GetComponent<Rigidbody>();
-                                if (rb != null)
-                                {
-                                    rb.velocity = Vector3.zero;
-                                    
-                                    rb.AddExplosionForce(forceExplosion, this.transform.position, forceExplosion, 2, ForceMode.Force);
-
-                                    auxiliar=Instantiate(explosionVFX, this.transform.position, Quaternion.identity);
-                                    auxiliar.transform.localScale = new Vector3(7, 7, 7);
-                                }
-                            }
-                        }
+                        
+                       
                         Invoke("DeactivateAreaAttack", 0.5f);
 
                         //Ponemos la animación de ataque en area
                         animator.AreaAttackAnimation();
                     }
                     //SI ESTA LEJOS HACEMOS ATAQUE CARGA
-                    else
+                    else if(Physics.CheckSphere(targetTelegraph.position, 1, Ground, QueryTriggerInteraction.Ignore))
                     {
                         line.enabled = true;
                         isAttacking = true;
@@ -445,6 +426,28 @@ public class Enemy : Agent
     void DeactivaterRangeAttack()
     {
         isCharging = false;
+    }
+    #endregion
+
+    #region EXPLOSION
+    void ExplosionAreaAttack()
+    {
+
+        //playerLogic.GetDamage(areaDamage, this.transform.position, areaPushingForce);
+        Collider[] colliders = Physics.OverlapSphere(this.transform.position, 7);
+        foreach (Collider hit in colliders)
+        {
+            Rigidbody rb = hit.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.velocity = Vector3.zero;
+
+                rb.AddExplosionForce(forceExplosion, this.transform.position, forceExplosion, 2, ForceMode.Force);
+            }
+        }
+        auxiliar = Instantiate(explosionVFX, this.transform.position, Quaternion.identity);
+        auxiliar.transform.localScale = new Vector3(7, 7, 7);
+
     }
     #endregion
 
