@@ -25,7 +25,8 @@ public class BossLogic : MonoBehaviour
     {
         NONE,
         CHARGE_ATTACK,
-        ROCK_ATTACK
+        ROCK_ATTACK,
+        AREA_ATTACK
     };
 
     AreaType playerCurrentArea;
@@ -54,6 +55,12 @@ public class BossLogic : MonoBehaviour
     [SerializeField] float rockSpeed = 0.75f;
     [SerializeField] float heightRock = 5;
 
+    [Header("AREA ATTACK")]
+    [SerializeField] SphereCollider areaCollider;
+    [SerializeField] float rotationSpeed = 1.5f;
+    [SerializeField] float rotationMagnitud = 400;
+    Animator bossAnimator;
+
     float timerAttack = 0;
     #endregion
 
@@ -67,6 +74,9 @@ public class BossLogic : MonoBehaviour
         //Buscamos el LineRenderer
         line = GetComponent<LineRenderer>();
         line.enabled = false;
+
+        //Buscamos al Animator
+        bossAnimator = GetComponent<Animator>();
     }
     #endregion
 
@@ -129,6 +139,12 @@ public class BossLogic : MonoBehaviour
                     RockAttack();
                     break;
                 }
+            case AttackType.AREA_ATTACK:
+                {
+                    //Area attack
+                    AreaAttack();
+                    break;
+                }
             default:
                 break;
         }
@@ -180,6 +196,17 @@ public class BossLogic : MonoBehaviour
 
         go.transform.DOJump(player.position, heightRock, 1,rockSpeed);
         Destroy(go, rockSpeed);
+    }
+    #endregion
+
+    #region CHARGE ATTACK
+    void AreaAttack()
+    {
+        //Vector3 newRotation = new Vector3(0, rotationMagnitud, 0 );
+        //this.transform.DORotate(newRotation, rotationSpeed);
+
+        //Activamos la animación
+        bossAnimator.SetTrigger("AreaAttack");
     }
     #endregion
 

@@ -1149,6 +1149,7 @@ GameObject:
   - component: {fileID: 848432282}
   - component: {fileID: 848432283}
   - component: {fileID: 848432284}
+  - component: {fileID: 848432285}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Boss
@@ -1164,7 +1165,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 848432281}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 17.22, y: 3.44, z: 6.24}
+  m_LocalPosition: {x: 30, y: 3.44, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 339896586}
@@ -1186,7 +1187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73f76af5fcf84dc4284baa30795baabe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentAttack: 2
+  currentAttack: 3
   areasPosition:
   - {fileID: 352069153}
   - {fileID: 319971908}
@@ -1205,6 +1206,9 @@ MonoBehaviour:
   rockSpawner: {fileID: 277519997}
   rockSpeed: 0.75
   heightRock: 10
+  areaCollider: {fileID: 0}
+  rotationSpeed: 1.5
+  rotationMagnitud: 0
 --- !u!120 &848432284
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -1320,6 +1324,25 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!95 &848432285
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 848432281}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a08822933af4ddb46b4ecff690c382a9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &894138654
 PrefabInstance:
   m_ObjectHideFlags: 0
