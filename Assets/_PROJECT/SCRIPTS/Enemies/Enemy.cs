@@ -334,6 +334,7 @@ public class Enemy : Agent
         {
             playerLogic.GetDamage(chargeDamage, this.transform.position, chargePushingForce);
         }
+
         line.SetPosition(0, baseTelegraph.position);
         line.SetPosition(1, targetTelegraph.position);
 

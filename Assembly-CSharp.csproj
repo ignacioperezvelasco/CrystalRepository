@@ -98,6 +98,7 @@
     <Compile Include="Assets\LeanTween\Framework\LeanTween.cs" />
     <Compile Include="Assets\LeanTween\Framework\LeanTweenExt.cs" />
     <Compile Include="Assets\QuickOutline\Scripts\Outline.cs" />
+    <Compile Include="Assets\RockLogic.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Vertical Fog Package by Tzar\Fix\FixMobileDepth.cs" />
     <Compile Include="Assets\_PROJECT\PREFABS\LightRays2D\Script\LightRays2D.cs" />

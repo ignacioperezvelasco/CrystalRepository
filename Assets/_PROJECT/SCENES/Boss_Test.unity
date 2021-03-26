@@ -1151,7 +1151,7 @@ GameObject:
   - component: {fileID: 848432284}
   m_Layer: 0
   m_Name: Boss
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1186,7 +1186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73f76af5fcf84dc4284baa30795baabe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentAttack: 1
+  currentAttack: 2
   areasPosition:
   - {fileID: 352069153}
   - {fileID: 319971908}
@@ -1203,7 +1203,7 @@ MonoBehaviour:
   endTelegraphing: {fileID: 685246258}
   rock: {fileID: 8480738707069915918, guid: 48c431ace134d1442b5bff64765ed019, type: 3}
   rockSpawner: {fileID: 277519997}
-  rockSpeed: 0.5
+  rockSpeed: 0.75
   heightRock: 10
 --- !u!120 &848432284
 LineRenderer:
