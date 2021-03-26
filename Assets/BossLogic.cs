@@ -33,6 +33,7 @@ public class BossLogic : MonoBehaviour
     AreaType bossCurrentArea;
 
     Transform player;
+    PlayerLogic playerLogic;
 
     public AttackType currentAttack;
 
@@ -56,9 +57,16 @@ public class BossLogic : MonoBehaviour
     [SerializeField] float heightRock = 5;
 
     [Header("AREA ATTACK")]
-    [SerializeField] SphereCollider areaCollider;
-    [SerializeField] float rotationSpeed = 1.5f;
-    [SerializeField] float rotationMagnitud = 400;
+    [SerializeField] float areaAttackTime = 1.5f;
+    [SerializeField] float areaDamage = 35;
+    [SerializeField] float pushForce = 25;
+    [SerializeField] Transform VFX_Spawner;
+    [SerializeField] GameObject area_VFX;
+    SphereCollider areaCollider;
+    bool playerHitted = false;
+
+    //[SerializeField] float rotationSpeed = 1.5f;
+    //[SerializeField] float rotationMagnitud = 400;
     Animator bossAnimator;
 
     float timerAttack = 0;
@@ -69,7 +77,9 @@ public class BossLogic : MonoBehaviour
     private void Start()
     {
         //Buscamos al player
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        GameObject go = GameObject.FindGameObjectWithTag("Player");
+        player = go.GetComponent<Transform>();
+        playerLogic = go.GetComponent<PlayerLogic>();
 
         //Buscamos el LineRenderer
         line = GetComponent<LineRenderer>();
@@ -77,6 +87,9 @@ public class BossLogic : MonoBehaviour
 
         //Buscamos al Animator
         bossAnimator = GetComponent<Animator>();
+
+        //Buscamos el SphereCollider
+        areaCollider = GetComponent<SphereCollider>();
     }
     #endregion
 
@@ -143,6 +156,17 @@ public class BossLogic : MonoBehaviour
                 {
                     //Area attack
                     AreaAttack();
+
+                    //Activamos el collider
+                    areaCollider.enabled = true;
+
+                    //VFX 
+                    GameObject go = Instantiate(area_VFX, VFX_Spawner.position, VFX_Spawner.rotation);
+                    Destroy(go,areaAttackTime);
+
+                    //Invocamos para el desactivar el collider
+                    Invoke("DeactivateCollider", areaAttackTime);
+                    
                     break;
                 }
             default:
@@ -216,5 +240,34 @@ public class BossLogic : MonoBehaviour
         playerCurrentArea = newArea;
     }
     #endregion
+
+    #region DEACTIVATE COLLIDER
+    void DeactivateCollider()
+    {
+        //Desactivamos el sphereCollider
+        areaCollider.enabled = false;
+
+        //Reseteamos el Hitted
+        playerHitted = false;
+    }
+    #endregion
+
+
+    #region TRIGGER ENTER
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {            
+            if (!playerHitted && currentAttack == AttackType.AREA_ATTACK)
+            {
+                //Seteamos a true el hitted para no darle muchas veces, solo una por ataque
+                playerHitted = true;
+
+                playerLogic.GetDamage(areaDamage,this.transform.position, pushForce);
+            }
+        }
+    }
+    #endregion
+
 
 }
