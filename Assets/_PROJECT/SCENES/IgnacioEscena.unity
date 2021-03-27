@@ -127,6 +127,25 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 6025142839793676096}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &157555631
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 157555630}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5b560bed146f26b4990d377cfbef5cfa, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &161603410
 GameObject:
   m_ObjectHideFlags: 0
@@ -5835,7 +5854,7 @@ PrefabInstance:
     - target: {fileID: 5163394427513343027, guid: 9b570243284187d44a1e5b8a02248cfb,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5197849277135483194, guid: 9b570243284187d44a1e5b8a02248cfb,
         type: 3}
@@ -6703,6 +6722,11 @@ PrefabInstance:
       propertyPath: pickedCollider
       value: 
       objectReference: {fileID: 748196821}
+    - target: {fileID: 2563698222079319664, guid: 3a91acf6839b9a747831d5711637cca1,
+        type: 3}
+      propertyPath: characterAnimator
+      value: 
+      objectReference: {fileID: 157555631}
     - target: {fileID: 6025142838663353059, guid: 3a91acf6839b9a747831d5711637cca1,
         type: 3}
       propertyPath: m_Name

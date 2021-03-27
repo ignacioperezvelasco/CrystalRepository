@@ -10,7 +10,7 @@ public class PlayerLogic : Agent
     public bool canBeDamaged = true;
     public float timeInvencible;
     float timer = 0;
-
+    [SerializeField]Animator characterAnimator;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,10 +31,13 @@ public class PlayerLogic : Agent
                 timer = 0;
             }
         }
+
+        AnimationHandler();
     }
 
     public override void GetDamage(float _damage)
     {
+        characterAnimator.SetBool("damaged", true);
         if (canBeDamaged)
         {
             life -= _damage;
@@ -77,6 +80,30 @@ public class PlayerLogic : Agent
     {
         Debug.Log(healUnit);
         life += healUnit;
+    }
+
+    void AnimationHandler()
+    {
+        //Horizontal input
+        if (Input.GetAxisRaw("Horizontal") > 0)
+            characterAnimator.SetBool("right", true);
+        else if (Input.GetAxisRaw("Horizontal") < 0)
+            characterAnimator.SetBool("left", true);
+        else
+        {
+            characterAnimator.SetBool("left", false);
+            characterAnimator.SetBool("right", false);
+        }
+        //Vertical input
+        if (Input.GetAxisRaw("Vertical") > 0)
+            characterAnimator.SetBool("forward", true);
+        else if (Input.GetAxisRaw("Vertical") < 0)
+            characterAnimator.SetBool("backward", true);
+        else
+        {
+            characterAnimator.SetBool("forward", false);
+            characterAnimator.SetBool("backward", false);
+        }
     }
 
     void Die()
