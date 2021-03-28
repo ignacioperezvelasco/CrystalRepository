@@ -37,19 +37,24 @@ public class PlayerLogic : Agent
 
     public override void GetDamage(float _damage)
     {
-        characterAnimator.SetBool("damaged", true);
         if (canBeDamaged)
         {
             life -= _damage;
             canBeDamaged = false;
         }
 
+        Debug.Log(life);
         if (life <= 0)
             Die();
+        else
+        {
+            characterAnimator.SetBool("damaged", true);
+        }
     }
 
     public override void GetDamage(float _damage, Vector3 pushPosition, float force)
     {
+
         if (canBeDamaged)
         {
             life -= _damage;
@@ -67,8 +72,13 @@ public class PlayerLogic : Agent
             canBeDamaged = false;
         }
 
+        Debug.Log(life);
         if (life <= 0)
             Die();
+        else
+        {
+            characterAnimator.SetBool("damaged", true);
+        }
     }
 
     public bool IsAlive()
@@ -110,7 +120,7 @@ public class PlayerLogic : Agent
     {
         dead = true;
         //Activater animate
-
+        characterAnimator.SetBool("die", true);
     }
 
     public float GetLife()
