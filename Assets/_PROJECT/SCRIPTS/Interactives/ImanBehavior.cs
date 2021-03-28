@@ -168,8 +168,7 @@ public class ImanBehavior : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.tag == "CanBeHitted")
-        {
-            
+        {            
             if(!imEnemy)
                 timerActive = 0;
             if (myPole == iman.POSITIVE)
@@ -204,6 +203,7 @@ public class ImanBehavior : MonoBehaviour
         {
             //Daño a enemigo
             myEnemyScript.GetDamage(otherCharges + numChargesAdded);
+            Invoke("ResetObject",0.5f);
         }
         hasToExplote = false;
     }
@@ -350,7 +350,7 @@ public class ImanBehavior : MonoBehaviour
 
     #endregion
 
-    private void ResetObject()
+    public void ResetObject()
     {
         this.gameObject.tag = "CanBeHitted";
         nearImantableObjects.Clear();

@@ -430,10 +430,8 @@ public class Enemy : Agent
     #endregion
 
     #region EXPLOSION
-    void ExplosionAreaAttack()
+    public void ExplosionAreaAttack()
     {
-
-        //playerLogic.GetDamage(areaDamage, this.transform.position, areaPushingForce);
         Collider[] colliders = Physics.OverlapSphere(this.transform.position, 7);
         foreach (Collider hit in colliders)
         {
@@ -443,6 +441,10 @@ public class Enemy : Agent
                 rb.velocity = Vector3.zero;
 
                 rb.AddExplosionForce(forceExplosion, this.transform.position, forceExplosion, 2, ForceMode.Force);
+                if (rb.gameObject.tag == "Player")
+                {
+                    rb.gameObject.GetComponent<PlayerLogic>().GetDamage(areaDamage);
+                }
             }
         }
         auxiliar = Instantiate(explosionVFX, this.transform.position, Quaternion.identity);
@@ -507,16 +509,26 @@ public class Enemy : Agent
     #region KINEMATIC
     void HandleGround(bool isGrounded)
     {
+        //No esta aplicando fuerza
         if (!myImanBehaviorScript.GetApplyForce())
         {
+            //Esta grounded
             if (isGrounded)
             {
                 if (myRB.isKinematic == false)
                     myRB.isKinematic = true;
             }
+            //no esta grounded
             else if (myRB.isKinematic == true)
             {
                 myRB.isKinematic = false;
+            }
+        }
+        else
+        {
+            if (isGrounded)
+            {
+                
             }
         }
     }
