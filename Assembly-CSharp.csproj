@@ -62,8 +62,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\BossLogic.cs" />
-    <Compile Include="Assets\CheckPlayerZone.cs" />
     <Compile Include="Assets\LeanTween\Examples\Archived\OldGUIExamplesCS.cs" />
     <Compile Include="Assets\LeanTween\Examples\Archived\TestingPunch.cs" />
     <Compile Include="Assets\LeanTween\Examples\Archived\TestingRigidbodyCS.cs" />
@@ -98,7 +96,6 @@
     <Compile Include="Assets\LeanTween\Framework\LeanTween.cs" />
     <Compile Include="Assets\LeanTween\Framework\LeanTweenExt.cs" />
     <Compile Include="Assets\QuickOutline\Scripts\Outline.cs" />
-    <Compile Include="Assets\RockLogic.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Vertical Fog Package by Tzar\Fix\FixMobileDepth.cs" />
     <Compile Include="Assets\_PROJECT\PREFABS\LightRays2D\Script\LightRays2D.cs" />
@@ -107,6 +104,7 @@
     <Compile Include="Assets\_PROJECT\SCRIPTS\ActivateDeactivate.cs" />
     <Compile Include="Assets\_PROJECT\SCRIPTS\Activator.cs" />
     <Compile Include="Assets\_PROJECT\SCRIPTS\AreaAttack.cs" />
+    <Compile Include="Assets\_PROJECT\SCRIPTS\BossLogic.cs" />
     <Compile Include="Assets\_PROJECT\SCRIPTS\Camera\CameraTransition.cs" />
     <Compile Include="Assets\_PROJECT\SCRIPTS\Camera\FollowCharacter.cs" />
     <Compile Include="Assets\_PROJECT\SCRIPTS\Camera\cameraScript.cs" />
@@ -120,6 +118,7 @@
     <Compile Include="Assets\_PROJECT\SCRIPTS\Character\ShootingScript.cs" />
     <Compile Include="Assets\_PROJECT\SCRIPTS\Character\rotateToCam.cs" />
     <Compile Include="Assets\_PROJECT\SCRIPTS\Character\rvMovementPers.cs" />
+    <Compile Include="Assets\_PROJECT\SCRIPTS\CheckPlayerZone.cs" />
     <Compile Include="Assets\_PROJECT\SCRIPTS\ControlWagonAnimation.cs" />
     <Compile Include="Assets\_PROJECT\SCRIPTS\DeathTrigger.cs" />
     <Compile Include="Assets\_PROJECT\SCRIPTS\Elevator.cs" />
@@ -151,6 +150,7 @@
     <Compile Include="Assets\_PROJECT\SCRIPTS\Potion.cs" />
     <Compile Include="Assets\_PROJECT\SCRIPTS\PressureButton.cs" />
     <Compile Include="Assets\_PROJECT\SCRIPTS\RailWagonBehaviour.cs" />
+    <Compile Include="Assets\_PROJECT\SCRIPTS\RockLogic.cs" />
     <Compile Include="Assets\_PROJECT\SCRIPTS\Room1PrototipeManager.cs" />
     <Compile Include="Assets\_PROJECT\SCRIPTS\RoomFallEnemy.cs" />
     <Compile Include="Assets\_PROJECT\SCRIPTS\RoomImantableManager.cs" />
