@@ -83,7 +83,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1565312928016383676}
-  m_Enabled: 0
+  m_Enabled: 1
 --- !u!114 &1565312928016383616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 1565312929269763269}
   - component: {fileID: 1565312929269763268}
   m_Layer: 0
-  m_Name: TargertCamera
+  m_Name: TargetCamera
   m_TagString: Untagged
   m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
