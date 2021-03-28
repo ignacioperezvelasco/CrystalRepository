@@ -44,6 +44,7 @@ public class BossLogic : MonoBehaviour
     [SerializeField] float timePreparingChargeAttack = 1.5f;
     [SerializeField] float speedAttack = 0.5f;
     [SerializeField] float timeBetweenAttacks = 5;
+    [SerializeField] float chargeDamage = 30;
 
     [Header("TELEGRAPHING")]
     [SerializeField] Transform startTelegraphing;
@@ -177,7 +178,7 @@ public class BossLogic : MonoBehaviour
                     AreaAttack();
 
                     //Activamos el collider
-                    areaCollider.enabled = true;
+                    ActivateCollider();
 
                     //VFX 
                     GameObject go = Instantiate(area_VFX, VFX_Spawner.position, VFX_Spawner.rotation);
@@ -214,6 +215,14 @@ public class BossLogic : MonoBehaviour
         }
 
         DeactiveTelegraphing();
+
+        //Activamos el collider
+        ActivateCollider();
+
+        //Preparamos la desactivación del collider
+        Invoke("DeactivateCollider", speedAttack);
+
+
 
     }
     #endregion
@@ -260,6 +269,17 @@ public class BossLogic : MonoBehaviour
     }
     #endregion
 
+    #region ACTIVATE COLLIDER
+    void ActivateCollider()
+    {
+        //Desactivamos el sphereCollider
+        areaCollider.enabled = true;
+
+        //Reseteamos el Hitted
+        playerHitted = false;
+    }
+    #endregion
+
     #region DEACTIVATE COLLIDER
     void DeactivateCollider()
     {
@@ -276,12 +296,19 @@ public class BossLogic : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            if (!playerHitted && currentAttack == AttackType.AREA_ATTACK)
+            if (!playerHitted && (currentAttack == AttackType.AREA_ATTACK || currentAttack == AttackType.CHARGE_ATTACK))
             {
                 //Seteamos a true el hitted para no darle muchas veces, solo una por ataque
                 playerHitted = true;
 
-                playerLogic.GetDamage(areaDamage, this.transform.position, pushForce);
+                if (currentAttack == AttackType.AREA_ATTACK)
+                {
+                    playerLogic.GetDamage(areaDamage, this.transform.position, pushForce);
+                }
+                else if (currentAttack == AttackType.CHARGE_ATTACK)
+                {
+                    playerLogic.GetDamage(chargeDamage, this.transform.position, pushForce * 2);
+                }
             }
         }
     }
