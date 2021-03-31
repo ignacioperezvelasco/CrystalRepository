@@ -5,16 +5,20 @@ using DG.Tweening;
 
 public class PlayerLogic : Agent
 {
+    enum direction {FORWARD, FORWARDLEFT,FORWARDRIGHT,RIGHT,LEFT,BACKWARD, BACKWARDLEFT, BACKWARDRIGHT, IDLE }
+    direction currentDirection = direction.IDLE;
     [SerializeField] float maxHealth=100;
     bool dead = false;
     public bool canBeDamaged = true;
     public float timeInvencible;
     float timer = 0;
     [SerializeField]Animator characterAnimator;
+    rvMovementPers myMovementScript;
     // Start is called before the first frame update
     void Start()
     {
         life = maxHealth;
+        myMovementScript = this.GetComponent<rvMovementPers>();
     }
 
     // Update is called once per frame
@@ -94,26 +98,89 @@ public class PlayerLogic : Agent
 
     void AnimationHandler()
     {
-        //Horizontal input
-        if (Input.GetAxisRaw("Horizontal") > 0)
-            characterAnimator.SetBool("right", true);
-        else if (Input.GetAxisRaw("Horizontal") < 0)
-            characterAnimator.SetBool("left", true);
+        float angle=0;
+        if (myMovementScript.desiredVelocity == Vector3.zero)
+            currentDirection = direction.IDLE;
         else
         {
-            characterAnimator.SetBool("left", false);
-            characterAnimator.SetBool("right", false);
+            angle = Vector3.SignedAngle(this.transform.forward, myMovementScript.desiredVelocity, Vector3.up);
+
+            //forward
+            if ((angle < 22.5) && (angle > -22.5))
+                currentDirection = direction.FORWARD;
+            //forwardRight
+            else if ((angle > 22.5) && (angle < 67.5))
+                currentDirection = direction.FORWARDRIGHT;
+            //Right
+            else if ((angle > 67.5) && (angle < 112.5))
+                currentDirection = direction.RIGHT;
+            //Back-Right
+            else if ((angle > 112.5) && (angle < 157.5))
+                currentDirection = direction.BACKWARDRIGHT;
+            //Back
+            else if ((angle > 157.5) || (angle < -157.5))
+                currentDirection = direction.BACKWARD;
+            //Forward-left
+            else if ((angle < -22.5) && (angle > -67.5))
+                currentDirection = direction.FORWARDLEFT;
+            //Left
+            else if ((angle < -67.5) && (angle > -112.5))
+                currentDirection = direction.LEFT;
+            //Back-left
+            else if ((angle < -112.5) && (angle > -157.5))
+                currentDirection = direction.BACKWARDLEFT;
         }
-        //Vertical input
-        if (Input.GetAxisRaw("Vertical") > 0)
-            characterAnimator.SetBool("forward", true);
-        else if (Input.GetAxisRaw("Vertical") < 0)
-            characterAnimator.SetBool("backward", true);
-        else
+        SetBool(currentDirection);
+    }
+
+    void SetBool(direction current)
+    {
+        //All false
+        characterAnimator.SetBool("forward", false);
+        characterAnimator.SetBool("forwardRight", false);
+        characterAnimator.SetBool("forwardLeft", false);
+        characterAnimator.SetBool("right", false);
+        characterAnimator.SetBool("left", false);
+        characterAnimator.SetBool("backward", false);
+        characterAnimator.SetBool("backwardLeft", false);
+        characterAnimator.SetBool("backwardRight", false);
+        characterAnimator.SetBool("idle", false);
+
+
+        //True
+        switch (currentDirection)
         {
-            characterAnimator.SetBool("forward", false);
-            characterAnimator.SetBool("backward", false);
+            case direction.FORWARD:
+                characterAnimator.SetBool("forward", true);
+                break;
+            case direction.FORWARDLEFT:
+                characterAnimator.SetBool("forwardLeft", true);
+                break;
+            case direction.FORWARDRIGHT:
+                characterAnimator.SetBool("forwardRight", true);
+                break;
+            case direction.RIGHT:
+                characterAnimator.SetBool("right", true);
+                break;
+            case direction.LEFT:
+                characterAnimator.SetBool("left", true);
+                break;
+            case direction.BACKWARD:
+                characterAnimator.SetBool("backward", true);
+                break;
+            case direction.BACKWARDLEFT:
+                characterAnimator.SetBool("backwardLeft", true);
+                break;
+            case direction.BACKWARDRIGHT:
+                characterAnimator.SetBool("backwardRight", true);
+                break;
+            case direction.IDLE:
+                characterAnimator.SetBool("idle", true);
+                break;
+            default:
+                break;
         }
+
     }
 
     void Die()
