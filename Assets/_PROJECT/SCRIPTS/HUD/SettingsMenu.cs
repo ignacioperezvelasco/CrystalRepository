@@ -15,6 +15,8 @@ public class SettingsMenu : MonoBehaviour
 
     public TextMeshProUGUI resText;
     public TMP_Dropdown dropdownResolution;
+    public TMP_Dropdown dropdownFullScreen;
+    public TMP_Dropdown dropdownVsync;
 
     // Start is called before the first frame update
     void Start()
@@ -42,7 +44,7 @@ public class SettingsMenu : MonoBehaviour
 
     public void ApplyFullScreen()
     {
-        if (fullscreenToggle.isOn)
+        if (dropdownFullScreen.options[dropdownFullScreen.value].text == "Fullscreen")
         {
             Screen.fullScreen = true;
         }
@@ -50,11 +52,21 @@ public class SettingsMenu : MonoBehaviour
         {
             Screen.fullScreen = false;
         }
+
+        //TOGGLE
+        /*if (fullscreenToggle.isOn)
+        {
+            Screen.fullScreen = true;
+        }
+        else
+        {
+            Screen.fullScreen = false;
+        }*/
     }
 
     public void ApplyVSync()
     {
-        if (vSyncToggle.isOn)
+        if (dropdownVsync.options[dropdownVsync.value].text == "On")
         {
             QualitySettings.vSyncCount = 1;
         }
@@ -62,6 +74,17 @@ public class SettingsMenu : MonoBehaviour
         {
             QualitySettings.vSyncCount = 0;
         }
+
+        //TOGGLE
+        /*
+        if (vSyncToggle.isOn)
+        {
+            QualitySettings.vSyncCount = 1;
+        }
+        else
+        {
+            QualitySettings.vSyncCount = 0;
+        }*/
     }
 
     public void ResolutionLeft()
