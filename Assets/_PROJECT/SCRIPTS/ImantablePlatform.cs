@@ -27,7 +27,7 @@ public class ImantablePlatform : MonoBehaviour
     [SerializeField] float speed;
 
     [Header("IMANS")]
-    [SerializeField] ImanBehavior platformIman;
+    public ImanBehavior platformIman;
     [SerializeField] ImanBehavior rightIman;
     [SerializeField] ImanBehavior leftIman;
 
