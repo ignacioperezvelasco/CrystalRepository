@@ -33,24 +33,24 @@ public class ControlWagonAnimation : MonoBehaviour
     #region TRIGGER ENTER
     private void OnTriggerEnter(Collider other)
     {
-        //if (other.CompareTag("Player"))
-        //{
-        //    switch (type)
-        //    {
-        //        case CallWagonType.CALL:
-        //            {
-        //                CallWagon();
-        //                break;
-        //            }
-        //        case CallWagonType.BACK:
-        //            {
-        //                BackWagon();
-        //                break;
-        //            }
-        //        default:
-        //            break;
-        //    }
-        //}
+        if (other.CompareTag("Player"))
+        {
+            switch (type)
+            {
+                case CallWagonType.CALL:
+                    {
+                        //CallWagon();
+                        break;
+                    }
+                case CallWagonType.BACK:
+                    {
+                        BackWagon();
+                        break;
+                    }
+                default:
+                    break;
+            }
+        }
     }
     #endregion
     
