@@ -30,7 +30,7 @@ public class PSController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if ((myIB.mobility == mobilityType.MOBILE) || (myIB.mobility == mobilityType.STATIC))
+        if ((myIB.mobility == mobilityType.MOBILE) || (myIB.mobility == mobilityType.STATIC) || ((myIB.mobility == mobilityType.JUSTPOLE) && (myIB.alwaysSamePole == true)))
         {
             switch (myIB.myPole)
             {
