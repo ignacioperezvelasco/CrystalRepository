@@ -146,6 +146,12 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!54 &157555639 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 6025142838663353062, guid: 3a91acf6839b9a747831d5711637cca1,
+    type: 3}
+  m_PrefabInstance: {fileID: 6025142839793676096}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &161603410
 GameObject:
   m_ObjectHideFlags: 0
@@ -6757,6 +6763,16 @@ PrefabInstance:
       propertyPath: characterAnimator
       value: 
       objectReference: {fileID: 157555631}
+    - target: {fileID: 2563698222079319664, guid: 3a91acf6839b9a747831d5711637cca1,
+        type: 3}
+      propertyPath: oneHand
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2563698222079319664, guid: 3a91acf6839b9a747831d5711637cca1,
+        type: 3}
+      propertyPath: myRB
+      value: 
+      objectReference: {fileID: 157555639}
     - target: {fileID: 6025142838663353059, guid: 3a91acf6839b9a747831d5711637cca1,
         type: 3}
       propertyPath: m_Name

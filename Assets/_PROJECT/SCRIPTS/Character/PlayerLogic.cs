@@ -11,10 +11,12 @@ public class PlayerLogic : Agent
     public float timeInvencible;
     float timer = 0;
     [SerializeField]Animator characterAnimator;
+    [SerializeField]bool oneHand=false;
     // Start is called before the first frame update
     void Start()
     {
         life = maxHealth;
+        characterAnimator.SetBool("oneHand", oneHand);
     }
 
     // Update is called once per frame
@@ -94,26 +96,8 @@ public class PlayerLogic : Agent
 
     void AnimationHandler()
     {
-        //Horizontal input
-        if (Input.GetAxisRaw("Horizontal") > 0)
-            characterAnimator.SetBool("right", true);
-        else if (Input.GetAxisRaw("Horizontal") < 0)
-            characterAnimator.SetBool("left", true);
-        else
-        {
-            characterAnimator.SetBool("left", false);
-            characterAnimator.SetBool("right", false);
-        }
-        //Vertical input
-        if (Input.GetAxisRaw("Vertical") > 0)
-            characterAnimator.SetBool("forward", true);
-        else if (Input.GetAxisRaw("Vertical") < 0)
-            characterAnimator.SetBool("backward", true);
-        else
-        {
-            characterAnimator.SetBool("forward", false);
-            characterAnimator.SetBool("backward", false);
-        }
+        characterAnimator.SetFloat("Forward", Input.GetAxis("Vertical"));
+        characterAnimator.SetFloat("Horizontal", Input.GetAxis("Horizontal"));
     }
 
     void Die()
