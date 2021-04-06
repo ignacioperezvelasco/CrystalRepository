@@ -16,6 +16,7 @@ public class ImanBehavior : MonoBehaviour
     [SerializeField] SphereCollider mysphereCollider;
     [Header("ELEMENT TYPE")]
     public mobilityType mobility = mobilityType.NONE;
+    public bool alwaysSamePole=false;
     public iman myPole = iman.NONE;
     public LayerMask whatCanBeImanted;
     private Rigidbody myRB;
@@ -34,7 +35,7 @@ public class ImanBehavior : MonoBehaviour
     Collider[] others;
     GameObject otherGO;
     forceType myForceType = forceType.NONE;
-    int numChargesAdded = 0;
+    [SerializeField]int numChargesAdded = 0;
     // Start is called before the first frame update
     public bool imEnemy = false;
     private NavMeshAgent myNavMeshScript;
@@ -64,6 +65,30 @@ public class ImanBehavior : MonoBehaviour
         {
             //mysphereCollider = this.GetComponentInChildren<SphereCollider>();
             mysphereCollider.radius = 0.5f;
+        }
+        else
+        {            
+            switch (numChargesAdded)
+            {
+                case 1:
+                    mysphereCollider.enabled = true;
+                    mysphereCollider.radius = sizeSphereOneCharge;
+                    break;
+                case 2:
+                    mysphereCollider.enabled = true;
+                    mysphereCollider.radius = sizeSphereTwoCharge;
+                    break;
+                case 3:
+                    mysphereCollider.enabled = true;
+                    mysphereCollider.radius = sizeSphereThreeCharge;
+                    break;
+                default:
+                    break;
+            }
+            if (myPole != iman.NONE)
+            {
+                ActivateOutline(myPole);
+            }
         }
 
         if (imEnemy)
@@ -282,22 +307,10 @@ public class ImanBehavior : MonoBehaviour
 
     public void AddCharge(iman typeIman, int numCharge, Rigidbody bullet)
     {
-        if (numCharge >= 1)
+        if ((numCharge >= 1) && !alwaysSamePole)
         {
-            //Primero asignamos polo para que no haya problemas en otra parte del codigo
-            if (typeIman == iman.POSITIVE)
-            {
-                myPole = iman.POSITIVE;
-                outline.OutlineColor = new Color32(255, 0, 0, 255);
-            }
-            else
-            {
-                myPole = iman.NEGATIVE;
-                outline.OutlineColor = new Color32(0, 0, 255, 255);
-            }
-
-            //ACTIVAMOS SCRIPT OUTLINE
-            outline.enabled = true;
+            //Activamos Outline
+            ActivateOutline(typeIman);            
 
             if (mobility != mobilityType.JUSTPOLE)
             {
@@ -330,9 +343,28 @@ public class ImanBehavior : MonoBehaviour
         else
         {
             //Behavior if is no charge bullet
-            myRB.AddForce(bullet.velocity.normalized * 2, ForceMode.Impulse);
+            myRB.AddForce(bullet.velocity.normalized * 10, ForceMode.Impulse);
         }
     }
+
+    void ActivateOutline(iman type)
+    {
+        //Primero asignamos polo para que no haya problemas en otra parte del codigo
+        if (type == iman.POSITIVE)
+        {
+            myPole = iman.POSITIVE;
+            outline.OutlineColor = new Color32(255, 0, 0, 255);
+        }
+        else
+        {
+            myPole = iman.NEGATIVE;
+            outline.OutlineColor = new Color32(0, 0, 255, 255);
+        }
+
+        //ACTIVAMOS SCRIPT OUTLINE
+        outline.enabled = true;
+    }
+
 
     #region GETTERS
 
