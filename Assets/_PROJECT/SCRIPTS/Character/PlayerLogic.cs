@@ -12,6 +12,7 @@ public class PlayerLogic : Agent
     float timer = 0;
     [SerializeField]Animator characterAnimator;
     [SerializeField]bool oneHand=false;
+    [SerializeField] rvMovementPers myMovementScript;
     // Start is called before the first frame update
     void Start()
     {
@@ -96,8 +97,23 @@ public class PlayerLogic : Agent
 
     void AnimationHandler()
     {
-        characterAnimator.SetFloat("Forward", Input.GetAxis("Vertical"));
-        characterAnimator.SetFloat("Horizontal", Input.GetAxis("Horizontal"));
+        //characterAnimator.SetFloat("Forward", Input.GetAxis("Vertical"));
+        //characterAnimator.SetFloat("Horizontal", Input.GetAxis("Horizontal"));
+        float angle = 0;
+
+        if (myMovementScript.desiredVelocity != Vector3.zero)
+        {
+            angle = Vector3.SignedAngle(this.transform.forward, myMovementScript.desiredVelocity, Vector3.up);
+            characterAnimator.SetFloat("Horizontal", Mathf.Sin(angle * Mathf.Deg2Rad));
+            characterAnimator.SetFloat("Forward", Mathf.Cos(angle * Mathf.Deg2Rad));
+        }
+        else
+        {
+            characterAnimator.SetFloat("Horizontal", 0);
+            characterAnimator.SetFloat("Forward", 0);
+        }
+           
+       
     }
 
     void Die()
