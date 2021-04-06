@@ -11,10 +11,13 @@ public class PlayerLogic : Agent
     public float timeInvencible;
     float timer = 0;
     [SerializeField]Animator characterAnimator;
+    public bool oneHand = false;
+    [SerializeField] rvMovementPers myMovementScript;
     // Start is called before the first frame update
     void Start()
     {
         life = maxHealth;
+        characterAnimator.SetBool("oneHand", oneHand);
     }
 
     // Update is called once per frame
@@ -94,26 +97,23 @@ public class PlayerLogic : Agent
 
     void AnimationHandler()
     {
-        //Horizontal input
-        if (Input.GetAxisRaw("Horizontal") > 0)
-            characterAnimator.SetBool("right", true);
-        else if (Input.GetAxisRaw("Horizontal") < 0)
-            characterAnimator.SetBool("left", true);
+        //characterAnimator.SetFloat("Forward", Input.GetAxis("Vertical"));
+        //characterAnimator.SetFloat("Horizontal", Input.GetAxis("Horizontal"));
+        float angle = 0;
+
+        if (myMovementScript.desiredVelocity != Vector3.zero)
+        {
+            angle = Vector3.SignedAngle(this.transform.forward, myMovementScript.desiredVelocity, Vector3.up);
+            characterAnimator.SetFloat("Horizontal", Mathf.Sin(angle * Mathf.Deg2Rad));
+            characterAnimator.SetFloat("Forward", Mathf.Cos(angle * Mathf.Deg2Rad));
+        }
         else
         {
-            characterAnimator.SetBool("left", false);
-            characterAnimator.SetBool("right", false);
+            characterAnimator.SetFloat("Horizontal", 0);
+            characterAnimator.SetFloat("Forward", 0);
         }
-        //Vertical input
-        if (Input.GetAxisRaw("Vertical") > 0)
-            characterAnimator.SetBool("forward", true);
-        else if (Input.GetAxisRaw("Vertical") < 0)
-            characterAnimator.SetBool("backward", true);
-        else
-        {
-            characterAnimator.SetBool("forward", false);
-            characterAnimator.SetBool("backward", false);
-        }
+           
+       
     }
 
     void Die()

@@ -13,7 +13,7 @@ public class rvMovementPers : MonoBehaviour
     public float maxSpeed=5;
     public float jumpForce = 20;
     public float airControl=1;
-    Vector3 desiredVelocity;
+    public Vector3 desiredVelocity;
     float horizontal;
     float vertical;
     private bool _isGrounded = true;
