@@ -146,6 +146,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &157555633 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2563698222079319664, guid: 3a91acf6839b9a747831d5711637cca1,
+    type: 3}
+  m_PrefabInstance: {fileID: 6025142839793676096}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 157555630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90a861bd1db20d1489dec8829cead117, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &157555638 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6025142838663353061, guid: 3a91acf6839b9a747831d5711637cca1,
@@ -6880,6 +6892,11 @@ PrefabInstance:
       propertyPath: cooldown3
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 6025142838663353063, guid: 3a91acf6839b9a747831d5711637cca1,
+        type: 3}
+      propertyPath: myPlayerLogic
+      value: 
+      objectReference: {fileID: 157555633}
     - target: {fileID: 6025142838663353066, guid: 3a91acf6839b9a747831d5711637cca1,
         type: 3}
       propertyPath: m_Enabled

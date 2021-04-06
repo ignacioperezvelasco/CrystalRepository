@@ -8,6 +8,7 @@ public class ShootingScript : MonoBehaviour
     [Header("GUN")]
     [SerializeField] GameObject negativePS;
     [SerializeField] GameObject positivePS;
+    [SerializeField] PlayerLogic myPlayerLogic;
     public float damage = 10f;
     public float bulletSpeed = 100;
     public Rigidbody bullet;
@@ -44,7 +45,8 @@ public class ShootingScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        NegativeShootHandler(Input.GetButton("Fire2"), Input.GetButtonUp("Fire2"));
+        if(!myPlayerLogic.oneHand)
+            NegativeShootHandler(Input.GetButton("Fire2"), Input.GetButtonUp("Fire2"));
 
         PositiveShootHandler(Input.GetButton("Fire1"), Input.GetButtonUp("Fire1"));
 

@@ -11,7 +11,7 @@ public class PlayerLogic : Agent
     public float timeInvencible;
     float timer = 0;
     [SerializeField]Animator characterAnimator;
-    [SerializeField]bool oneHand=false;
+    public bool oneHand = false;
     [SerializeField] rvMovementPers myMovementScript;
     // Start is called before the first frame update
     void Start()
