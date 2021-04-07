@@ -97,8 +97,21 @@ public class PlayerLogic : Agent
 
     void AnimationHandler()
     {
-        //characterAnimator.SetFloat("Forward", Input.GetAxis("Vertical"));
-        //characterAnimator.SetFloat("Horizontal", Input.GetAxis("Horizontal"));
+        //Velocity
+        characterAnimator.SetFloat("Velocity", this.GetComponent<Rigidbody>().velocity.magnitude);
+
+        //Dash
+        if (myMovementScript.isDashing)
+        {
+            characterAnimator.SetBool("Dash", true);
+        }
+        else 
+        {
+            if(characterAnimator.GetBool("Dash"))
+                characterAnimator.SetBool("Dash", false);
+        }
+
+        //Direction
         float angle = 0;
 
         if (myMovementScript.desiredVelocity != Vector3.zero)
