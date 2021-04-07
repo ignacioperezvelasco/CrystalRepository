@@ -160,6 +160,12 @@
     <Compile Include="Assets\_PROJECT\SCRIPTS\Room1PrototipeManager.cs" />
     <Compile Include="Assets\_PROJECT\SCRIPTS\RoomFallEnemy.cs" />
     <Compile Include="Assets\_PROJECT\SCRIPTS\RoomImantableManager.cs" />
+    <Compile Include="Assets\_PROJECT\SCRIPTS\SOUND\AudioManager.cs" />
+    <Compile Include="Assets\_PROJECT\SCRIPTS\SOUND\BackgroundMusic.cs" />
+    <Compile Include="Assets\_PROJECT\SCRIPTS\SOUND\ButtonSound.cs" />
+    <Compile Include="Assets\_PROJECT\SCRIPTS\SOUND\MusicManager.cs" />
+    <Compile Include="Assets\_PROJECT\SCRIPTS\SOUND\Sound.cs" />
+    <Compile Include="Assets\_PROJECT\SCRIPTS\SOUND\Sound3D.cs" />
     <Compile Include="Assets\_PROJECT\SCRIPTS\SetPlayerChild.cs" />
     <Compile Include="Assets\_PROJECT\SCRIPTS\SimpleCameraController.cs" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
