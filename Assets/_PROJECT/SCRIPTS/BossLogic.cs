@@ -69,6 +69,12 @@ public class BossLogic : MonoBehaviour
     //[SerializeField] float rotationSpeed = 1.5f;
     //[SerializeField] float rotationMagnitud = 400;
     Animator bossAnimator;
+    [Header("BOSS ANIMATIONS")]
+    [SerializeField] Animator modelAnimator;
+    [SerializeField] GameObject particlesLaunchRock;
+    [SerializeField] float startParticles = 0.25f;
+    [SerializeField] float endParticles = 2.05f;
+    float delayLaunchRock = 1.25f;
 
     float timerAttack = 0;
     #endregion
@@ -167,9 +173,12 @@ public class BossLogic : MonoBehaviour
                 {
                     //Miramos al jugador
                     Vector3 toLookAt = new Vector3(player.position.x, this.transform.position.y, player.position.z);
-                    this.transform.LookAt(toLookAt);
+                    this.transform.DOLookAt(toLookAt, timePreparingChargeAttack);
 
-                    RockAttack();
+                    //PREPARAMOS EL ATAQUE
+                    Invoke("PreparingRockAttack", timePreparingChargeAttack);
+                    
+
                     break;
                 }
             case AttackType.AREA_ATTACK:
@@ -238,6 +247,21 @@ public class BossLogic : MonoBehaviour
     void DeactiveTelegraphing()
     {
         line.enabled = false;
+    }
+    #endregion
+
+    #region PREPARING ROCK ATTACK
+    void PreparingRockAttack()
+    {
+        //Activamos la animacion
+        modelAnimator.SetTrigger("RockAttack");
+
+        //Preparamos las particulas
+        Invoke("StartParticles", startParticles);
+        Invoke("EndParticles", endParticles);
+
+        //Preparamos el lanzamiento
+        Invoke("RockAttack", delayLaunchRock);
     }
     #endregion
 
@@ -311,6 +335,20 @@ public class BossLogic : MonoBehaviour
                 }
             }
         }
+    }
+    #endregion
+
+    #region START PARTICLES
+    void StartParticles()
+    {
+        particlesLaunchRock.SetActive(true);
+    }
+    #endregion
+
+    #region END PARTICLES
+    void EndParticles()
+    {
+        particlesLaunchRock.SetActive(false);
     }
     #endregion
 
