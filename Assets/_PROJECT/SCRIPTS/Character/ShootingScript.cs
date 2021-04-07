@@ -8,6 +8,8 @@ public class ShootingScript : MonoBehaviour
     [Header("GUN")]
     [SerializeField] GameObject negativePS;
     [SerializeField] GameObject positivePS;
+    [SerializeField] PlayerLogic myPlayerLogic;
+    [SerializeField] Animator myAnimator;
     public float damage = 10f;
     public float bulletSpeed = 100;
     public Rigidbody bullet;
@@ -44,7 +46,8 @@ public class ShootingScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        NegativeShootHandler(Input.GetButton("Fire2"), Input.GetButtonUp("Fire2"));
+        if(!myPlayerLogic.oneHand)
+            NegativeShootHandler(Input.GetButton("Fire2"), Input.GetButtonUp("Fire2"));
 
         PositiveShootHandler(Input.GetButton("Fire1"), Input.GetButtonUp("Fire1"));
 
@@ -127,6 +130,9 @@ public class ShootingScript : MonoBehaviour
         {
             if (!isChargingPositive && !isChargingNegative)
             {
+                //Seteamos animator
+                myAnimator.SetBool("AimingRight", true);
+
                 isChargingNegative = true;
                 negativePS.SetActive(true);
             }
@@ -179,7 +185,8 @@ public class ShootingScript : MonoBehaviour
             canShootNegative = false;
             //PS
             negativePS.SetActive(false);
-
+            //Seteamos animator
+            myAnimator.SetBool("AimingRight", false);
         }
         else if (shotButtonUp)
         {
@@ -196,6 +203,9 @@ public class ShootingScript : MonoBehaviour
         {
             if (!isChargingPositive && !isChargingNegative)
             {
+                //Seteamos animator
+                myAnimator.SetBool("AimingLeft", true);
+
                 isChargingPositive = true;
                 positivePS.SetActive(true);
             }
@@ -246,6 +256,9 @@ public class ShootingScript : MonoBehaviour
             canShootPositive = false;
             //PS
             positivePS.SetActive(false);
+            //Seteamos animator
+            myAnimator.SetBool("AimingLeft", false);
+
         }
         else if (shotButtonUp)
         {

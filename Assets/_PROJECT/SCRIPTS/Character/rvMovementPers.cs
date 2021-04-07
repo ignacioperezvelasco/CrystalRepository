@@ -13,7 +13,7 @@ public class rvMovementPers : MonoBehaviour
     public float maxSpeed=5;
     public float jumpForce = 20;
     public float airControl=1;
-    Vector3 desiredVelocity;
+    public Vector3 desiredVelocity;
     float horizontal;
     float vertical;
     private bool _isGrounded = true;
@@ -31,7 +31,7 @@ public class rvMovementPers : MonoBehaviour
 
     [Header("DASH")]
     [SerializeField] GameObject myTrail;
-    bool isDashing=false;
+    public bool isDashing=false;
     float dashTimer = 0f;
     public float dashvelocity = 30;
     private Vector3 dashV;
@@ -133,6 +133,7 @@ public class rvMovementPers : MonoBehaviour
                 dashTimer -= Time.fixedDeltaTime;
                 if (dashTimer <= 0f)
                 {
+                    
                     isDashing = false;
                 }
             }

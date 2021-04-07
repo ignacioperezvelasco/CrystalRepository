@@ -17,8 +17,6 @@ public class Prueba : StateMachineBehaviour
        //    Debug.Log("Entro left");
        if(animator.GetBool("damaged"))
            animator.SetBool("damaged", false);
-        if (animator.GetBool("die"))
-            animator.SetBool("die", false);
     }
 
      //OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
