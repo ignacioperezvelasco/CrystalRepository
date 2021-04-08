@@ -45,7 +45,6 @@ public class PickUP : MonoBehaviour
             }
         }
         
-
         if (isObjectInside)
         {
             if (isGrabed)

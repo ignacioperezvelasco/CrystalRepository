@@ -116,8 +116,8 @@ public class rvMovementPers : MonoBehaviour
             {
                 //Add velocity
                 myRb.AddForce((desiredVelocity * speed), ForceMode.Acceleration);
-                if ((horizontal == 0) && (vertical == 0) && _isGrounded)                
-                    myRb.velocity = Vector3.zero;
+                //if ((horizontal == 0) && (vertical == 0) && _isGrounded)                
+                   // myRb.velocity = Vector3.zero;
                 
                 //Max velocity
                 if ((myRb.velocity.magnitude > maxSpeed) && _isGrounded)
