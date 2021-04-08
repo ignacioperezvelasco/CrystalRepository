@@ -6557,6 +6557,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1711813855672652347, guid: 3a91acf6839b9a747831d5711637cca1,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2329974780280994487, guid: 3a91acf6839b9a747831d5711637cca1,
         type: 3}
       propertyPath: m_Enabled
@@ -6577,6 +6582,21 @@ PrefabInstance:
       propertyPath: characterAnimator
       value: 
       objectReference: {fileID: 667222867}
+    - target: {fileID: 3623820523464772893, guid: 3a91acf6839b9a747831d5711637cca1,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5350123077657557620, guid: 3a91acf6839b9a747831d5711637cca1,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6025142837679545524, guid: 3a91acf6839b9a747831d5711637cca1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6025142838663353059, guid: 3a91acf6839b9a747831d5711637cca1,
         type: 3}
       propertyPath: m_Name
@@ -6640,11 +6660,16 @@ PrefabInstance:
     - target: {fileID: 6025142838663353061, guid: 3a91acf6839b9a747831d5711637cca1,
         type: 3}
       propertyPath: speed
-      value: 500
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 6025142838663353062, guid: 3a91acf6839b9a747831d5711637cca1,
         type: 3}
       propertyPath: m_Drag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6025142838663353062, guid: 3a91acf6839b9a747831d5711637cca1,
+        type: 3}
+      propertyPath: m_UseGravity
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6025142838663353063, guid: 3a91acf6839b9a747831d5711637cca1,

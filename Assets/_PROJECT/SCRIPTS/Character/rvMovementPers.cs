@@ -8,6 +8,7 @@ public class rvMovementPers : MonoBehaviour
     //movement
     public bool dead = false;
     [Header("movement")]
+    [SerializeField] Vector3 myGravity = new Vector3(0, -15, 0);
     public Rigidbody myRb;
     public float speed=2;
     public float maxSpeed=5;
@@ -109,6 +110,7 @@ public class rvMovementPers : MonoBehaviour
 
     private void FixedUpdate()
     {
+        myRb.AddForce(myGravity,ForceMode.Acceleration);
         if (!isStoped)
         {
             //Movement

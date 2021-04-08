@@ -116,7 +116,6 @@ public class PlayerLogic : Agent
        
         angle = Vector3.SignedAngle(this.transform.forward, this.GetComponent<Rigidbody>().velocity, Vector3.up);
         characterAnimator.SetFloat("Horizontal", (Mathf.Sin(angle * Mathf.Deg2Rad) * this.GetComponent<Rigidbody>().velocity.magnitude));
-        Debug.Log((Mathf.Sin(angle * Mathf.Deg2Rad) * this.GetComponent<Rigidbody>().velocity.magnitude));
         characterAnimator.SetFloat("Forward", (Mathf.Cos(angle * Mathf.Deg2Rad) * this.GetComponent<Rigidbody>().velocity.magnitude));
        
            
