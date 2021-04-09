@@ -218,6 +218,10 @@ public class ImantablePlatform : MonoBehaviour
         {
             player.transform.SetParent(platformTransform);
         }
+        else if (other.CompareTag("CanBeHitted") && type == PlatformType.PLATFORM)
+        {
+            other.gameObject.transform.SetParent(platformTransform);
+        }
 
         if (type == PlatformType.RAIL && other.gameObject.layer == LayerMask.NameToLayer("Enemy") && !hitted && state == PlatformState.MOVING)
         {            
@@ -234,7 +238,11 @@ public class ImantablePlatform : MonoBehaviour
         if (other.CompareTag("Player") && type == PlatformType.PLATFORM)
         {
             player.transform.SetParent(null);
-        }        
+        }
+        else if (other.CompareTag("CanBeHitted") && type == PlatformType.PLATFORM)
+        {
+            other.gameObject.transform.SetParent(null);
+        }
     }
     #endregion
 
