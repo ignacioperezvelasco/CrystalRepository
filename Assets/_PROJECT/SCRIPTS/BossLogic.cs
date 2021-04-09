@@ -35,6 +35,8 @@ public class BossLogic : MonoBehaviour
     Transform player;
     PlayerLogic playerLogic;
 
+    bool isKilled = false;
+
     public AttackType currentAttack;
 
     [Header("AREAS")]
@@ -102,18 +104,22 @@ public class BossLogic : MonoBehaviour
     #region UPDATE
     void Update()
     {
-        //Seeteamos las posiciones del telgraphing
-        line.SetPosition(0, startTelegraphing.position);
-        line.SetPosition(1, endTelegraphing.position);
-
-        timerAttack += Time.deltaTime;
-        if (timerAttack >= timeBetweenAttacks)
+        if (!isKilled)
         {
-            timerAttack = 0;
+            //Seeteamos las posiciones del telgraphing
+            line.SetPosition(0, startTelegraphing.position);
+            line.SetPosition(1, endTelegraphing.position);
 
-            //Controlameos el ataque
-            AttackBehaviourHandler();
+            timerAttack += Time.deltaTime;
+            if (timerAttack >= timeBetweenAttacks)
+            {
+                timerAttack = 0;
+
+                //Controlameos el ataque
+                AttackBehaviourHandler();
+            }
         }
+        
     }
     #endregion
 
@@ -349,6 +355,13 @@ public class BossLogic : MonoBehaviour
     void EndParticles()
     {
         particlesLaunchRock.SetActive(false);
+    }
+    #endregion
+
+    #region KILL BOSS
+    public void KillBoss()
+    {
+        isKilled = true;
     }
     #endregion
 
