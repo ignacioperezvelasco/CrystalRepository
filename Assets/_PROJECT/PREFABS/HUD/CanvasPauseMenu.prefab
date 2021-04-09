@@ -146,6 +146,7 @@ GameObject:
   - component: {fileID: 699257555202476954}
   - component: {fileID: 699257555202476953}
   - component: {fileID: 699257555202476952}
+  - component: {fileID: 3265753971791825424}
   m_Layer: 5
   m_Name: Continue
   m_TagString: Untagged
@@ -265,6 +266,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &3265753971791825424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 699257555202476958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 163370372314bc0478e0c6bee5784127, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HoverSound: Button Hover
+  PressSound: Button Sound
 --- !u!1 &699257555308777792
 GameObject:
   m_ObjectHideFlags: 0
@@ -642,6 +657,7 @@ GameObject:
   - component: {fileID: 5340558930412491126}
   - component: {fileID: 8413341430256736925}
   - component: {fileID: 6731555510659444136}
+  - component: {fileID: 1345877471574744900}
   m_Layer: 5
   m_Name: Settings
   m_TagString: Untagged
@@ -750,6 +766,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1345877471574744900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3608277204994960934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 163370372314bc0478e0c6bee5784127, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HoverSound: Button Hover
+  PressSound: Button Sound
 --- !u!1 &3675288697056659479
 GameObject:
   m_ObjectHideFlags: 0
@@ -1030,6 +1060,7 @@ GameObject:
   - component: {fileID: 6629694529794240998}
   - component: {fileID: 3106763843354175990}
   - component: {fileID: 230082113049204919}
+  - component: {fileID: 3575361777774315024}
   m_Layer: 5
   m_Name: Quit
   m_TagString: Untagged
@@ -1149,6 +1180,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &3575361777774315024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6460473891745196544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 163370372314bc0478e0c6bee5784127, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HoverSound: Button Hover
+  PressSound: Button Sound
 --- !u!1 &6612778731258735537
 GameObject:
   m_ObjectHideFlags: 0
@@ -1161,6 +1206,7 @@ GameObject:
   - component: {fileID: 4142026891079203326}
   - component: {fileID: 2325349723547898671}
   - component: {fileID: 4054779595316764080}
+  - component: {fileID: 4885257807821948916}
   m_Layer: 5
   m_Name: Main Menu
   m_TagString: Untagged
@@ -1280,6 +1326,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &4885257807821948916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6612778731258735537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 163370372314bc0478e0c6bee5784127, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HoverSound: Button Hover
+  PressSound: Button Sound
 --- !u!1 &7769648982384080623
 GameObject:
   m_ObjectHideFlags: 0
