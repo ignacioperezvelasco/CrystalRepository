@@ -46,7 +46,7 @@ public class PlayerLogic : Agent
             canBeDamaged = false;
         }
 
-        Debug.Log(life);
+        //Debug.Log(life);
         if (life <= 0)
             Die();
         else
@@ -63,7 +63,7 @@ public class PlayerLogic : Agent
             life -= _damage;
 
             //Calculamos la direccion del empujón
-            Vector3 directionPush = -pushPosition - this.transform.position;
+            Vector3 directionPush = pushPosition - this.transform.position;
             directionPush.y = 0;
             directionPush = directionPush.normalized;
 
@@ -75,12 +75,13 @@ public class PlayerLogic : Agent
             canBeDamaged = false;
         }
 
-        Debug.Log(life);
+        //Debug.Log(life);
         if (life <= 0)
             Die();
         else
         {
             characterAnimator.SetBool("damaged", true);
+            Debug.Log("Esta a true");
         }
     }
 
@@ -113,18 +114,11 @@ public class PlayerLogic : Agent
 
         //Direction
         float angle = 0;
-
-        if (myMovementScript.desiredVelocity != Vector3.zero)
-        {
-            angle = Vector3.SignedAngle(this.transform.forward, myMovementScript.desiredVelocity, Vector3.up);
-            characterAnimator.SetFloat("Horizontal", Mathf.Sin(angle * Mathf.Deg2Rad));
-            characterAnimator.SetFloat("Forward", Mathf.Cos(angle * Mathf.Deg2Rad));
-        }
-        else
-        {
-            characterAnimator.SetFloat("Horizontal", 0);
-            characterAnimator.SetFloat("Forward", 0);
-        }
+       
+        angle = Vector3.SignedAngle(this.transform.forward, this.GetComponent<Rigidbody>().velocity, Vector3.up);
+        characterAnimator.SetFloat("Horizontal", (Mathf.Sin(angle * Mathf.Deg2Rad) * this.GetComponent<Rigidbody>().velocity.magnitude));
+        characterAnimator.SetFloat("Forward", (Mathf.Cos(angle * Mathf.Deg2Rad) * this.GetComponent<Rigidbody>().velocity.magnitude));
+       
            
        
     }

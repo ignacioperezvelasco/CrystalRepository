@@ -43,9 +43,19 @@ public class PickUP : MonoBehaviour
 
                 }
             }
-        }      
-
+        }
         
+        if (isObjectInside)
+        {
+            if (isGrabed)
+            {
+                //objectTransform.DOMove(this.transform.position, speedAtraction);
+            }
+            else
+            {
+                collider.enabled = true;
+            }
+        }
     }
     #endregion
 
