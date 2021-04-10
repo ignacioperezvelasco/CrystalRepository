@@ -44,6 +44,7 @@ public class Enemy : Agent
     [SerializeField] float areaPushingForce = 4;
     [SerializeField] float chargeDamage = 20;
     [SerializeField] float chargePushingForce = 3;
+    bool hasHitted = false;
 
     [Header("PATROL")]
     [SerializeField] List<Transform> patrolPoints;
@@ -335,7 +336,11 @@ public class Enemy : Agent
         //Miramos si esta haciendo el ataque en carga y choca a el player 
         if (isCharging && rangeAttackLogic.GetIsPlayer())
         {
-            playerLogic.GetDamage(chargeDamage, this.transform.position, chargePushingForce);
+            if (!hasHitted)
+            {
+                playerLogic.GetDamage(chargeDamage, this.transform.position, chargePushingForce);
+                hasHitted = true;
+            }
         }
 
         line.SetPosition(0, baseTelegraph.position);
@@ -427,6 +432,7 @@ public class Enemy : Agent
     void DeactivaterRangeAttack()
     {
         isCharging = false;
+        hasHitted = false;
     }
     #endregion
 
@@ -441,7 +447,7 @@ public class Enemy : Agent
             {
                 rb.velocity = Vector3.zero;
 
-                rb.AddExplosionForce(forceExplosion, this.transform.position, forceExplosion, 2, ForceMode.Force);
+                rb.AddExplosionForce(forceExplosion, this.transform.position, forceExplosion, 1, ForceMode.Force);
                 if (rb.gameObject.tag == "Player")
                 {
                     rb.gameObject.GetComponent<PlayerLogic>().GetDamage(areaDamage);

@@ -46,7 +46,7 @@ public class PlayerLogic : Agent
             canBeDamaged = false;
         }
 
-        Debug.Log(life);
+        //Debug.Log(life);
         if (life <= 0)
             Die();
         else
@@ -63,7 +63,7 @@ public class PlayerLogic : Agent
             life -= _damage;
 
             //Calculamos la direccion del empujón
-            Vector3 directionPush = -pushPosition - this.transform.position;
+            Vector3 directionPush = pushPosition - this.transform.position;
             directionPush.y = 0;
             directionPush = directionPush.normalized;
 
@@ -75,12 +75,13 @@ public class PlayerLogic : Agent
             canBeDamaged = false;
         }
 
-        Debug.Log(life);
+        //Debug.Log(life);
         if (life <= 0)
             Die();
         else
         {
             characterAnimator.SetBool("damaged", true);
+            Debug.Log("Esta a true");
         }
     }
 

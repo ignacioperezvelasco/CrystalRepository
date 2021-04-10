@@ -134,8 +134,7 @@ public class rvMovementPers : MonoBehaviour
                 myRb.MovePosition(myRb.position + dashV * dashvelocity *  Time.fixedDeltaTime);
                 dashTimer -= Time.fixedDeltaTime;
                 if (dashTimer <= 0f)
-                {
-                    
+                {                    
                     isDashing = false;
                 }
             }

@@ -7,16 +7,19 @@ public class Prueba : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-       //if (animator.GetBool("forward"))
-       //    Debug.Log("Entro Forward");
-       //else if (animator.GetBool("backward"))
-       //    Debug.Log("Entro backward");
-       //else if(animator.GetBool("right"))
-       //    Debug.Log("Entro right");
-       //else if(animator.GetBool("left"))
-       //    Debug.Log("Entro left");
-       if(animator.GetBool("damaged"))
-           animator.SetBool("damaged", false);
+        //if (animator.GetBool("forward"))
+        //    Debug.Log("Entro Forward");
+        //else if (animator.GetBool("backward"))
+        //    Debug.Log("Entro backward");
+        //else if(animator.GetBool("right"))
+        //    Debug.Log("Entro right");
+        //else if(animator.GetBool("left"))
+        //    Debug.Log("Entro left");
+        if (animator.GetBool("damaged"))
+        {
+            animator.SetBool("damaged", false);
+            Debug.Log("esta a false");
+        }
     }
 
      //OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
