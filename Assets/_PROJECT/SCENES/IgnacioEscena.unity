@@ -292,6 +292,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainCharacter
       objectReference: {fileID: 0}
+    - target: {fileID: 5420115300347966284, guid: 4042dcf05b14e66438ae035895746c31,
+        type: 3}
+      propertyPath: myAnimator
+      value: 
+      objectReference: {fileID: 1065910670}
     - target: {fileID: 5420115300347966286, guid: 4042dcf05b14e66438ae035895746c31,
         type: 3}
       propertyPath: dashTime
@@ -352,7 +357,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4102848448148445980, guid: 4042dcf05b14e66438ae035895746c31, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4042dcf05b14e66438ae035895746c31, type: 3}
 --- !u!1001 &312443810
 PrefabInstance:
@@ -5830,6 +5836,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9b570243284187d44a1e5b8a02248cfb, type: 3}
+--- !u!95 &1065910670 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1896731843569135253, guid: 4042dcf05b14e66438ae035895746c31,
+    type: 3}
+  m_PrefabInstance: {fileID: 287132442}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1086859858
 GameObject:
   m_ObjectHideFlags: 0

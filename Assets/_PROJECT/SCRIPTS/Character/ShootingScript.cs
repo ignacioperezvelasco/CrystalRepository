@@ -130,8 +130,6 @@ public class ShootingScript : MonoBehaviour
         {
             if (!isChargingPositive && !isChargingNegative)
             {
-                //Seteamos animator
-                myAnimator.SetBool("AimingRight", true);
 
                 isChargingNegative = true;
                 negativePS.SetActive(true);
@@ -186,7 +184,7 @@ public class ShootingScript : MonoBehaviour
             //PS
             negativePS.SetActive(false);
             //Seteamos animator
-            myAnimator.SetBool("AimingRight", false);
+
         }
         else if (shotButtonUp)
         {
@@ -203,8 +201,6 @@ public class ShootingScript : MonoBehaviour
         {
             if (!isChargingPositive && !isChargingNegative)
             {
-                //Seteamos animator
-                myAnimator.SetBool("AimingLeft", true);
 
                 isChargingPositive = true;
                 positivePS.SetActive(true);
@@ -257,8 +253,8 @@ public class ShootingScript : MonoBehaviour
             //PS
             positivePS.SetActive(false);
             //Seteamos animator
-            myAnimator.SetBool("AimingLeft", false);
-
+            myAnimator.SetBool("shootLeft", true);
+            Debug.Log("dedede "+myAnimator.GetBool("ShotLeft"));
         }
         else if (shotButtonUp)
         {

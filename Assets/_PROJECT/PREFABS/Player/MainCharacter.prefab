@@ -5888,7 +5888,7 @@ MonoBehaviour:
   negativePS: {fileID: 7048553583570012149}
   positivePS: {fileID: 4419344994487080740}
   myPlayerLogic: {fileID: 4265349373781901275}
-  myAnimator: {fileID: 4102848448148445980}
+  myAnimator: {fileID: 1896731843569135253}
   damage: 10
   bulletSpeed: 35
   bullet: {fileID: 6096528498339846667, guid: b7c935c248e673d49b81bec311b263e5, type: 3}

@@ -15,10 +15,14 @@ public class Prueba : StateMachineBehaviour
         //    Debug.Log("Entro right");
         //else if(animator.GetBool("left"))
         //    Debug.Log("Entro left");
+        
         if (animator.GetBool("damaged"))
         {
             animator.SetBool("damaged", false);
-            Debug.Log("esta a false");
+        }
+        if (animator.GetBool("shootLeft"))
+        {
+            animator.SetBool("shootLeft", false);
         }
     }
 
