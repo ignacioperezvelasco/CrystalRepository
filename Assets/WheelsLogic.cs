@@ -10,6 +10,8 @@ public class WheelsLogic : MonoBehaviour
     #region VARIABLES
     BossLogic boss;
 
+    [SerializeField] float wheelDisplacement = 0.2f;
+
     [Header("PARTICLES EFECT")]
     [SerializeField] GameObject leftFrontParticles;
     [SerializeField] GameObject leftBackParticles;
@@ -89,45 +91,45 @@ public class WheelsLogic : MonoBehaviour
     #region CHECK WHEELS
     void CheckWheels()
     {
-        ///// -- CHECK LEFT FRONT
-        //if (!leftFrontDisabled)
-        //{
-        //    if (leftFrontIman.myPole == iman.POSITIVE)
-        //    {
-        //        //Desactivamos la rueda
-        //        DeactivateLeftFront();
-        //    }
-        //}
+        /// -- CHECK LEFT FRONT
+        if (!leftFrontDisabled)
+        {
+            if (leftFrontIman.myPole == iman.POSITIVE)
+            {
+                //Desactivamos la rueda
+                DeactivateLeftFront();
+            }
+        }
 
-        ///// -- CHECK LEFT BACK
-        //if (!leftBackDisabled)
-        //{
-        //    if (leftBackIman.myPole == iman.POSITIVE)
-        //    {
-        //        //Desactivamos la rueda
-        //        DeactivateLeftBack();
-        //    }
-        //}
+        /// -- CHECK LEFT BACK
+        if (!leftBackDisabled)
+        {
+            if (leftBackIman.myPole == iman.POSITIVE)
+            {
+                //Desactivamos la rueda
+                DeactivateLeftBack();
+            }
+        }
 
-        ///// -- CHECK RIGHT FRONT
-        //if (!rightFrontDisabled)
-        //{
-        //    if (rightFrontIman.myPole == iman.POSITIVE)
-        //    {
-        //        //Desactivamos la rueda
-        //        DeactivateRightFront();
-        //    }
-        //}
+        /// -- CHECK RIGHT FRONT
+        if (!rightFrontDisabled)
+        {
+            if (rightFrontIman.myPole == iman.POSITIVE)
+            {
+                //Desactivamos la rueda
+                DeactivateRightFront();
+            }
+        }
 
-        ///// -- CHECK RIGHT BACK
-        //if (!rightBackDisabled)
-        //{
-        //    if (rightBackIman.myPole == iman.POSITIVE)
-        //    {
-        //        //Desactivamos la rueda
-        //        DeactivateRightBack();
-        //    }
-        //}
+        /// -- CHECK RIGHT BACK
+        if (!rightBackDisabled)
+        {
+            if (rightBackIman.myPole == iman.POSITIVE)
+            {
+                //Desactivamos la rueda
+                DeactivateRightBack();
+            }
+        }
 
     }
     #endregion
