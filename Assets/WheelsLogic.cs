@@ -11,6 +11,7 @@ public class WheelsLogic : MonoBehaviour
     BossLogic boss;
 
     [SerializeField] float wheelDisplacement = 0.2f;
+    [SerializeField] Transform praphicsTransform;
 
     [Header("PARTICLES EFECT")]
     [SerializeField] GameObject leftFrontParticles;
@@ -146,8 +147,8 @@ public class WheelsLogic : MonoBehaviour
         //leftFrontWheel_1.DOMoveX((leftFrontWheel_1.position.x - 0.2f), 0.5f);
 
         //Quitamos las ruedas de ser hijas de la animación
-        leftFrontWheel_1.SetParent(this.transform);
-        leftFrontWheel_2.SetParent(this.transform);
+        leftFrontWheel_1.SetParent(praphicsTransform);
+        leftFrontWheel_2.SetParent(praphicsTransform);
     }
     #endregion
 
@@ -164,8 +165,8 @@ public class WheelsLogic : MonoBehaviour
         //leftBackWheel_1.DOMoveX((leftBackWheel_1.position.x + 0.2f), 0.5f);
 
         //Quitamos las ruedas de ser hijas de la animación
-        leftBackWheel_1.SetParent(this.transform);
-        leftBackWheel_2.SetParent(this.transform);
+        leftBackWheel_1.SetParent(praphicsTransform);
+        leftBackWheel_2.SetParent(praphicsTransform);
 
     }
     #endregion
@@ -182,8 +183,8 @@ public class WheelsLogic : MonoBehaviour
         //rightFrontWheel_1.DOMoveX((rightFrontWheel_1.position.x - 0.2f), 0.5f);
 
         //Quitamos las ruedas de ser hijas de la animación
-        rightFrontWheel_1.SetParent(this.transform);
-        rightFrontWheel_2.SetParent(this.transform);
+        rightFrontWheel_1.SetParent(praphicsTransform);
+        rightFrontWheel_2.SetParent(praphicsTransform);
     }
     #endregion
 
@@ -199,8 +200,8 @@ public class WheelsLogic : MonoBehaviour
         //rightBackWheel_1.DOMoveX((rightBackWheel_1.position.x + 0.2f), 0.5f);
 
         //Quitamos las ruedas de ser hijas de la animación
-        rightBackWheel_1.SetParent(this.transform);
-        rightBackWheel_2.SetParent(this.transform);
+        rightBackWheel_1.SetParent(praphicsTransform);
+        rightBackWheel_2.SetParent(praphicsTransform);
     }
     #endregion
 }
