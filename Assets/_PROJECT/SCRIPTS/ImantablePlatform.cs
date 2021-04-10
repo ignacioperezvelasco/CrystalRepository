@@ -25,6 +25,7 @@ public class ImantablePlatform : MonoBehaviour
     public float forceToPush = 10f;
 
     [SerializeField] float speed;
+    [SerializeField] AudioSource movement_SFX;
 
     [Header("IMANS")]
     public ImanBehavior platformIman;
@@ -48,6 +49,8 @@ public class ImantablePlatform : MonoBehaviour
     #region START
     void Start()
     {
+        movement_SFX = GetComponent<AudioSource>();
+
         //Player
         player = GameObject.FindGameObjectWithTag("Player");
 
@@ -94,6 +97,8 @@ public class ImantablePlatform : MonoBehaviour
                                     // Movemos la plataforma al otro lado
                                     platformTransform.DOMove(leftPosition.position, speed);
 
+                                                                       
+
                                     //Preparamos que se reestablezca el estado
                                     Invoke("ArriveToLeft", speed);
                                 }
@@ -108,6 +113,10 @@ public class ImantablePlatform : MonoBehaviour
 
                                     // Movemos la plataforma al otro lado
                                     platformTransform.DOMove(rightPosition.position, speed);
+
+                                    //Activamos el sonido
+                                    movement_SFX.Play();
+                                    Invoke("StopSound", speed);
 
                                     //Preparamos que se reestablezca el estado
                                     Invoke("ArriveToRight", speed);
@@ -209,6 +218,10 @@ public class ImantablePlatform : MonoBehaviour
         {
             player.transform.SetParent(platformTransform);
         }
+        else if (other.CompareTag("CanBeHitted") && type == PlatformType.PLATFORM)
+        {
+            other.gameObject.transform.SetParent(platformTransform);
+        }
 
         if (type == PlatformType.RAIL && other.gameObject.layer == LayerMask.NameToLayer("Enemy") && !hitted && state == PlatformState.MOVING)
         {            
@@ -225,7 +238,18 @@ public class ImantablePlatform : MonoBehaviour
         if (other.CompareTag("Player") && type == PlatformType.PLATFORM)
         {
             player.transform.SetParent(null);
-        }        
+        }
+        else if (other.CompareTag("CanBeHitted") && type == PlatformType.PLATFORM)
+        {
+            other.gameObject.transform.SetParent(null);
+        }
+    }
+    #endregion
+
+    #region STOP SOUND
+    void StopSound()
+    {
+        movement_SFX.Stop();
     }
     #endregion
 

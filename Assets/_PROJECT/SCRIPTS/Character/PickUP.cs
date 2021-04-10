@@ -27,7 +27,7 @@ public class PickUP : MonoBehaviour
                 if (isGrabed)
                 {
                     isGrabed = false;
-                    pickedCollider.enabled = false;
+                   // pickedCollider.enabled = false;
                     collider.enabled = true;
                     objectRb.isKinematic = false;
                     objectTransform.parent = null;
@@ -37,7 +37,7 @@ public class PickUP : MonoBehaviour
                     isGrabed = true;
                     collider.enabled = false;
                     objectRb.isKinematic = true;
-                    pickedCollider.enabled = true;
+                   // pickedCollider.enabled = true;
                     objectTransform.parent = this.transform;
                     objectTransform.rotation = this.transform.rotation;
 
