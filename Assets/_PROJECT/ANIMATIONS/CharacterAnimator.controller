@@ -13,7 +13,7 @@ BlendTree:
       type: 3}
     m_Threshold: 0.2
     m_Position: {x: 0, y: -10}
-    m_TimeScale: 4
+    m_TimeScale: 10
     m_CycleOffset: 0
     m_DirectBlendParameter: Backward
     m_Mirror: 0
@@ -22,7 +22,7 @@ BlendTree:
       type: 3}
     m_Threshold: 0.40000004
     m_Position: {x: 10, y: 0}
-    m_TimeScale: 4
+    m_TimeScale: 10
     m_CycleOffset: 0
     m_DirectBlendParameter: Horizontal
     m_Mirror: 0
@@ -31,7 +31,7 @@ BlendTree:
       type: 3}
     m_Threshold: 0.6
     m_Position: {x: -10, y: 0}
-    m_TimeScale: 1
+    m_TimeScale: 10
     m_CycleOffset: 0
     m_DirectBlendParameter: Horizontal
     m_Mirror: 0
@@ -197,7 +197,7 @@ BlendTree:
       type: 3}
     m_Threshold: 0
     m_Position: {x: 10, y: 0}
-    m_TimeScale: 4
+    m_TimeScale: 10
     m_CycleOffset: 0
     m_DirectBlendParameter: Blend
     m_Mirror: 0
@@ -206,7 +206,7 @@ BlendTree:
       type: 3}
     m_Threshold: 0.3
     m_Position: {x: -10, y: 0}
-    m_TimeScale: 4
+    m_TimeScale: 10
     m_CycleOffset: 0
     m_DirectBlendParameter: Backward
     m_Mirror: 0
@@ -215,7 +215,7 @@ BlendTree:
       type: 3}
     m_Threshold: 0.6
     m_Position: {x: 0, y: 10}
-    m_TimeScale: 4
+    m_TimeScale: 10
     m_CycleOffset: 0
     m_DirectBlendParameter: Backward
     m_Mirror: 0
@@ -909,55 +909,55 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: die
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Horizontal
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Forward
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: oneHand
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: AimingRight
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: AimingLeft
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Velocity
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Dash
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Body

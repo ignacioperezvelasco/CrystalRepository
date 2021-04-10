@@ -143,7 +143,7 @@ public class LookAt : MonoBehaviour
         Vector3 targetDirection;        
 
         targetDirection = autoaim.GetCurrentTarget() - this.transform.position;
-        targetDirection.y = 0;        
+       // targetDirection.y = 0;        
         targetDirection = targetDirection.normalized;
 
         return targetDirection;

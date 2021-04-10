@@ -5807,7 +5807,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5420115300347966280}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 13.69}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -5856,7 +5856,7 @@ MonoBehaviour:
   myGravity: {x: 0, y: -15, z: 0}
   myRb: {fileID: 5420115300347966285}
   speed: 250
-  maxSpeed: 8
+  maxSpeed: 5
   jumpForce: 25
   airControl: 0.1
   desiredVelocity: {x: 0, y: 0, z: 0}
@@ -5870,8 +5870,8 @@ MonoBehaviour:
     m_Bits: 0
   myTrail: {fileID: 1775972255045503276}
   isDashing: 0
-  dashvelocity: 35
-  dashTime: 0.25
+  dashvelocity: 20
+  dashTime: 0.2
   timeToNextDash: 1.25
 --- !u!114 &5420115300347966284
 MonoBehaviour:
@@ -6001,9 +6001,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 2.5662465
+  m_Height: 2.4638164
   m_Direction: 1
-  m_Center: {x: 0, y: -0.28312325, z: 0}
+  m_Center: {x: 0, y: -0.049752235, z: 0}
 --- !u!95 &4102848448148445980
 Animator:
   serializedVersion: 3
@@ -6140,7 +6140,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5420115301522902524}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.11, z: 0}
+  m_LocalPosition: {x: 0, y: -1.341, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5420115300347966287}

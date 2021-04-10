@@ -268,6 +268,7 @@ public class ShootingScript : MonoBehaviour
     //Shoot-
     void ShootNegative()
     {
+
         Rigidbody bulletClone = (Rigidbody)Instantiate(bullet, rightPistol.transform.position, rightPistol.transform.rotation);
         bulletClone.gameObject.GetComponent<BulletScript>().SetPole(iman.NEGATIVE);
         //Debug.Log("Negative");
@@ -282,13 +283,11 @@ public class ShootingScript : MonoBehaviour
         }
         else
         {
-
             //miramos la dirección que ha de tener el disparo
             bulletClone.velocity = lookAt.GetShootDirection() * bulletSpeed;
 
             //Hacemos play del sonido
             shoot.Play();
-
         }
     }
     //Shoot+
