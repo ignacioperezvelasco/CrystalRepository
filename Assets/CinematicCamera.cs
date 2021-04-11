@@ -40,28 +40,32 @@ public class CinematicCamera : MonoBehaviour
     {
         if (other.CompareTag("Player") && !isActivated)
         {
-            isActivated = true;
-
-            //Guardamos la posicion
-            initialPosition = mainCamera.position;
-            initialRotation = mainCamera.eulerAngles;
-            initialFOV = Camera.main.fieldOfView;
-
-            //Paramos el movimiento del player
-            player.StopMovement();
-
-            //Movemos la camara
-            mainCamera.transform.DOMove(positionCinematicCamera.position, cameraSpeed);
-            mainCamera.transform.DORotate(positionCinematicCamera.eulerAngles, cameraSpeed);
-            Camera.main.DOFieldOfView(FOV,cameraSpeed);
-
-            //LLamamos a la funcion de acabar la cinematica
-            Invoke("StartFinishCinematic", cameraSpeed);         
-                
+            Invoke("StartCinematic", 1.5f);          
 
         }
     }
     #endregion
+
+    public void StartCinematic()
+    {
+        isActivated = true;
+
+        //Guardamos la posicion
+        initialPosition = mainCamera.position;
+        initialRotation = mainCamera.eulerAngles;
+        initialFOV = Camera.main.fieldOfView;
+
+        //Paramos el movimiento del player
+        player.StopMovement();
+
+        //Movemos la camara
+        mainCamera.transform.DOMove(positionCinematicCamera.position, cameraSpeed);
+        mainCamera.transform.DORotate(positionCinematicCamera.eulerAngles, cameraSpeed);
+        Camera.main.DOFieldOfView(FOV, cameraSpeed);
+
+        //LLamamos a la funcion de acabar la cinematica
+        Invoke("StartFinishCinematic", cameraSpeed);
+    }
 
 
     #region FINISH CINEMATIC
