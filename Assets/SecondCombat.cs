@@ -9,6 +9,8 @@ public class SecondCombat : MonoBehaviour
     [SerializeField] string enemyName;
     [SerializeField] ImantablePlatform imanPlatform;
 
+    [SerializeField] CinematicCamera cinematic;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,8 +22,16 @@ public class SecondCombat : MonoBehaviour
     {
         if (other.name == enemyName)
         {
-            imanPlatform.platformIman.myPole = iman.POSITIVE;   
+            cinematic.StartCinematic();
+
+            Invoke("ActivateWagon", 1.5f);              
+
         }
     }
     #endregion
+
+    void ActivateWagon()
+    {
+        imanPlatform.platformIman.myPole = iman.POSITIVE;
+    }
 }

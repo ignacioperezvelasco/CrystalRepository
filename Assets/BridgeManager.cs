@@ -5,15 +5,15 @@ using UnityEngine;
 public class BridgeManager : MonoBehaviour
 {
     [SerializeField] Animator bridgeAnimator;
+    CinematicCamera cinematic;
 
     int numButtonsPressed = 0;
 
-   
 
-    // Update is called once per frame
-    void Update()
+
+    private void Start()
     {
-        
+        cinematic = GetComponent<CinematicCamera>();
     }
     public void PressButton()
     {
@@ -23,6 +23,7 @@ public class BridgeManager : MonoBehaviour
             numButtonsPressed++;
             if (numButtonsPressed == 2)
             {
+                cinematic.StartCinematic();
                 bridgeAnimator.SetBool("Active", true);
             }
         }
