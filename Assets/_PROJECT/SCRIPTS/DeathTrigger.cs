@@ -25,6 +25,10 @@ public class DeathTrigger : MonoBehaviour
         {
             Reload();
         }
+        if (other.name == "Elemental")
+        {
+            Destroy(other.gameObject);
+        }
     }
 
     void Reload()

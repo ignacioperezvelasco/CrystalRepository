@@ -15,6 +15,10 @@ public class GameManager : MonoBehaviour
         {
             player.transform.position = initialCheckpoint.transform.position;
         }
+        else if(PlayerPrefs.GetInt("CHECKPOINT") == 5)
+        {
+            player.transform.position = initialCheckpoint.transform.position;
+        }
         else
         {
             Vector3 newPosition = new Vector3(PlayerPrefs.GetFloat("POS_X"),

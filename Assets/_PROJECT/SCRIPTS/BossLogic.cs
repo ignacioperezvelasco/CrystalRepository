@@ -35,7 +35,8 @@ public class BossLogic : MonoBehaviour
     Transform player;
     PlayerLogic playerLogic;
 
-    bool isKilled = false;
+    [HideInInspector] public bool isKilled = false;
+    [HideInInspector] public bool isActive = false;
 
     public AttackType currentAttack;
 
@@ -104,7 +105,7 @@ public class BossLogic : MonoBehaviour
     #region UPDATE
     void Update()
     {
-        if (!isKilled)
+        if (!isKilled && isActive)
         {
             //Seeteamos las posiciones del telgraphing
             line.SetPosition(0, startTelegraphing.position);
