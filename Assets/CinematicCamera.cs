@@ -40,6 +40,10 @@ public class CinematicCamera : MonoBehaviour
     {
         if (other.CompareTag("Player") && !isActivated)
         {
+
+            //Paramos el movimiento del player
+            player.StopMovement();
+
             Invoke("StartCinematic", 1.5f);          
 
         }
@@ -55,8 +59,7 @@ public class CinematicCamera : MonoBehaviour
         initialRotation = mainCamera.eulerAngles;
         initialFOV = Camera.main.fieldOfView;
 
-        //Paramos el movimiento del player
-        player.StopMovement();
+        
 
         //Movemos la camara
         mainCamera.transform.DOMove(positionCinematicCamera.position, cameraSpeed);

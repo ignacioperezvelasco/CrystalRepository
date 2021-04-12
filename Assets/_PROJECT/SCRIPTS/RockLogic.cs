@@ -9,6 +9,17 @@ public class RockLogic : MonoBehaviour
     [SerializeField] float pushForce = 20;
 
     [SerializeField] GameObject rockVFX;
+    bool canBeDestroyed = false;
+
+    private void Start()
+    {
+        Invoke("ActiveVFXGround" , 0.5f);
+    }
+
+    void ActiveVFXGround()
+    {
+        canBeDestroyed = true;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -31,6 +42,15 @@ public class RockLogic : MonoBehaviour
 
         }
 
+        if (other.CompareTag("Ground") && canBeDestroyed)
+        {
+            Instantiate(rockVFX, this.transform.position, this.transform.rotation);
+        }
+
     }
-    
+
+    private void OnCollisionEnter(Collision collision)
+    {
+    }
+
 }

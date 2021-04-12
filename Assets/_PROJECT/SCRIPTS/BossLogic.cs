@@ -80,6 +80,8 @@ public class BossLogic : MonoBehaviour
     float delayLaunchRock = 1.25f;
 
     float timerAttack = 0;
+
+    GameObject go;
     #endregion
 
     #region START
@@ -92,7 +94,7 @@ public class BossLogic : MonoBehaviour
 
         //Buscamos el LineRenderer
         line = GetComponent<LineRenderer>();
-        line.enabled = false;
+        //line.enabled = false;
 
         //Buscamos al Animator
         bossAnimator = GetComponent<Animator>();
@@ -108,8 +110,8 @@ public class BossLogic : MonoBehaviour
         if (!isKilled && isActive)
         {
             //Seeteamos las posiciones del telgraphing
-            line.SetPosition(0, startTelegraphing.position);
-            line.SetPosition(1, endTelegraphing.position);
+            //line.SetPosition(0, startTelegraphing.position);
+            //line.SetPosition(1, endTelegraphing.position);
 
             timerAttack += Time.deltaTime;
             if (timerAttack >= timeBetweenAttacks)
@@ -246,14 +248,14 @@ public class BossLogic : MonoBehaviour
     #region ACTIVE TELEGRAPHING
     void ActiveTelegraphing()
     {
-        line.enabled = true;
+        //line.enabled = true;
     }
     #endregion
 
     #region DEACTIVE TELEGRAPHING
     void DeactiveTelegraphing()
     {
-        line.enabled = false;
+        //line.enabled = false;
     }
     #endregion
 
@@ -275,7 +277,7 @@ public class BossLogic : MonoBehaviour
     #region ROCK ATTACK
     void RockAttack()
     {
-        GameObject go = Instantiate(rock, rockSpawner.position, rockSpawner.rotation) as GameObject;
+        go = Instantiate(rock, rockSpawner.position, rockSpawner.rotation) as GameObject;
 
         go.transform.DOJump(player.position, heightRock, 1, rockSpeed);
         Destroy(go, rockSpeed);

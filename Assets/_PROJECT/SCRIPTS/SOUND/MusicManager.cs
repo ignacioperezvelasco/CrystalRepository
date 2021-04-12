@@ -16,6 +16,8 @@ public class MusicManager : MonoBehaviour
         else if (SelectedMusicType == MusicType.INGAME)
         {
             //AudioManager.Instance.StopSound("MainMenu");
+
+            AudioManager.Instance.PlaySound("Music");
             AudioManager.Instance.PlaySound("Ambience");
         }
     }

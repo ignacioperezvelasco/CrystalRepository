@@ -4,9 +4,18 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    #region VARIABLES
     [SerializeField] Transform initialCheckpoint;
-    Transform player;
 
+    [Header("CHECK POINTS")]
+    [SerializeField] Transform checkPoint_1;
+    [SerializeField] Transform checkPoint_2;
+    [SerializeField] Transform checkPoint_3;
+    [SerializeField] Transform checkPoint_4;
+    Transform player;
+    #endregion
+
+    #region AWAKE
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -28,6 +37,32 @@ public class GameManager : MonoBehaviour
             player.transform.position = newPosition;
         }
     }
-    
+    #endregion
+
+    #region UPDATE
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            player.transform.position = initialCheckpoint.position;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            player.transform.position = checkPoint_1.position;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            player.transform.position = checkPoint_2.position;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            player.transform.position = checkPoint_3.position;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            player.transform.position = checkPoint_4.position;
+        }
+    }
+    #endregion
 
 }

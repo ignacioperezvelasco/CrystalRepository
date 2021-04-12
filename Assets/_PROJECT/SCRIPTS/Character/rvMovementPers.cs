@@ -17,7 +17,7 @@ public class rvMovementPers : MonoBehaviour
     public Vector3 desiredVelocity;
     float horizontal;
     float vertical;
-    private bool _isGrounded = true;
+    [SerializeField] private bool _isGrounded = true;
     public Transform _groundChecker;
     public float GroundDistance = 0.2f;
     public LayerMask Ground;

@@ -27,7 +27,7 @@ public class DeathTrigger : MonoBehaviour
         }
         if (other.name == "Elemental")
         {
-            Destroy(other.gameObject);
+            Destroy(other.transform.parent.gameObject);
         }
     }
 

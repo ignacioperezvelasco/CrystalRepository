@@ -9786,6 +9786,11 @@ PrefabInstance:
       propertyPath: explosionForce
       value: 1500
       objectReference: {fileID: 0}
+    - target: {fileID: 5410129694641868956, guid: d79c472062d815f4a9cd110000636e47,
+        type: 3}
+      propertyPath: outline
+      value: 
+      objectReference: {fileID: 1404029036903797069}
     - target: {fileID: 5560948044664891373, guid: d79c472062d815f4a9cd110000636e47,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -9931,6 +9936,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0bdce265bd5d54749a9dc4a20bc5c0a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1404029036903797069 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6583810312458840225, guid: d79c472062d815f4a9cd110000636e47,
+    type: 3}
+  m_PrefabInstance: {fileID: 5197849277414881772}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!137 &3191415212019759049 stripped

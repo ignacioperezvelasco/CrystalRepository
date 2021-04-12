@@ -481,6 +481,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialCheckpoint: {fileID: 2008019744}
+  checkPoint_1: {fileID: 0}
+  checkPoint_2: {fileID: 0}
+  checkPoint_3: {fileID: 0}
+  checkPoint_4: {fileID: 0}
 --- !u!1001 &164000454
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3365,7 +3369,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1045866756}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 89.3, y: 0.6, z: 93}
+  m_LocalPosition: {x: 89.3, y: -2.6, z: 93}
   m_LocalScale: {x: 144.4379, y: 144.4379, z: 144.4379}
   m_Children: []
   m_Father: {fileID: 1480094956}
@@ -3785,7 +3789,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1096720647}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 89.3, y: -6.8, z: 93}
+  m_LocalPosition: {x: 89.3, y: -10, z: 93}
   m_LocalScale: {x: 144.4379, y: 144.4379, z: 144.4379}
   m_Children: []
   m_Father: {fileID: 1480094956}
@@ -4619,10 +4623,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4265349373781901275, guid: 4042dcf05b14e66438ae035895746c31,
+        type: 3}
+      propertyPath: oneHand
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5420115300347966280, guid: 4042dcf05b14e66438ae035895746c31,
         type: 3}
       propertyPath: m_Name
       value: MainCharacter
+      objectReference: {fileID: 0}
+    - target: {fileID: 5420115300347966286, guid: 4042dcf05b14e66438ae035895746c31,
+        type: 3}
+      propertyPath: speed
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 5420115300347966286, guid: 4042dcf05b14e66438ae035895746c31,
+        type: 3}
+      propertyPath: maxSpeed
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 5420115300347966287, guid: 4042dcf05b14e66438ae035895746c31,
         type: 3}
@@ -5963,10 +5982,10 @@ MonoBehaviour:
     Pitch: 1
     SpatialBlend: 0
     Loop: 0
-  - Name: 
-    Clip: {fileID: 0}
-    Volume: 0
-    Pitch: 0
+  - Name: Music
+    Clip: {fileID: 8300000, guid: e228a1e38af461e4897bfb112ef5cf0e, type: 3}
+    Volume: 0.5
+    Pitch: 1
     SpatialBlend: 0
     Loop: 0
   - Name: 
@@ -7132,6 +7151,11 @@ PrefabInstance:
       value: 315
       objectReference: {fileID: 0}
     - target: {fileID: 6848712449833039182, guid: 2f5f7d4f5ed55114781120c1791a4dd7,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6848712449943241619, guid: 2f5f7d4f5ed55114781120c1791a4dd7,
         type: 3}
       propertyPath: m_Enabled
       value: 0
