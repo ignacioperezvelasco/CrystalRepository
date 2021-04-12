@@ -227,7 +227,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 515177733}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -239,7 +239,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 8ef6394f82d62a74e94f4e8e96a4cd67, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 78e4dae1eabaf9d438df522d7d4a44a4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -460,6 +460,37 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &1489072425847070880
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1489072425847070883}
+  m_Layer: 0
+  m_Name: HealthBar
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1489072425847070883
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1489072425847070880}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.57, y: 6.09, z: 0}
+  m_LocalScale: {x: 0.21536213, y: 0.21536213, z: 0.21536213}
+  m_Children:
+  - {fileID: 356099782}
+  m_Father: {fileID: 3622517249532212304}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &805030101
 Animator:
   serializedVersion: 3
@@ -492,37 +523,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   elementalAnimator: {fileID: 805030101}
---- !u!1 &1489072425847070880
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1489072425847070883}
-  m_Layer: 0
-  m_Name: HealthBar
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1489072425847070883
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1489072425847070880}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.57, y: 6.09, z: 0}
-  m_LocalScale: {x: 0.21536213, y: 0.21536213, z: 0.21536213}
-  m_Children:
-  - {fileID: 356099782}
-  m_Father: {fileID: 3622517249532212304}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  explosionVFX: {fileID: 0}
+  enemyScript: {fileID: 0}
 --- !u!1 &2805737369200448148
 GameObject:
   m_ObjectHideFlags: 0
@@ -2033,15 +2035,18 @@ MonoBehaviour:
   agressiveSpeed: 15
   timeBetweenAttacks: 2.5
   distanceToDoAreaAtttack: 7.04
+  forceExplosion: 10000
   attackArea: {fileID: 3622517249028150663}
   areaAttackLogic: {fileID: 615473362}
   rangeAttackLogic: {fileID: 518334464}
+  explosionVFX: {fileID: 0}
   line: {fileID: 3622517249532212319}
   baseTelegraph: {fileID: 3622517249669487005}
   targetTelegraph: {fileID: 3622517248279490865}
   chargeDistance: 15
   speedTelegraph: 1
   speedCharging: 0.5
+  rend: {fileID: 0}
 --- !u!120 &3622517249532212319
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -2154,6 +2159,7 @@ MonoBehaviour:
   nearImantableObjects: []
   mysphereCollider: {fileID: 916608557840635750}
   mobility: 0
+  alwaysSamePole: 0
   myPole: 2
   whatCanBeImanted:
     serializedVersion: 2
@@ -2163,8 +2169,15 @@ MonoBehaviour:
   timerActive: 3
   timeImanted: 8
   timeActive: 3
+  sizeSphereOneCharge: 7
+  sizeSphereTwoCharge: 9
+  sizeSphereThreeCharge: 16
+  numChargesAdded: 0
   imEnemy: 1
   outline: {fileID: 0}
+  explosionForce: 1500
+  explosionVFX: {fileID: 0}
+  myEnemyScript: {fileID: 0}
 --- !u!114 &6583810312458840225
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -44,15 +44,17 @@ public class SettingsMenu : MonoBehaviour
 
     public void ApplyFullScreen()
     {
-        if (dropdownFullScreen.options[dropdownFullScreen.value].text == "Fullscreen")
+        if (dropdownFullScreen.value == 0)
         {
             Screen.fullScreen = true;
         }
-        else
+        else if(dropdownFullScreen.value == 1)
         {
             Screen.fullScreen = false;
         }
 
+        //Debug.Log(Screen.fullScreen);
+    
         //TOGGLE
         /*if (fullscreenToggle.isOn)
         {
@@ -74,6 +76,8 @@ public class SettingsMenu : MonoBehaviour
         {
             QualitySettings.vSyncCount = 0;
         }
+
+        //Debug.Log(QualitySettings.vSyncCount);
 
         //TOGGLE
         /*
@@ -122,7 +126,6 @@ public class SettingsMenu : MonoBehaviour
 
     public void ApplyChanges()
     {
-        DropDownResolution();
         ApplyFullScreen();
         ApplyVSync();
         DropDownResolution();
