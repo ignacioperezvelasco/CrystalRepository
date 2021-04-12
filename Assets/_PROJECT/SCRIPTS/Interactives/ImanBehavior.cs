@@ -106,8 +106,8 @@ public class ImanBehavior : MonoBehaviour
     {
         if (mobility != mobilityType.JUSTPOLE)
         {
-            if (myPole != iman.NONE)
-                CalculateDirectionForce();
+            //if (myPole != iman.NONE)
+                
         }
     }
 
@@ -115,6 +115,7 @@ public class ImanBehavior : MonoBehaviour
     {
         if (mobility != mobilityType.JUSTPOLE)
         {
+            CalculateDirectionForce();
             if (myPole != iman.NONE)
             {
                 if (applyForce && mobility == mobilityType.MOBILE)
@@ -291,9 +292,9 @@ public class ImanBehavior : MonoBehaviour
             default:
                 break;
         }
-        float invertedDistance = (1f / finalForce.magnitude * numChargesSum * force);
+        float invertedDistance = (1f / finalForce.magnitude );
 
-        finalForce = finalForce.normalized * invertedDistance;
+        finalForce = finalForce.normalized * invertedDistance * numChargesSum * force;
         //Debug.Log(finalForce);
 
         return finalForce;

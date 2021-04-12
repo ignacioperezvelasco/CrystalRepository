@@ -9777,7 +9777,7 @@ PrefabInstance:
     - target: {fileID: 609703410532210519, guid: 73b9ff86893cf5247b7098f444678fa2,
         type: 3}
       propertyPath: force
-      value: 18
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 609703410532210519, guid: 73b9ff86893cf5247b7098f444678fa2,
         type: 3}
