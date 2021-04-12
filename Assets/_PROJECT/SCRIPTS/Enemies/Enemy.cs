@@ -19,7 +19,7 @@ public class Enemy : Agent
     StateEnemy currentState = StateEnemy.PATROL;
     Transform player;
     NavMeshAgent agentNavMesh;
-    ImanBehavior myImanBehaviorScript;
+    [SerializeField]ImanBehavior myImanBehaviorScript;
     Rigidbody myRB;
     List<GameObject> gameObjectsHittedMe;
     public LayerMask Ground;
@@ -149,8 +149,8 @@ public class Enemy : Agent
         if (!isDead)
         {
             //Actualizamos la barra de vide
-            healthBar.fillAmount = life / startingLife;
-            healthTransform.transform.LookAt(Camera.main.transform);
+            //healthBar.fillAmount = life / startingLife;
+            //healthTransform.transform.LookAt(Camera.main.transform);
 
             //Controlamos si debe haber cambio de estado
             CheckState();
@@ -294,19 +294,21 @@ public class Enemy : Agent
     #region SET NEW DESTINATION
     void SetNewDestination()
     {
-        onPoint = false;
-        //Aumentamos la posicion del array
-        currentPatrolPoint++;
-        if (currentPatrolPoint == patrolPoints.Count)
+        
+            onPoint = false;
+            //Aumentamos la posicion del array
+            currentPatrolPoint++;
+            if (currentPatrolPoint == patrolPoints.Count)
+            {
+                currentPatrolPoint = 0;
+            }
+        if (myImanBehaviorScript.myPole == iman.NONE)
         {
-            currentPatrolPoint = 0;
+            //Seleccionamos el siguiente destino
+            agentNavMesh.SetDestination(patrolPoints[currentPatrolPoint].position);
+            Debug.Log("cderfvdrtgbv");
+            animator.WalkAnimation();
         }
-
-        //Seleccionamos el siguiente destino
-        agentNavMesh.SetDestination(patrolPoints[currentPatrolPoint].position);
-
-        animator.WalkAnimation();
-
     }
     #endregion
 

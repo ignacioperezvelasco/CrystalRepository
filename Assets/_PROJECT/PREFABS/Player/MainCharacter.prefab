@@ -5246,8 +5246,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.3844506, y: 1, z: 2.6663163}
-  m_Center: {x: 0, y: 0, z: 0.8331594}
+  m_Size: {x: 0.52827394, y: 0.76551074, z: 2.1353488}
+  m_Center: {x: -0.012428461, y: -0.044455633, z: 0.5676758}
 --- !u!114 &1775972255769934170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5562,7 +5562,6 @@ GameObject:
   - component: {fileID: 569424433997126188}
   - component: {fileID: 3991210886018607745}
   - component: {fileID: 3093938634789858486}
-  - component: {fileID: 8087892233625104880}
   m_Layer: 0
   m_Name: NegativeGun
   m_TagString: Untagged
@@ -5632,19 +5631,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &8087892233625104880
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3835981214131596802}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4764105826480541725
 GameObject:
   m_ObjectHideFlags: 0
@@ -5855,8 +5841,8 @@ MonoBehaviour:
   dead: 0
   myGravity: {x: 0, y: -15, z: 0}
   myRb: {fileID: 5420115300347966285}
-  speed: 250
-  maxSpeed: 5
+  speed: 200
+  maxSpeed: 3
   jumpForce: 25
   airControl: 0.1
   desiredVelocity: {x: 0, y: 0, z: 0}
@@ -6157,7 +6143,6 @@ GameObject:
   - component: {fileID: 8545120700004909652}
   - component: {fileID: 7953440017597360160}
   - component: {fileID: 5952335720177146847}
-  - component: {fileID: 876991434543627819}
   m_Layer: 0
   m_Name: PositiveGun
   m_TagString: Untagged
@@ -6227,19 +6212,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &876991434543627819
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6350120126053517131}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1775972254815203092
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6510,15 +6482,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6e44a2ce2c1feb84d9e4bb2459f6d69c, type: 3}
---- !u!1 &4419344994487080740 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8751896472858851126, guid: 6e44a2ce2c1feb84d9e4bb2459f6d69c,
-    type: 3}
-  m_PrefabInstance: {fileID: 4909013356233580562}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3628393430311622408 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8537405675790579482, guid: 6e44a2ce2c1feb84d9e4bb2459f6d69c,
+    type: 3}
+  m_PrefabInstance: {fileID: 4909013356233580562}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4419344994487080740 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8751896472858851126, guid: 6e44a2ce2c1feb84d9e4bb2459f6d69c,
     type: 3}
   m_PrefabInstance: {fileID: 4909013356233580562}
   m_PrefabAsset: {fileID: 0}

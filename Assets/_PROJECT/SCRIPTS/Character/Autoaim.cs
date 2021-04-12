@@ -88,7 +88,8 @@ public class Autoaim : MonoBehaviour
     {
         if (other.CompareTag("CanBeHitted"))
         {
-            AddNewPosibleTarget(other.gameObject);
+            if (!other.gameObject.GetComponent<ImanBehavior>().alwaysSamePole)
+                AddNewPosibleTarget(other.gameObject);
         }
     }
     #endregion
